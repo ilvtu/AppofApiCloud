@@ -109,6 +109,12 @@ function init(){
 }
 
 apiready = function () {
+
+
+	var header = $api.dom('header');
+	var headerPos = $api.offset(header);
+	$api.fixStatusBar(header);
+	
  	var uid= api.pageParam.uid;
     $api.setStorage('uid',uid);  
     

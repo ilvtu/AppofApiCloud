@@ -4,71 +4,98 @@ function sliding() {
     
 }
 apiready = function () {	
-	var header = document.querySelector('#header');
-	$api.fixStatusBar(header);
+	  
+    $api.fixStatusBar($api.dom('.header'));
     //$api.setStorage('uid','58a45e8e6b1017645e8f437d');
-       
-
     api.addEventListener({
 	    name: 'closemap'
 	}, function(ret, err) {
 	    //alert(JSON.stringify(ret.value));
-	    if(ret.value.key1=='fromdayzuji' || ret.value.key1=='fromtravelpause'){
+	    if(ret.value.key1=='fromrun' || ret.value.key1=='fromrunstop'){
 	    	//alert();
 	    	var amap = api.require('aMap');   
 			amap.close(); 
 	    }
 	});
        
-    $api.fixStatusBar($api.dom('.header'));
+    api.sendEvent({
+	    name: 'closemap',
+	    extra: {
+	        key1: 'fromslide'
+	    }
+	});
+	   
+     
     api.addEventListener({
         name: 'keyback'
     }, function(ret, err){
         api.closeWidget();
     });      
+    
+    
     api.addEventListener({
         name:'viewappear'
     },function(ret,err){
         //operation
-       //alert($api.getStorage('uid'));	      
-       
+        
+		init();
        var travelstatus = $api.getStorage('intravel');   
-       	//alert(travelstatus);
+       	
 		if(travelstatus && travelstatus==1){
 			var travelid =  $api.getStorage('travelId');
 			var uid = $api.getStorage('uid');
-			/*			
-		     var amap = api.require('aMap');
-		    amap.close();
-		    */
+			
 			api.openWin({
-		        name: 'onlvtu',
-		        url: 'onlvtu.html',
-		        opaque: true,
-		        vScrollBarEnabled: false,
-		        pageParam:{uid:uid,travelid:travelid}
-		    });
+	            name: 'win_runpage',
+	            url: '../html/win_runpage.html',
+	            pageParam: {
+		            url: 'frm_run.html',
+		            frameName: 'frm_run',
+		            uid:uid,
+		            travelid:travelid	
+		        },
+	            bounces: false,
+	            rect: {
+	                x: 0,
+	                y: 0,
+	                w: 'auto',
+	                h: 'auto'
+	            },           
+	            reload: true,
+	            showProgress: true
+	        });
 		    return;
 		}
-		init();
     })
+    
+    
     init(); 
-	var travelstatus = $api.getStorage('intravel');   
-	//alert(travelstatus);
-	
+	var travelstatus = $api.getStorage('intravel');  
 	if(travelstatus && travelstatus==1){
-		var travelid =  $api.getStorage('travelId');
-		var uid = $api.getStorage('uid');
-	   
 	    var amap = api.require('aMap');
 	    amap.close();
+	    
+		var travelid =  $api.getStorage('travelId');
+		var uid = $api.getStorage('uid');
 		api.openWin({
-	        name: 'onlvtu',
-	        url: 'onlvtu.html',
-	        opaque: true,
-	        vScrollBarEnabled: false,
-	        pageParam:{uid:uid,travelid:travelid}
-	    });
+	            name: 'webpage',
+	            url: '../html/win_runpage.html',
+	            pageParam: {
+		            url: 'frm_run.html',
+		            frameName: 'frm_run',
+		            uid:uid,
+		            travelid:travelid
+		        },
+	            bounces: false,
+	            rect: {
+	                x: 0,
+	                y: 0,
+	                w: 'auto',
+	                h: 'auto'
+	            },           
+	            reload: true,
+	            showProgress: true
+	        });
 	    return;
 	}
       
@@ -101,11 +128,16 @@ function init(){
 	});
 	*/
 	/* amap*/
+	
+	
+	var header = $api.dom('header');
+	var headerPos = $api.offset(header);
+	//alert(JSON.stringify(headerPos));
 	var aMap = api.require('aMap');
 	aMap.open({
 	    rect: {
 	        x: 0,
-	        y: 40
+	        y:headerPos.h
 	    },
 	    showUserLocation: true,
 	    zoomLevel: 16,
@@ -198,6 +230,8 @@ function setlocation(){
 		});
 	*/
 	/*aMap*/
+	
+	
 	var aMap = api.require('aMap');
         aMap.getLocation({
         	autoStop:true
@@ -232,9 +266,9 @@ function initSetLocationbtn(){
 	    },
 	    corner: 5,
 	    bg: {
-	        normal: 'widget://image/setmaplocation.png',
-	        highlight: 'widget://image/setmaplocation.png',
-	        active: 'widget://image/setmaplocation.png'
+	        normal: 'widget://image/slide/setmaplocation.png',
+	        highlight: 'widget://image/slide/setmaplocation.png',
+	        active: 'widget://image/slide/setmaplocation.png'
 	    },
 	    title: {
 	        size: 14,
@@ -265,19 +299,69 @@ function initSetLocationbtn(){
 }
 
 function initStartbtn(){
+	var winWidth = api.winWidth;
+	var winHeight = api.winHeight;  
+	var tmpX = (winWidth-100)/2;
+	var tmpY= winHeight/2+100;
+	var arcMenu = api.require('arcMenu');
+	arcMenu.open({
+	    type: 'arc',
+	    mainMenu: {
+	        x: tmpX,
+	        y: tmpY,
+	        w: 100,
+	        h: 100,
+	        img: 'widget://image/slide/start.png',
+	        imgLight: 'widget://image/slide/start.png'
+	    },
+	    items: [{
+	        w: 50,
+	        h: 50,
+	        img: 'widget://image/slide/run.png',
+	        imgLight: 'widget://image/slide/run.png'
+	    }, {
+	        w: 50,
+	        h: 50,
+	        img: 'widget://image/slide/edit.png',
+	        imgLight: 'widget://image/slide/edit.png'
+	    }],
+	    startAngle:60,
+	    wholeAngle: 60,
+	    radius: 100,
+	    fixedOn: api.frameName
+	}, function(ret, err) {
+	    if (ret) {
+	    	
+	        switch(ret.index){
+	        	case 0:
+	        		startlvtu();
+	        		break;
+	        	
+	        	case 1:
+	        		startmakenote();
+	        		break;
+	        	default:
+	        		break;
+	        }
+	    } else {
+	        alert(JSON.stringify(err));
+	    }
+	});
+	
+	/*
 	var button2 = api.require('UIButton');
 	button2.open({
 	    rect: {
-	        x: 110,
-	        y: 550,
-	        w: 134,
-	        h: 46
+	        x: tmpX,
+	        y: tmpY,
+	        w: 100,
+	        h: 100
 	    },
 	    corner: 5,
 	    bg: {
-	        normal: 'widget://image/start.png',
-	        highlight: 'widget://image/start.png',
-	        active: 'widget://image/start.png'
+	        normal: 'widget://image/slide/start.png',
+	        highlight: 'widget://image/slide/start.png',
+	        active: 'widget://image/slide/start.png'
 	    },
 	    title: {
 	        size: 14,
@@ -304,28 +388,34 @@ function initStartbtn(){
 	        //alert(JSON.stringify(err));
 	    }
 	});
+	*/
 }
 
+
+/*
 function showmnstack(){
+	var winWidth = api.winWidth;
+	var winHeight = api.winHeight;  
+	var tmpX = (winWidth-100)/2+50;
+	var tmpY= winHeight/2+100;
+	
 	var MNStack = api.require('MNStack');
 	MNStack.open({
 	    startCoords: {
-	        x: 110,
-	        y:400
+	        x: tmpX,
+	        y:tmpY
 	    },
 	    styles: {
 	        bg: 'rgba(0,0,0,0.7)',
-	        itemHeight: 50,
+	        itemHeight:70,
 	        titleColor: '#333'
 	    },
 	    items: [{
-	        title: '来一场说走就走的旅行',
+	        title: '旅行',
+	        icon:'widget://image/slide/run.png',
 	        bgColor: '#fff'
 	    },
-	    /*{
-	        title: '制定一个出游计划先',
-	        bgColor: '#fff'
-	    },*/
+	   
 	    {
 	        title: '看看大家都在怎么玩',
 	        bgColor: '#fff'
@@ -337,9 +427,7 @@ function showmnstack(){
 	        	case 0:
 	        		startlvtu();
 	        		break;
-	        	/*case 1:
-	        		startplan();
-	        		break;*/
+	        	
 	        	case 1:
 	        		showyouji();
 	        		break;
@@ -351,62 +439,146 @@ function showmnstack(){
 	    }
 	});
 }
+*/
+
 
 function startlvtu(){		
-	var uid = $api.getStorage('uid');
-    if(!uid){
-		api.openWin({
-	        name: 'userLogin',
-	        url: 'userLogin.html',
-	        opaque: true,
-	        vScrollBarEnabled:false
-	    });
+	var uid = $api.getStorage('uid');     
+    //alert(uid);
+	if(!uid || uid=='undefined'){			
+	    api.openWin({
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '登录',
+	            url: 'frm_login.html',
+	            frameName: 'frm_login'	
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+		 
 	    return;
+	}	
+	else
+	{
+		var travelstatus = $api.getStorage('intravel');  
+		if(travelstatus && travelstatus==1){
+			var travelid =  $api.getStorage('travelId');  
+			api.openWin({
+	            name: 'win_runpage',
+	            url: '../html/win_runpage.html',
+	            pageParam: {
+		            url: 'frm_run.html',
+		            frameName: 'frm_run',
+		            uid:uid,
+		            travelid:travelid
+		        },
+	            bounces: false,
+	            rect: {
+	                x: 0,
+	                y: 0,
+	                w: 'auto',
+	                h: 'auto'
+	            },           
+	            reload: true,
+	            showProgress: true
+	        });
+		}
+		else
+		{
+			api.showProgress({
+		        title: '开始旅行...',
+		        modal: false
+		    });
+			//创建一个新的游记
+			//var appUid = $api.getStorage('appUid');
+			
+			var newyjUlr = '/user/'+uid+'/yj';
+			var bodyParam = {
+		        title: '',
+		        status:0
+		    }
+			 ajaxRequest(newyjUlr, 'post', JSON.stringify(bodyParam), function (ret, err) {
+		        if (ret) {
+		            $api.setStorage('intravel',1);   
+		            $api.setStorage('travelId',ret.id);  
+		            
+		             setTimeout(function () {
+				     var amap = api.require('aMap');
+				    	amap.close();
+				    }, 100);
+				    
+		           //api.closeWin();
+		           api.openWin({
+			            name: 'win_runpage',
+			            url: '../html/win_runpage.html',
+			            pageParam: {
+				            url: 'frm_run.html',
+				            frameName: 'frm_run',
+				            uid:uid,
+				            travelid:ret.id	
+				        },
+			            bounces: false,
+			            rect: {
+			                x: 0,
+			                y: 0,
+			                w: 'auto',
+			                h: 'auto'
+			            },           
+			            reload: true,
+			            showProgress: true
+			        });
+		            
+		        } else {
+		            api.alert({
+		                msg: err.msg
+		            });
+		        }
+		        api.hideProgress();
+		    })	
+		}
 	}
 
-	api.showProgress({
-        title: '加载中...',
-        modal: false
-    });
-	//创建一个新的游记
-	//var appUid = $api.getStorage('appUid');
+}
+
+
+function startmakenote(){	
+	var uid = $api.getStorage('uid');     
+    //alert(uid);
+	if(!uid || uid=='undefined'){			
+	    api.openWin({
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '登录',
+	            url: 'frm_login.html',
+	            frameName: 'frm_login',
+	            uid:uid
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+		 
+	    return;
+	}	
 	
-	var newyoujiUlr = '/user/'+uid+'/youji';
-	var bodyParam = {
-        yjname: ''
-    }
-	 ajaxRequest(newyoujiUlr, 'post', JSON.stringify(bodyParam), function (ret, err) {
-        if (ret) {
-            $api.setStorage('intravel',1);   
-            $api.setStorage('travelId',ret.id);  
-            /*
-             setTimeout(function () {
-		     var amap = api.require('aMap');
-		    	amap.close();
-		    }, 100);
-		    */
-           //api.closeWin();
-            api.openWin({
-		        name: 'onlvtu',
-		        url: 'onlvtu.html',
-		        opaque: true,
-		        vScrollBarEnabled: false,
-		        pageParam:{uid:uid,travelid:ret.id}
-		    });
-        } else {
-            api.alert({
-                msg: err.msg
-            });
-        }
-        api.hideProgress();
-    })
+	
+	
 	
 }
 
-function startplan(){	
-	alert(1);
-}
-
-function showyouji(){
-	alert(2);
-}

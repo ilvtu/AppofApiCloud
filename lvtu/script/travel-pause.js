@@ -153,7 +153,7 @@ function setrec(points,poppoints,lon,lat){
 					//alert(JSON.stringify(points));
 				    var aMap = api.require('aMap');					
 					
-					amap.addAnnotations({
+					aMap.addAnnotations({
 					    annotations:points , 
 					  // icons: ['widget://'],
 			    		draggable: true,
@@ -204,7 +204,7 @@ function setrec(points,poppoints,lon,lat){
 									        vScrollBarEnabled: false,
 									        pageParam:{uid:uid,travelid:travelid,recordid:allpoppoints[id].recid}
 									    });
-																	    }
+								    }
 								});
 						    
 						    }	
