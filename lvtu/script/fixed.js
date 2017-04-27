@@ -1,5 +1,9 @@
+var uid=null;
+var token=null;
 apiready = function () { 
 	
+	uid = $api.getStorage('uid');
+	token= $api.getStorage('token');
 	var $header=$api.dom('.header');		
     $api.fixIos7Bar($header);	
     $api.fixStatusBar($header); 			
@@ -31,7 +35,8 @@ apiready = function () {
         },function(ret,err){
             //operation
             //alert($api.getStorage('uid')); 
-                
+           uid = $api.getStorage('uid');    
+		   token=$api.getStorage('token'); 
            showUserInfo();
         }) ;
     
@@ -45,7 +50,6 @@ function backToWin(){
  * 设置fixed用户头像和信息
  */
 function showUserInfo(){
-	 var uid = $api.getStorage('uid');     
 	 
     //alert(uid);
 	if(uid && uid!='undefined'){
@@ -121,14 +125,14 @@ function initPersonalCenter(json) {
         username: json.nickname,
         count: point,
         modButton: {
-            bgImg: 'widget://image/edit.png',
-            lightImg: 'widget://image/edit.png'
+            bgImg: 'widget://image/fixed/edit.png',
+            lightImg: 'widget://image/fixed/edit.png'
         },
         btnArray: [
             {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
+                bgImg: 'widget://image/fixed/personal_btn_nor.png',
+                lightImg: 'widget://image/fixed/personal_btn_light.png',
+                selectedImg: 'widget://image/fixed/personal_btn_sele.png',
                 title: '笔记',
                 count: 1,
                 titleColor: '#ffffff',
@@ -137,9 +141,9 @@ function initPersonalCenter(json) {
                 countLightColor: '#55abce'
             },
             {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
+                bgImg: 'widget://image/fixed/personal_btn_nor.png',
+                lightImg: 'widget://image/fixed/personal_btn_light.png',
+                selectedImg: 'widget://image/fixed/personal_btn_sele.png',
                 title: '关注',
                 count: 1,
                 titleColor: '#ffffff',
@@ -148,9 +152,9 @@ function initPersonalCenter(json) {
                 countLightColor: '#55abce'
             },
             {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
+                bgImg: 'widget://image/fixed/personal_btn_nor.png',
+                lightImg: 'widget://image/fixed/personal_btn_light.png',
+                selectedImg: 'widget://image/fixed/personal_btn_sele.png',
                 title: '粉丝',
                 count: 1,
                 titleColor: '#ffffff',
@@ -162,7 +166,7 @@ function initPersonalCenter(json) {
     }, function (ret, err) {
 		if ( ret.click === 3) {
 		
-	 		var uid = $api.getStorage('uid');  
+	 		//var uid = $api.getStorage('uid');  
 	        api.openWin({
 		        name: 'userinfo',
 		        url: 'userinfo.html',
@@ -215,7 +219,7 @@ function initPersonalCenter(json) {
 }
 
 function login(){
-	var uid = $api.getStorage('uid');     
+	//var uid = $api.getStorage('uid');     
     //alert(uid);
 	if(!uid || uid=='undefined'){			
 	    api.openWin({
@@ -243,7 +247,7 @@ function login(){
 
 function logout(){
 
-	var loginid = $api.getStorage("token");
+	//var loginid = $api.getStorage("token");
 	api.showProgress({
         title: '正在退出...',
         modal: false
@@ -251,7 +255,7 @@ function logout(){
     var user = api.require('user');
 	user.logout(function(ret, err){
 	    if( ret ){
-	   		 $api.setStorage('uid', null);
+	   		$api.setStorage('uid', null);
             $api.setStorage('token', null);
             
             var pc = api.require('personalCenter');
@@ -269,16 +273,30 @@ function logout(){
 
 }
 
+/*
 function showzuji(){
 	
-	 var uid = $api.getStorage('uid'); 
+	 //var uid = $api.getStorage('uid'); 
 	if(!uid || uid=='undefined'){
-		 api.openWin({
-		        name: 'userLogin',
-		        url: 'userLogin.html',
-		        opaque: true,
-		        vScrollBarEnabled:false
-		    });
+		api.openWin({
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '登录',
+	            url: 'frm_login.html',
+	            frameName: 'frm_login',
+	            uid:uid
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
 		    return;
 	}
 	else{
@@ -291,39 +309,67 @@ function showzuji(){
 	    });
     }
 }
+*/
 
 function showyouji(){
 	
-	 var uid = $api.getStorage('uid'); 
+	//var uid = $api.getStorage('uid'); 
 	if(!uid || uid=='undefined'){
-		 api.openWin({
-		        name: 'userLogin',
-		        url: 'userLogin.html',
-		        opaque: true,
-		        vScrollBarEnabled:false
-		    });
+		api.openWin({
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '登录',
+	            url: 'frm_login.html',
+	            frameName: 'frm_login',
+	            uid:uid
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
 		    return;
 	}
-	else{
+	
+	else{	
 		api.openWin({
-	        name: 'myyjlist',
-	        url: 'myyjlist.html',
-	        opaque: true,
-	        vScrollBarEnabled:false,
-	        pageParam:{uid:uid}
-	    });
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '我的游记',
+	            url: 'frm_myyjlist.html',
+	            frameName: 'frm_myyjlist',
+	            uid:uid
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+		
     }
 }
 
 function showabout(){
 	
-	 var uid = $api.getStorage('uid'); 
+	 //var uid = $api.getStorage('uid'); 
+		api.openWin({
+	        name: 'aboutus',
+	        url: 'aboutus.html',
+	        opaque: true,
+	        vScrollBarEnabled:false,
+	        pageParam:{uid:uid}
+	    });
 	
-	api.openWin({
-        name: 'aboutus_window',
-        url: 'aboutus_window.html',
-        opaque: true,
-        vScrollBarEnabled:false,
-        pageParam:{uid:uid}
-    });
 }

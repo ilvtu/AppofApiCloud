@@ -9,7 +9,7 @@
   	<style>
 	  	header {
 	    background-color: #f2f2f2;
-	    background-image: url("../image/slide/top-label.png");
+	    background-image: url("../image/win_notepage/top-label.png");
 	    border-bottom: 1px solid #f2f2f2;
 		}
 		.header {
@@ -54,45 +54,8 @@
     </div>
 </header>	
 <script type="text/javascript" src="../script/api.js"></script>		
-<script>		
-    apiready=function(){		
-        var $header=$api.dom('.header');		
-        $api.fixIos7Bar($header);	
-        $api.fixStatusBar($header);	
-        var $header_h=$api.offset($header).h;		
-        
-        var newurl = api.pageParam.url;
-        //var title = api.pageParam.title;
-        var uid = api.pageParam.uid;
-        var travelid = api.pageParam.travelid;
-        var startdate = api.pageParam.startdate;
-        var enddate = api.pageParam.enddate;
-        //$api.byId('curtitle').innerHTML=title;
-        api.openFrame({		
-            name:'',		
-            url:newurl,		
-            rect:{		
-                x:0,		
-                y:$header_h,		
-                w:'auto',		
-                h:'auto'		
-            },
-         pageParam:{
-        	header_h:$header_h,
-        	travelid:travelid,
-        	uid:uid,
-        	startdate:startdate,
-        	enddate:enddate
-        }	
-        })		
-    }		
-    
-    function backToWin(){		
-    setTimeout(function () {    
-       api.closeWin();       
-    }, 100);
-}
+<script type="text/javascript" src="../script/common.js"></script>		
 
-</script>		
+<script type="text/javascript" src="../script/win_notepage.js"></script>
 </body>		
 </html>		

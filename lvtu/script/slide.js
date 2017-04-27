@@ -1,10 +1,13 @@
+var uid=null;
+var travelid=null;
 function sliding() {
-	
     api.openSlidPane({type: 'left'});
     
 }
-apiready = function () {	
-	  
+apiready = function () {
+	uid= $api.getStorage('uid');
+	travelid =  $api.getStorage('travelId');
+	
     $api.fixStatusBar($api.dom('.header'));
     //$api.setStorage('uid','58a45e8e6b1017645e8f437d');
     api.addEventListener({
@@ -39,11 +42,10 @@ apiready = function () {
         //operation
         
 		init();
-       var travelstatus = $api.getStorage('intravel');   
-       	
-		if(travelstatus && travelstatus==1){
-			var travelid =  $api.getStorage('travelId');
-			var uid = $api.getStorage('uid');
+       var travelstatus = $api.getStorage('intravel');          	
+		if(travelstatus && travelstatus==1 && travelid!=null){
+			 travelid =  $api.getStorage('travelId');
+			 uid = $api.getStorage('uid');
 			
 			api.openWin({
 	            name: 'win_runpage',
@@ -71,12 +73,12 @@ apiready = function () {
     
     init(); 
 	var travelstatus = $api.getStorage('intravel');  
-	if(travelstatus && travelstatus==1){
-	    var amap = api.require('aMap');
-	    amap.close();
+	if(travelstatus && travelstatus==1 && travelid!=null){
+	    //var amap = api.require('aMap');
+	    //amap.close();
 	    
-		var travelid =  $api.getStorage('travelId');
-		var uid = $api.getStorage('uid');
+		//var travelid =  $api.getStorage('travelId');
+		//var uid = $api.getStorage('uid');
 		api.openWin({
 	            name: 'webpage',
 	            url: '../html/win_runpage.html',
@@ -233,11 +235,13 @@ function setlocation(){
 	
 	
 	var aMap = api.require('aMap');
+		
         aMap.getLocation({
         	autoStop:true
         },function(ret, err) {
+        
+		       
 		    if (ret.status) {
-		        //alert(JSON.stringify(ret));	
 		        if(ret.lon>0){
 					aMap.setCenter({
 					    coords: {
@@ -443,7 +447,7 @@ function showmnstack(){
 
 
 function startlvtu(){		
-	var uid = $api.getStorage('uid');     
+	//var uid = $api.getStorage('uid');     
     //alert(uid);
 	if(!uid || uid=='undefined'){			
 	    api.openWin({
@@ -470,8 +474,8 @@ function startlvtu(){
 	else
 	{
 		var travelstatus = $api.getStorage('intravel');  
-		if(travelstatus && travelstatus==1){
-			var travelid =  $api.getStorage('travelId');  
+		if(travelstatus && travelstatus==1 && travelid!=null){
+			//var travelid =  $api.getStorage('travelId');  
 			api.openWin({
 	            name: 'win_runpage',
 	            url: '../html/win_runpage.html',
@@ -551,8 +555,7 @@ function startlvtu(){
 
 
 function startmakenote(){	
-	var uid = $api.getStorage('uid');     
-    //alert(uid);
+	//var uid = $api.getStorage('uid');    
 	if(!uid || uid=='undefined'){			
 	    api.openWin({
             name: 'win_userpage',
@@ -576,9 +579,27 @@ function startmakenote(){
 		 
 	    return;
 	}	
-	
-	
-	
+	else{
+		api.openWin({
+            name: 'win_userpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '选择日期',
+	            url: 'frm_calendar.html',
+	            frameName: 'frm_calendar',
+	            uid:uid
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+	}
 	
 }
 

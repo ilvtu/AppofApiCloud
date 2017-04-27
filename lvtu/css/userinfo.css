@@ -7,7 +7,7 @@ li {
     background-size: 8px;		
     background-repeat: no-repeat;		
     background-position: right;		
-    background-image: url("../image/fixed/right_arrow.png");		
+    background-image: url("../image/userinfo/right_arrow.png");		
     border-bottom: 1px solid #F6F6F6;	
    
 }
@@ -33,22 +33,32 @@ li a {
     -webkit-flex: 1;		
     flex: 1;
 }		
+
+
+
 .header a {		
     display: block;		
     background-size: 20px;		
     padding: 20px;		
     background-repeat: no-repeat;		
     background-position: center;		
-}		
+}	
+
+.header .logo {	
+	float:left;
+    padding-left:80%;
+    background-size: 20px;		
+    background-image: url("../image/userinfo/logo.png");		
+}	
 .header .back {		
-    background-image: url("../image/left.png");		
+    background-image: url("../image/userinfo/left.png");		
 }		
 
 .header .logo {	
 	float:left;
     padding-left:80%;
     background-size: 20px;		
-    background-image: url("../image/logo.png");		
+    background-image: url("../image/userinfo/logo.png");		
 }
 
 .btn-box img{
