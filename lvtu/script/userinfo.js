@@ -1,4 +1,3 @@
-var uid=null;s
 function backToWin(){		
     setTimeout(function () {    
        api.closeWin();       
@@ -9,7 +8,7 @@ function ensure() {
         title: '修改用户信息中...',
         modal: false
     });
-    //var uid = $api.getStorage('uid');   
+    var uid = $api.getStorage('uid');   
     var getUserInfoUrl = '/user?filter=';
     var userinfo_urlParam = {
     	where:{
@@ -97,11 +96,10 @@ function ensure() {
 }
 
 apiready = function () {
-    var header = $api.dom('.header');
+    var header = $api.byId('header');
     $api.fixIos7Bar(header);
-    $api.fixStatusBar(header);
-	uid= api.pageParam.uid;    
-	//$api.setStorage('uid',uid);   
+	var uid= api.pageParam.uid;    
+	$api.setStorage('uid',uid);   
 	
 	
 	api.showProgress({
@@ -121,7 +119,7 @@ apiready = function () {
 			$api.byId("userphoto").src=ret[0].userinfo.userphoto.url;
 		}
 		else{
-			$api.byId("userphoto").src="../image/userinfo/userTitle.png";
+			$api.byId("userphoto").src="../image/userTitle.png";
 		}
 	});
 	api.hideProgress();

@@ -37,13 +37,12 @@ function ensure() {
 				    }
 				    ajaxRequest(loginUlr, 'post', JSON.stringify(bodyParam), function (ret, err) {
 				        if (ret) {
-				            
 				            $api.setStorage('uid', ret.userId);
 				            $api.setStorage('token', ret.id);
 				            setTimeout(function () {
 				                api.closeWin();   
-				            }, 100); 
-				           
+				            }, 100);        	
+				            
 				        } else {
 				            api.alert({
 				                msg: err.msg

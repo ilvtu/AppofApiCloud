@@ -8,59 +8,47 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>		
     <style>		
         html, body {		
+            height: 100%;		
             min-width: 320px;		
         }		
         body {		
             font-size: 14px;		
         }		
-        /*header*/	
-        header {
-		    background-color: #f2f2f2;
-		    background-image: url("../image/win_userpage/top-label.png");
-		    border-bottom: 1px solid #f2f2f2;
-		}	
-        .header {	
-        		
+        /*header*/		
+        .header {		
             display: -webkit-box;		
             display: -webkit-flex;		
-            display: flex;	
-            /*	
+            display: flex;		
             border-bottom: 1px solid #E5E5E5;		
             -webkit-box-pack: center;		
             -webkit-box-align: center;		
-            background-color: #E5E5E5;	
-           */
-             
+            background-color: #E5E5E5;		
         }		
-        
+        .header-title {		
+            -webkit-box-flex: 1;		
+            -webkit-flex: 1;		
+            flex: 1;		
+        }		
         .header a {		
-            display: block;	
-            background-size: 20px;	
+            display: block;		
+            background-size: 20px;		
+            padding: 20px;		
             background-repeat: no-repeat;		
-            background-position: center;
+            background-position: center;		
         }		
-        .header .back {	  		
-            padding: 15px;	
-            background-image: url("../image/win_userpage/left.png");		
+        .header .back {		
+            background-image: url("../image/left.png");		
         }		
-		.header .header-title {	
-					
-		    -webkit-box-flex: 1;
-		    -webkit-flex: 1;
-		    flex: 1;
-		    text-align: center;
-		    color:#FFFFFF;	
-        }		
-        .header .header-title .title{	
+		
+        .header .title{	
         	font-size:18px;
         	/*padding-left:40%;*/
         	text-align:center;
         	height:20px;
             /*background-size: 45px;		
-            background-image: url("../image/win_userpage/logo.png");	*/
+            background-image: url("../image/logo.png");	*/
            	
-        }	
-       	  
+        }		  
         
     </style>		
 </head>		
@@ -81,13 +69,11 @@
 <script>		
     apiready=function(){		
         var $header=$api.dom('.header');		
-        $api.fixIos7Bar($header);	
-        $api.fixStatusBar($header);	
+        $api.fixIos7Bar($header);		
         var $header_h=$api.offset($header).h;		
         
         var newurl = api.pageParam.url;
         var title = api.pageParam.title;
-        var uid = api.pageParam.uid;
         $api.byId('curtitle').innerHTML=title;
         api.openFrame({		
             name:'',		
@@ -97,11 +83,8 @@
                 y:$header_h,		
                 w:'auto',		
                 h:'auto'		
-            },
-            pageParam:{
-            	uid:uid
-            }	
-        })			
+            }		
+        })		
     }		
     
     function backToWin(){		

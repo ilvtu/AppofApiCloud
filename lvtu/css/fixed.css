@@ -41,14 +41,14 @@ li a {
     background-position: center;		
 }		
 .header .back {		
-    background-image: url("../image/fixed/left.png");		
+    background-image: url("../image/left.png");		
 }		
 
 .header .logo {	
 	float:left;
     padding-left:80%;
     background-size: 20px;		
-    background-image: url("../image/fixed/logo.png");		
+    background-image: url("../image/logo.png");		
 }	
  .profile_box{	
     height: 200px;	

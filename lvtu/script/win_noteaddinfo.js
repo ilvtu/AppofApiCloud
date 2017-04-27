@@ -1,6 +1,5 @@
-var uid=null;
 apiready = function(){
-	uid= api.pageParam.uid;
+	
     $api.fixStatusBar($api.dom('.header'));
     
     var type = api.pageParam.type;
