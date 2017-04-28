@@ -1,0 +1,349 @@
+//var avatar = $api.dom('#avatar img');
+//var url = avatar.src;
+//var cover = $api.dom('#cover');
+//var pos = $api.offset(cover);
+//var coverImg = $api.dom('#cover .cover');
+//coverImg.src = url;
+//var css = 'width:'+ pos.w +'px; height:'+ pos.h +'px;';
+//$api.css(coverImg,css);
+
+//function openActDetail(){
+//api.openWin({
+//  name: 'actDetail',
+//  url: 'actDetail.html',
+//  delay: 400
+//});
+//}
+
+/*
+function openNewDetail(type, did) {
+    var name = ''
+    switch (type) {
+        case 't':
+            name = 'news-text';
+            break;
+        case 'v':
+            name = 'news-video';
+            break;
+    }
+    api.openWin({
+        name: name,
+        url: name + '.html',
+        pageParam: {newsId: did}
+    });
+}
+
+
+function openActDetail(did) {
+    api.openWin({
+        name: 'actDetail',
+        url: 'actDetail.html',
+//		delay: 200,
+        pageParam: {dataId: did}
+    });
+}
+
+function openMer(did) {
+    api.openWin({
+        name: 'restaurant',
+        url: 'restaurant.html',
+        opaque: true,
+        pageParam: {dataId: did},
+        vScrollBarEnabled: false
+    });
+}
+*/
+
+
+function backToWin(){	
+    setTimeout(function () {    
+       api.closeWin();      
+    }, 100);
+}
+
+//init personal center
+function initPersonalCenter(json) {    
+     api.showProgress({
+        title: '加载中...',
+        modal: false
+    });
+    json = json || {};
+    if (!json.nickname) {
+        return;
+    }
+	
+    var uid = $api.getStorage('uid');
+    
+    var getUserInfoUrl = '/user?filter=';
+    var userinfo_urlParam = {
+    	where:{
+    		id:uid
+    		},
+    	include:['userinfoPointer']
+    };
+    ajaxRequest(getUserInfoUrl + JSON.stringify(userinfo_urlParam), 'GET', '', function (ret, err) {   
+        if (ret) {        	
+        	
+        	//$api.setStorage('appUid',ret[0].userinfo.id);
+            var pc = api.require('personalCenter');
+            //var headerH = api.pageParam.headerHeight;
+            var photo = json.photo || 'widget://image/userTitle.png';            
+            var point = json.point || 0;
+            
+                       
+            /*
+            var actFav = ret[0].act_fav.length || 0;
+            var merFav = ret[0].mer_fav.length || 0;
+            var newsFav = ret[0].news_fav.length || 0;
+			
+            var actFavArr = [], merFavArr = [], newsFavArr = [];
+            for (var i in ret[0].act_fav) {
+                actFavArr[i] = ret[0].act_fav[i].activity;
+            }
+            for (var i in ret[0].mer_fav) {
+                merFavArr[i] = ret[0].mer_fav[i].merchant;
+            }
+            for (var i in ret[0].news_fav) {
+                newsFavArr[i] = ret[0].news_fav[i].news;
+            }
+            
+            localStorage.setItem('actFavArr', actFavArr);
+            localStorage.setItem('merFavArr', merFavArr);
+            localStorage.setItem('newsFavArr', newsFavArr);
+            */
+            pc.open({
+                y: 50,
+                height: 200,
+                fixed: true,
+                imgPath: photo,
+                placeHoldImg: photo,
+                showLeftBtn: false,
+                showRightBtn: false,
+                username: json.nickname,
+                count: point,
+                modButton: {
+                    bgImg: 'widget://image/edit.png',
+                    lightImg: 'widget://image/edit.png'
+                },
+                btnArray: [
+                    {
+                        bgImg: 'widget://image/personal_btn_nor.png',
+                        lightImg: 'widget://image/personal_btn_light.png',
+                        selectedImg: 'widget://image/personal_btn_sele.png',
+                        title: '我的游记',
+                        count: 1,
+                        titleColor: '#ffffff',
+                        titleLightColor: '#55abce',
+                        countColor: '#ffffff',
+                        countLightColor: '#55abce'
+                    },
+                    {
+                        bgImg: 'widget://image/personal_btn_nor.png',
+                        lightImg: 'widget://image/personal_btn_light.png',
+                        selectedImg: 'widget://image/personal_btn_sele.png',
+                        title: '关注游记',
+                        count: 1,
+                        titleColor: '#ffffff',
+                        titleLightColor: '#55abce',
+                        countColor: '#ffffff',
+                        countLightColor: '#55abce'
+                    },
+                    {
+                        bgImg: 'widget://image/personal_btn_nor.png',
+                        lightImg: 'widget://image/personal_btn_light.png',
+                        selectedImg: 'widget://image/personal_btn_sele.png',
+                        title: '旅游印章',
+                        count: 1,
+                        titleColor: '#ffffff',
+                        titleLightColor: '#55abce',
+                        countColor: '#ffffff',
+                        countLightColor: '#55abce'
+                    }
+                ]
+            }, function (ret, err) {
+				
+				
+                $api.byId('userLvyou').innerHTML = '';
+                if (ret.click === 0) {
+                	//getUserLvyou('myyouji');                	
+                    //getFavData('activity', localStorage.getItem('actFavArr'));
+                }
+                if (ret.click === 1) {
+                	//getUserLvyou('favoryouji');      
+                    //getFavData('merchant', localStorage.getItem('merFavArr'));
+                }
+                if (ret.click === 2) {
+                	//getUserLvyou('stamp');      
+                    //getFavData('news', localStorage.getItem('newsFavArr'));
+                }
+                
+            });
+            api.hideProgress();
+        	//getUserLvyou('myyouji');              
+            //getFavData('activity', localStorage.getItem('actFavArr'));
+        } else {
+            api.toast({msg: err.msg, location: 'middle'})
+            api.hideProgress();
+        }
+
+    })
+}
+
+//user数据获取接口
+function getUserLvyou(type){
+	 var getUserLvyouUrl = '/' + type + '?filter=';
+    //var arr = ids.split(',');
+    var urlParam = {
+        //where: {
+            //id: {
+                //inq: arr
+            //}
+        //}
+    };
+    ajaxRequest(getUserLvyouUrl + JSON.stringify(urlParam), 'get', '', function (ret, err) {
+        switch (type) {
+            case 'myyouji':
+                myyoujiCallBack(ret, err);
+                break;
+            case 'favoryouji':
+                favoryoujiCallBack(ret, err)
+                break;
+            case 'stamp':
+                stampCallBack(ret, err)
+                break;
+        }
+    })
+}         
+
+function myyoujiCallBack(ret, err) {
+    if (ret) {
+       
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+function favoryoujiCallBack(ret, err) {
+    if (ret) {
+       
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+function stampCallBack(ret, err) {
+    if (ret) {
+        
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+
+/*
+function getFavData(type, ids) {
+    var getUserFavUrl = '/' + type + '?filter=';
+    var arr = ids.split(',');
+    var urlParam = {
+        where: {
+            id: {
+                inq: arr
+            }
+        }
+    };
+    ajaxRequest(getUserFavUrl + JSON.stringify(urlParam), 'get', '', function (ret, err) {
+        switch (type) {
+            case 'activity':
+                activityCallBack(ret, err);
+                break;
+            case 'merchant':
+                merchantCallBack(ret, err)
+                break;
+            case 'news':
+                newsCallBack(ret, err)
+                break;
+        }
+    })
+}
+
+function activityCallBack(ret, err) {
+    if (ret) {
+        var data = {};
+        data.favType = 'act';
+        data.ret = ret;
+        var content = $api.byId('activity');
+        var tpl = $api.byId('template').text;
+        var tempFn = doT.template(tpl);
+        $api.byId('activity').innerHTML = '';
+        $api.append(content, tempFn(data));
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+function merchantCallBack(ret, err) {
+    if (ret) {
+        var content = $api.byId('activity');
+        var tpl = $api.byId('template').text;
+        var tempFn = doT.template(tpl);
+        $api.byId('activity').innerHTML = '';
+        $api.append(content, tempFn(data));
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+function newsCallBack(ret, err) {
+    if (ret) {
+        var data = {};
+        data.favType = 'news';
+        data.ret = ret;
+        var content = $api.byId('activity');
+        var tpl = $api.byId('template').text;
+        var tempFn = doT.template(tpl);
+        $api.byId('activity').innerHTML = '';
+        $api.append(content, tempFn(data));
+    } else {
+        alert(JSON.stringify(err))
+    }
+}
+*/
+
+function init() {
+
+	/*
+	 * 此处应该从接口获得用户头像、nickname等信息
+	 */
+    var photoUrl = '';
+    initPersonalCenter({
+        nickname: 'ilvtu',
+        photo: photoUrl,
+        point: 0
+    });
+}
+
+function updateInfo() {
+    var pc = api.require('personalCenter');
+    pc.close();
+    init();
+}
+
+apiready = function () {
+	init();
+    api.setRefreshHeaderInfo({
+        visible: true,
+        // loadingImgae: 'wgt://image/refresh-white.png',
+        bgColor: '#f2f2f2',
+        textColor: '#4d4d4d',
+        textDown: '下拉刷新...',
+        textUp: '松开刷新...',
+        showTime: true
+    }, function (ret, err) {   	
+    	init();
+        api.refreshHeaderLoadDone();
+    });
+
+
+    api.addEventListener({
+        name: 'scrolltobottom'
+    }, function (ret, err) {
+    	init();
+    });
+
+};
+
