@@ -1,0 +1,94 @@
+function backToWin(){		
+    setTimeout(function () {    
+       api.closeWin();       
+    }, 100);
+}
+function ensure() {
+    api.closeWin();
+}
+
+apiready = function () {
+    var header = $api.byId('header');
+    $api.fixIos7Bar(header);
+
+    
+};
+
+function modifyphoto(){	
+	
+	api.getPicture({
+	    sourceType: 'album',
+	    encodingType: 'png',
+	    mediaValue: 'pic',
+	    destinationType: 'url',
+	    allowEdit: true,
+	    quality: 60,
+	    targetWidth: 100,
+	    targetHeight: 100,
+	    saveToPhotoAlbum: true
+		}, function(ret, err){ 
+		    if (ret) {
+		    
+		    	var picurl = ret.data;	    
+		    	if(picurl!=null){
+					$api.byId("userphoto").src=picurl;
+		    	}
+		        //api.alert({msg:ret.data});
+		    } else{
+		        api.alert({msg:err.msg});
+		    };
+		});
+}
+
+
+function begincamera(){
+	api.getPicture({
+	    sourceType: 'camera',
+	    encodingType: 'png',
+	    mediaValue: 'pic',
+	    destinationType: 'url',
+	    allowEdit: true,
+	    quality: 60,
+	    targetWidth: 100,
+	    targetHeight: 100,
+	    saveToPhotoAlbum: true
+	}, function(ret, err) {
+	    if (ret) {	    	
+	    	var picurl = ret.data;	    
+	    	$api.byId(userphoto).src=picurl;
+	    	//document.getElementById("myImage").src="hackanm.gif";
+	    		
+	    	//saveimg(picurl);
+	    	
+	        //alert(JSON.stringify(ret));
+	    } else {
+	        alert(JSON.stringify(err));
+	    }
+	});
+}
+
+
+function saveimg(imgurl){
+	var uploadphtoUlr = '/file';
+	var bodyParam = {
+        file:imgurl
+    }
+	 ajaxPhotoRequest(uploadphtoUlr, 'post', imgurl, function (ret, err) {	
+        if (ret) {  
+        	var file ={
+        		id:ret.id,
+        		name:ret.name,
+        		url:ret.url
+        	}
+        	$api.setStorage('newphoto',file);    
+        	$api.byId("newImg").innerHTML ="<img src='"+ret.url+"'>"       
+         	
+        } else {
+            api.alert({
+                msg: err.msg
+            });
+        }
+        api.hideProgress();
+    })
+
+}

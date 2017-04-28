@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/> 
+    <link rel="stylesheet" type="text/css" href="../css/frm_register.css"/>
+</head>
+<body>
+<div id="login-page">
+	<h1>旅图网欢迎您</h1>
+	<div id="content">
+		<form action="" class="login-form">
+			<div class="phone">
+				<label>手机号</label>
+				<input id="username" type="text" onfocus="edit(this)" onblur="cancel(this)">
+				<i class="del" tapmode="" onclick="delWord(this)"></i>
+			</div>
+			<div class="pwd">
+				<label>密码</label>
+				<input id="password" type="password" onfocus="edit(this)" onblur="cancel(this)">
+				<i class="del" tapmode="" onclick="delWord(this)"></i>
+			</div>
+			<div class="verifycode">
+				<label>验证码</label>
+				<input id="verifycode" type="text" onfocus="edit(this)" onblur="cancel(this)">
+				<i class="del" tapmode="" onclick="delWord(this)"></i>
+				<img src="../image/frm_register/get-register-sms.png" onclick="sendCode();">
+			</div>
+			<input type="button" class="login-btn" value="注册" onclick="ensure();">
+		</form>		
+	</div>
+	<div id="logo" >
+		<img src="../image/frm_register/register-bottom-L.png" >
+	</div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/frm_register.js"></script> 
+</body>
+</html>

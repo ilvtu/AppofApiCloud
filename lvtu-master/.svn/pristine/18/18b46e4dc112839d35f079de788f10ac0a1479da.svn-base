@@ -1,0 +1,49 @@
+ apiready=function(){		
+    var $header=$api.dom('.header');		
+    $api.fixIos7Bar($header);	
+    $api.fixStatusBar($header);	
+    var $header_h=$api.offset($header).h;		
+    
+    var newurl = api.pageParam.url;
+    //var title = api.pageParam.title;
+    var uid = api.pageParam.uid;
+    var travelid = api.pageParam.travelid;
+    var startdate = api.pageParam.startdate;
+    var enddate = api.pageParam.enddate;
+    var yjtype = api.pageParam.yjtype;
+    //$api.byId('curtitle').innerHTML=title;
+    api.openFrame({		
+        name:'',		
+        url:newurl,		
+        rect:{		
+            x:0,		
+            y:$header_h,		
+            w:'auto',		
+            h:'auto'		
+        },
+	     pageParam:{
+	    	header_h:$header_h,
+	    	travelid:travelid,
+	    	uid:uid,
+	    	startdate:startdate,
+	    	enddate:enddate,
+	    	yjtype:yjtype
+	    }	
+    });		
+}		
+    
+function backToWin(){		
+    setTimeout(function () {    
+       api.closeWin();       
+    }, 100);
+}
+
+function publishyj(){
+	
+	var toreshowyjarrays = $api.getStorage('toreshowyjarrays');
+	for(var id in toreshowyjarrays){
+		
+	}
+}
+
+

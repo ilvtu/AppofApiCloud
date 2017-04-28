@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>slidPane</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  	<style>
+	  	header {
+	    background-color: #f2f2f2;
+	    background-image: url("../image/win_runpage/top-label.png");
+	    border-bottom: 1px solid #f2f2f2;
+		}
+		.header {
+		    display: -webkit-box;
+		    display: -webkit-flex;
+		    display: flex;    
+		}
+		.header a{
+		    display: block;
+		    padding: 20px;
+		    display: block;		
+            background-size: 20px;	
+            background-repeat: no-repeat;		
+            background-position: center;	
+		}
+		.title {
+		    line-height:40px;
+		    -webkit-box-flex: 1;
+		    -webkit-flex: 1;
+		    flex: 1;
+		    text-align: center;
+		    color: #FFF;	
+		}
+		/*
+		.header .menu {
+		    background-size: 30px;
+		    background-repeat: no-repeat;
+		    background-position:center;
+		    background-image: url("../image/win_runpage/personal-man.png");
+		}
+		*/
+		 .header .back {		
+            background-image: url("../image/win_runpage/left.png");		
+        }		
+  	</style>
+</head>
+<body>
+<header>
+    <div class="header">    
+        <a class="back" tapmode="" onclick="backToWin();"></a>		
+        <div class="title" >旅行中</div>
+        <!--<a class="menu" tapmode="" onclick="sliding()"></a>-->
+    </div>
+</header>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>	
+
+	
+    apiready=function(){		
+        var $header=$api.dom('.header');		
+        $api.fixIos7Bar($header);		
+        $api.fixStatusBar($header);
+        var $header_h=$api.offset($header).h;		
+        var travelid = api.pageParam.travelid;		
+        var uid = api.pageParam.uid;
+        var newurl = api.pageParam.url;
+        
+      
+        //var title = api.pageParam.title;
+        //$api.byId('curtitle').innerHTML=title;
+        api.openFrame({		
+            name:'',		
+            url:newurl,		
+            rect:{		
+                x:0,		
+                y:$header_h,		
+                w:'auto',		
+                h:'auto'		
+            },
+            pageParam:{
+            	header_h:$header_h,
+            	travelid:travelid,
+            	uid:uid
+            }	
+        })		
+    }		
+    
+    function backToWin(){		
+	    setTimeout(function () {    
+	       api.closeWin();       
+	    }, 100);
+	}
+
+</script>	
+</body>
+</html>

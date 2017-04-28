@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+    <title>api</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/user.css" />
+    <style>		
+        html, body {		
+            height: 100%;		
+            min-width: 320px;		
+        }		
+        body {		
+            font-size: 14px;		
+        }		
+        /*header*/		
+        .header {		
+            display: -webkit-box;		
+            display: -webkit-flex;		
+            display: flex;		
+            border-bottom: 1px solid #E5E5E5;		
+            -webkit-box-pack: center;		
+            -webkit-box-align: center;		
+            background-color: #E5E5E5;		
+        }		
+        .header-title {		
+            -webkit-box-flex: 1;		
+            -webkit-flex: 1;		
+            flex: 1;		
+        }		
+        .header a {		
+            display: block;		
+            background-size: 20px;		
+            padding: 20px;		
+            background-repeat: no-repeat;		
+            background-position: center;		
+        }		
+        .header .back {		
+            background-image: url("../image/left.png");		
+        }		
+		
+        .header .logo {		
+            background-size: 45px;		
+            background-image: url("../image/logo.png");		
+        }		
+    
+
+
+
+         #loginTip{
+            text-align: center;
+            margin-top: 20px;
+         }
+         #loginTip a{
+         	line-height: 40px;
+            text-decoration: underline;
+            color: #bfbfbf;
+            font-size: 1em;
+            font-family: '微软雅黑';
+         }
+         .hidden{
+            display: none;
+         }
+         .input-wrap{
+         	padding: 20px 10px 0;
+         }
+    </style>
+</head>
+<body>
+<header>		
+    <div class="header">		
+        <a class="back" tapmode="" onclick="backToWin();"></a>		
+        <div class="header-title">		
+            <a class="logo" tapmode=""></a>		
+        </div>		        
+        <div class="btn-box" tapmode onclick="api.closeWin();">
+            <img src="../image/webview_close.png" alt="">
+        </div>
+        <a  tapmode="" onclick=""></a>		
+    </div>		
+</header>	
+    <div id="wrap">
+        <div id="main"> 
+        	<!--
+            <div id="cover">
+                <img class="cover" />
+                <div id="avatar">
+                    <img src="../image/userTitle.png"/>
+                    <i class="edit"></i>
+                </div>
+                <label>Itravel</label>
+            </div>
+            
+            <ul id="tab">
+                <li><a class="active light">
+                    <span>1</span>
+                    <div>我的游记</div>
+                </a></li>
+                <li><a>
+                    <span>2</span>
+                    <div>关注游记</div>
+                </a></li>              
+                <li><a>
+                    <span>2</span>
+                    <div>世界印记</div>
+                </a></li>
+            </ul>
+            
+            <script id="template" type="text/x-dot-template">
+	              <div class="item">
+	              
+	              	{{? it.favType == 'act' }}
+                      {{ for(var i=0, len=it.ret.length; i < len; i++) {}}
+	              		<a tapmode="" onclick="openActDetail('{{=it.ret[i].id}}');">
+		                	<div class="pic" style="background-image:url({{=it.ret[i].img.url}})">
+							</div>
+		                    <h2>{{=it.ret[i].title}}</h2>
+		                    <p>
+		                    	{{=it.ret[i].summary}}
+		                    </p>
+		                </a>
+                      {{ } }}
+	              	{{?}}
+	              	{{? it.favType == 'mer' }}
+                      {{ for(var i=0, len=it.ret.length; i < len; i++) {}}
+	              		<a tapmode="" onclick="openMer('{{=it.id}}');">
+		                	<div class="pic" style="background-image:url({{=it.poster.url}})">
+							</div>
+		                    <h2>{{=it.name}}</h2>
+		                    <p>
+		                    	{{=it.address}}
+		                    </p>
+		                </a>
+                      {{ } }}
+	              	{{?}}
+	              	{{? it.favType == 'news' }}
+                      {{ for(var i=0, len=it.ret.length; i < len; i++) {}}
+		                <a tapmode="" onclick="openNewDetail('{{=it.ret[i].type}}','{{=it.ret[i].id}}');">
+							<div class="pic" style="background-image:url({{=it.ret[i].img.url}})">
+							</div>
+		                    <h2>{{=it.ret[i].title}}</h2>
+		                    <p>
+		                    	{{=it.ret[i].summary}}
+		                    </p>
+		                </a>
+                      {{ } }}
+	                {{?}}
+	                
+	              </div>
+            </script>
+            -->
+            <div id="userLvyou">
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+</html>

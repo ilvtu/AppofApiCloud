@@ -1,0 +1,42 @@
+<!doctype html>		
+<html>		
+<head>		
+    <meta charset="utf-8">		
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>		
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">		
+    <title>window</title>		
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>		
+    <link rel="stylesheet" type="text/css" href="../css/win_yjview.css"/>		
+  	<style>
+	  	
+  	</style>
+</head>
+<body>
+<header>
+    <div class="header">    
+        <a></a>		
+        <div class="title"></div>
+        <a class="ok" tapmode="" onclick="closeyjview()"></a>
+    </div>
+</header>	
+<div class="guideimg">
+	<img src='../image/win_yjview/pic144.png'>
+</div>
+<div id="yjinfo">
+	<!--
+	<a class="dateofview">3月<br/>1日</a>
+	<div class="dayview">
+		<div class="photo">
+			<img src="../image/win_yjview/pic144.png" width="100%">
+			<a class="photoinfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum </a>
+		</div>
+	</div>
+	-->
+</div>
+
+<script type="text/javascript" src="../script/api.js"></script>		
+<script type="text/javascript" src="../script/common.js"></script>		
+
+<script type="text/javascript" src="../script/win_yjview.js"></script>
+</body>		
+</html>		

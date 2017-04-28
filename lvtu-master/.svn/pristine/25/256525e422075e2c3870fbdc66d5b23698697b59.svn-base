@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>slidPane</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/> 
+  	<style>
+	  	header {
+	    background-color: #f2f2f2;
+	    background-image: url("../image/win_runstop/top-label.png");
+	    border-bottom: 1px solid #f2f2f2;
+		}
+		.header {
+		    display: -webkit-box;
+		    display: -webkit-flex;
+		    display: flex;    
+		}
+		.header a{
+		    display: block;
+		    padding: 20px;
+		    display: block;		
+            background-size: 20px;	
+            background-repeat: no-repeat;		
+            background-position: center;	
+		}
+		.title {
+		    line-height:40px;
+		    -webkit-box-flex: 1;
+		    -webkit-flex: 1;
+		    flex: 1;
+		    text-align: center;
+		    color: #FFF;	
+		}
+		/*
+		.header .menu {
+		    background-size: 30px;
+		    background-repeat: no-repeat;
+		    background-position:center;
+		    background-image: url("../image/win_runstop/personal-man.png");
+		}
+		*/
+		 .header .ok {		
+            background-image: url("../image/win_runstop/ok-white.png");		
+        }		        
+        .header .menu {
+        
+            background-size: 30px;	
+        	background-image: url("../image/win_runstop/edit.png");		
+        }
+        #yjinfo {
+        	position:absolute;
+        	top:290px;
+        	margin-top:10px;
+        	width:100%;
+        	height:240px;
+        	text-align:left;
+        	font-size:15px;
+        	border-color:#959595;
+        	border-width:thin;
+        	border-style :groove;
+        	 
+        }
+  	</style>
+</head>
+<body>
+<header>
+    <div class="header">    
+        <a class="ok" tapmode="" onclick="endrun();"></a>		
+        <div class="title" ></div>
+        <a class="menu" tapmode="" onclick="edityj()"></a>
+    </div>
+</header>
+<div>
+	
+</div>
+<div>
+	<textarea name="yjinfo" rows="8"   id="yjinfo" onfocus="" onblur="">我想旅游</textarea>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/win_runstop.js"></script>
+</body>
+</html>

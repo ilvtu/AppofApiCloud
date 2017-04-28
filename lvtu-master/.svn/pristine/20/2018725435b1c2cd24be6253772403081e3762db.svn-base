@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>fixedPane</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        html, body {
+            /*background-color: #dfdede;*/
+        }
+        li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #d4d3d3;
+            background-size: 8px;		
+            background-repeat: no-repeat;		
+            background-position: right;		
+            background-image: url("../image/fixed/right_arrow.png");		
+            border-bottom: 1px solid #F6F6F6;	
+           
+        }
+        .liActive {
+            background-color: #3ABA63;
+        }
+        li a {
+            display: block;
+            padding: 10px 30px;
+        }
+         /*header*/		
+        .header {		
+            display: -webkit-box;		
+            display: -webkit-flex;		
+            display: flex;		
+            border-bottom: 1px solid #E5E5E5;		
+            -webkit-box-pack: center;		
+            -webkit-box-align: center;		
+            background-color: #E5E5E5;		
+        }		
+        .header-title {		
+            -webkit-box-flex: 1;		
+            -webkit-flex: 1;		
+            flex: 1;
+        }		
+        .header a {		
+            display: block;		
+            background-size: 20px;		
+            padding: 20px;		
+            background-repeat: no-repeat;		
+            background-position: center;		
+        }		
+        .header .back {		
+            background-image: url("../image/left.png");		
+        }		
+		
+        .header .logo {	
+        	float:left;
+            padding-left:80%;
+            background-size: 20px;		
+            background-image: url("../image/logo.png");		
+        }	
+         .profile_box{	
+            height: 200px;	
+            width: 100%;	
+            background: url(../image/fixed/api_35.png) center center no-repeat;	
+            background-size: 100% 100%;	
+        }	
+        .profile_top{	
+            width: 100%;	
+            height: 121px;	
+            position: relative;	
+        }	
+        .login_btn{	
+            border: 1px solid #FFF;	
+            position: absolute;	
+            left: 50%;	
+            top: 70%;	
+            -webkit-transform: translate(-50%,-50%);	
+                    transform: translate(-50%,-50%);	
+            padding: 0.5em 1em;	
+            border-radius: 5px;	
+            color: #FFF;	
+        }	
+        
+		#logo{
+			text-align:center;	
+				
+		}
+		img{ 
+			max-width:100%;height:auto; 
+		} 
+		
+		
+		.myyouji{			
+        	float:left;
+        	height:37px;
+        	
+		}
+		.favor{			
+        	float:left;
+        	height:37px;
+        	
+		}
+		.friend{			
+        	float:left;
+        	height:37px;
+        	
+		}
+		.refresh{			
+        	float:left;
+        	height:37px;
+        	
+		}
+		.fankui{			
+        	float:left;
+        	height:37px;
+        	
+		}
+		.about{			
+        	float:left;
+        	height:37px;
+        	padding:0px 7px 0px 7px;
+        	
+		}
+        .logout{
+        	float:left;
+        	height:37px;
+        }
+        	
+    </style>
+</head>
+<body>
+<header>		
+    <div class="header">
+        <a class="back" tapmode="" onclick="backToWin();"></a>		
+        <div class="header-title">		
+            <a class="logo" tapmode=""></a>		
+        </div>	
+    </div>		
+</header>
+
+<div id="profile" class="profile_box" >	
+	<div class="profile_top">	
+	    <i class="msg_icon" tapmode onclick=""></i>	
+	    <span class="login_btn" tapmode onclick="login();">点击登录</span>	
+	</div>	
+</div>
+<nav>
+    <ul>
+        <li tapmode="liActive" onclick="showyouji();">
+	        <img class="myyouji" src="../image/fixed/a.png" >
+	        <a class="nav1">我的游记</a>
+        </li>
+        <!--
+        <li tapmode="liActive" onclick=""> 
+	        <img class="favor" src="../image/fixed/logo.png" >
+        	<a class="nav1">我的收藏</a>
+        </li> 
+        <li tapmode="liActive" onclick=""> 
+	        <img class="friend" src="../image/fixed/logo.png" >
+        	<a class="nav1">我的好友</a>
+        </li> 
+        -->
+        <li tapmode="liActive" onclick=""> 
+	        <img class="refresh" src="../image/fixed/d.png" >
+        	<a class="nav1">检查更新</a>
+        </li> 
+        <li tapmode="liActive" onclick=""> 
+	        <img class="fankui" src="../image/fixed/e.png" >
+        	<a class="nav1">意见反馈</a>
+        </li>
+        <li tapmode="liActive" onclick="showabout();"> 
+	        <img class="about" src="../image/fixed/logo-1.png" >
+        	<a class="nav1">关于我们</a>
+        </li>
+        <li id="logout" tapmode="liActive" onclick="logout();">  
+	        <img class="logout" src="../image/fixed/g.png" >
+        	<a class="nav1">退出登录</a>
+        </li>
+    </ul>
+</nav>
+<div id="logo" >
+	<img src="../image/fixed/bottom-bokeh60-D.png" >
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/fixed.js"></script>
+
+</html>

@@ -1,0 +1,103 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+    <title>api</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/myyjlist.css" />
+        <style>		
+        html, body {		
+            height: 100%;		
+            min-width: 320px;		
+        }		
+        body {		
+            font-size: 14px;		
+        }		
+        /*header*/		
+        .header {		
+            display: -webkit-box;		
+            display: -webkit-flex;		
+            display: flex;		
+            border-bottom: 1px solid #E5E5E5;		
+            -webkit-box-pack: center;		
+            -webkit-box-align: center;		
+            background-color: #E5E5E5;		
+        }		
+        .header-title {		
+            -webkit-box-flex: 1;		
+            -webkit-flex: 1;		
+            flex: 1;		
+        }		
+        .header a {		
+            display: block;		
+            background-size: 20px;		
+            padding: 20px;		
+            background-repeat: no-repeat;		
+            background-position: center;		
+        }		
+        .header .back {			
+            background-image: url("../image/left.png");		
+        }		
+		
+        .header .logo {		
+            background-size: 20px;		
+            background-image: url("../image/logo.png");		
+        }		
+    
+
+
+
+         #loginTip{
+            text-align: center;
+            margin-top: 20px;
+         }
+         #loginTip a{
+         	line-height: 40px;
+            text-decoration: underline;
+            color: #bfbfbf;
+            font-size: 1em;
+            font-family: '微软雅黑';
+         }
+         .hidden{
+            display: none;
+         }
+         .input-wrap{
+         	padding: 20px 10px 0;
+         }
+    </style>
+</head>
+<body>
+<header>		
+    <div class="header">		
+        <a class="back" tapmode="" onclick="backToWin();"></a>		
+        <div class="header-title">		
+            <a class="logo" tapmode=""></a>		
+        </div>		        
+        <div class="btn-box" tapmode onclick="api.closeWin();">
+            <img src="../image/webview_close.png" height="30px" alt="">
+        </div>
+        <a  tapmode="" onclick=""></a>		
+    </div>		
+</header>	
+<div id="wrap">   
+ 
+	<div id="yj" class="youji-frame">		
+        <div class="youji-box">		
+            <div class="youji-top clearfix" tapmode="tap-active" onclick="" data-id="120333" data-type="">		
+               <span class="user-name pull-left">apicloud</span>		
+            </div>		
+            <div class="youji-content-text" tapmode="tap-active" onclick="" data-id="90000099">		
+                <p class="text">重新定义移动应用开发</p>		
+            </div>	
+        </div>		
+        
+    </div>		        
+</div>
+    
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/myyjlist.js"></script>
+</html>

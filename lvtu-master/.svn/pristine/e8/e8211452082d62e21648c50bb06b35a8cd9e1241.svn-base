@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>SelectCalendar</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/frm_calendar.css"/>
+</head>
+<body>
+    <div id="wrap">
+        <!--
+        <header id='header'>
+            <nav id="nav">
+                <a id="left" onclick="api.closeWin();">
+                    <span>返回</span>
+                </a>
+                <a id="middle">
+                    <span>选择日期</span>
+                </a>
+                <a id="right">
+                </a>
+            </nav>
+        </header>
+        -->
+		<div id="main" style="margin :0px auto; ">
+			<!--input type="button"  name="file" id="doc" multiple="multiple"  style="width:150px;"
+			 onchange="setImagePreviews(this);" accept="image/*" /-->
+			<div id="dd" style=" width:300px;"></div>
+		</div>
+    </div>
+
+		<div class="Calendar">
+			<div id="idCalendarPre">
+				&lt;&lt;
+			</div>
+			<div id="idCalendarNext">
+				&gt;&gt;
+			</div>
+			<div id="toyear">
+				<span id="idCalendarYear">2016</span>年<span id="idCalendarMonth">9</span>月
+			</div>
+			<table border="1px" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr class="tou">
+						<td class="AAA">日</td>
+						<td>一</td>
+						<td>二</td>
+						<td>三</td>
+						<td>四</td>
+						<td>五</td>
+						<td>六</td>
+					</tr>
+				</thead>
+				<tbody id="idCalendar"></tbody>
+			</table>
+		</div>
+    	<script type="text/javascript" src="../script/frm_calendar.js"></script>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	
+</script>
+<!--script type="text/javascript" src="../script/calendar.js"></script-->
+
+</html>

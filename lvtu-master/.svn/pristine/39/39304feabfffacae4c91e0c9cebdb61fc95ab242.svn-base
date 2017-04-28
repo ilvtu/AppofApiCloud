@@ -1,0 +1,49 @@
+
+#main h2{
+   
+    height: 30px; font-size: 0;
+    background-color: #f2f2f2;
+    background-position: 10px 60%;
+    background-repeat: no-repeat;
+    -webkit-background-size: 142px 15px;
+    background-size: 142px 15px;
+  
+  
+}
+#main ul{
+    background-color: #fff;
+    -webkit-box-shadow: 0px 2px 4px #dddcdc;
+    box-shadow: 0px 2px 4px #dddcdc;
+    margin-bottom: 6px;
+}
+#main ul li{
+    float: left; width: 25%; border-right: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9; text-align: center; 
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#main ul li a{
+    display: block; padding: 55px 0 10px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    -webkit-background-size: 35px;
+    background-size: 35px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#main ul li a.active{
+	background-color: #f2f2f2 !important;
+}
+#backToaddrecord{
+	
+	position:relative;
+	float:left;
+}
+#ToPhotoStyle{
+	
+	position:relative;
+	float:right;
+}
+
+

@@ -1,0 +1,120 @@
+function delWord(el) {
+    var input = $api.prev(el, '.txt');
+    input.value = '';
+}
+
+apiready = function () {
+    var header = $api.byId('header');
+    $api.fixIos7Bar(header);
+};
+
+function ensure() {
+    api.showProgress({
+        title: '正在登录...',
+        modal: false
+    });
+    var name = $api.byId('username').value;
+    var pwd = $api.byId('password').value;
+	
+	//2.0判断手机格式
+	if($api.trim(name)==""){
+		register();
+	}
+	else
+	{	 
+	    /*
+	 	 *  判断用户是否已注册
+	 	 */
+	 	var getUserByUserId = '/user?filter[where][username]='+name; 	
+	    ajaxRequest(getUserByUserId, 'get', '', function (ret, err) {    
+	        if (ret) {        	
+	        	if(ret[0]!=null && ret[0].id!=null){
+	        		//uid = ret[0].id;        		
+			        var loginUlr = '/user/login';
+				    var bodyParam = {
+				        username: name,
+				        password: pwd
+				    }
+				    ajaxRequest(loginUlr, 'post', JSON.stringify(bodyParam), function (ret, err) {
+				        if (ret) {
+				            $api.setStorage('uid', ret.userId);
+				            $api.setStorage('token', ret.id);
+				            setTimeout(function () {
+				                api.closeWin();   
+				            }, 100);        	
+				            
+				        } else {
+				            api.alert({
+				                msg: err.msg
+				            });
+				        }
+				        api.hideProgress();
+				    })
+	        	}
+	        	else{
+	        		register(name);
+	        		/*
+		        	api.alert({
+		                msg: '该手机号未注册！'
+		            }, function (ret, err) {
+		                //api.closeWin();
+		            });*/
+	        	}
+	        }
+	        else{
+	        	register(name);
+	        	/*
+	         	api.alert({
+	                msg: '该手机号未注册！'
+	            }, function (ret, err) {
+	                //api.closeWin();
+	            });*/
+	        }
+	    });
+	}
+
+
+}
+
+function forgetPwd() {
+    api.openWin({
+            name: 'webpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '忘记密码',
+	            url: 'frm_forgetpassword.html',
+	            frameName: 'frm_forgetpassword'	
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+}
+
+function register(name) {
+	$api.setStorage('registerphone',name);
+    api.openWin({
+            name: 'webpage',
+            url: '../html/win_userpage.html',
+            pageParam: {
+	            title: '新用户注册',
+	            url: 'frm_register.html',
+	            frameName: 'frm_register'
+	        },
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },           
+            reload: true,
+            showProgress: true
+        });
+}
