@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+    <title>api</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/travel-end.css" />
+  
+</head>
+<body>
+    <div id="wrap">
+        <div id="main" >    
+        	<div id="backToaddrecord" >           		       		
+           		<img src="../image/restart.png" height="40px" onclick="backToaddrecord();">
+           	</div>
+       		
+        	<div class="input-wrap" >
+                <input type="text" placeholder="给这次旅行游记起个名" onfocus="edit(this)" onblur="cancel(this)" class="txt" id="yjname" value="" />
+                
+            </div>            	   
+           	<div class="input-wrap" onclick="showtypelist()">
+                <input type="text" placeholder="适合旅行类别" onfocus="edit(this)" onblur="cancel(this)" class="txt" id="type" value="" />
+                
+            </div>
+            <div class="input-wrap">	
+            	<textarea placeholder="旅行感想" onfocus="edit(this)" onblur="cancel(this)" class="txt" id="feel"  style="width:80%;height:200px;" value=""></textarea>
+                <!--<input type="text"  placeholder="旅行感想" onfocus="edit(this)" onblur="cancel(this)" class="txt" id="feel" value="" />-->
+                <i class="del" tapmode="" onclick="delWord(this)"></i>
+            </div>
+            <a class="btn" tapmode="active" onclick="endlvtu()">结束旅行</a>
+          
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/travel-end.js"></script>
+</html>

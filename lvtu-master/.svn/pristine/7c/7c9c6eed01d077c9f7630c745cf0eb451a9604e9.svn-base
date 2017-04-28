@@ -1,0 +1,133 @@
+
+.title {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;    
+    float:left;
+}
+.title a{
+
+    
+    display: block;
+    padding: 20px;
+    display: block;	
+    background-size: 50px;	
+    background-repeat: no-repeat;		
+    background-position: center;
+    font-size: 15px;	
+    
+}
+
+.center_title {
+
+   
+    font-size: 15px;
+    line-height:50px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    text-align:center;
+    color:#333333;
+    
+}
+
+.titleinfo{
+	width:50%;
+	margin-top:10px;
+	margin-left:10px;
+    line-height:10px;
+    font-size: 15px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    text-align:left;
+    color:#333333;
+}
+ .yjdate {
+    background-image: url("../image/frm_newnote/calendar.png");		
+}	
+
+.daytitle {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;    
+    float:left;
+    margin-left:40%;
+}
+.daytitle a{    
+    display: block;
+    padding: 20px;
+    display: block;	
+    background-size: 50px;	
+    background-repeat: no-repeat;		
+    background-position: center;
+    font-size: 15px;
+}
+.curdate {
+    background-image: url("../image/frm_newnote/calendar.png");		
+}	
+
+
+.daylabel {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;    
+    float:left;
+    margin-left:43%;
+}
+.daylabel a{    
+    display: block;
+    padding: 20px;
+    display: block;	
+    background-size: 50px;	
+    background-repeat: no-repeat;		
+    background-position: center;
+    font-size: 15px;
+}
+.label {
+    background-image: url("../image/frm_newnote/test.png");		
+}	
+
+
+.dayview {
+	width:100%;
+	float:left;
+}
+
+.photo{
+ 	display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;    
+    float:left;
+	width:100%;
+	height:100px;
+	background:#F8F8F8;
+	border-style: solid;
+	border-radius: 2em;
+    border-color:#000000;
+    
+	margin-top:10px;
+}
+
+.photo .delbtn{
+	width:50px;
+	height:50px;
+    display: block;
+  
+    background-size: 50px;	
+    background-repeat: no-repeat;		
+    background-position:center;	
+	background-image: url("../image/frm_newnote/x100.png");	
+}
+
+.photo .curimg{
+	height:100%;
+}
+
+.photo .info{
+	display: block;  
+    background-size: 50px;	
+    background-repeat: no-repeat;		
+    background-position:center;	
+	padding-left:10px;
+}

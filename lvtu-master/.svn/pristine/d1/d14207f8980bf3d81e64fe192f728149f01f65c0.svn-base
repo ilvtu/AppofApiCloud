@@ -1,0 +1,110 @@
+ html, body {
+    /*background-color: #dfdede;*/
+}
+li {
+    padding: 5px 10px;
+    border-bottom: 1px solid #d4d3d3;
+    background-size: 8px;		
+    background-repeat: no-repeat;		
+    background-position: right;		
+    background-image: url("../image/fixed/right_arrow.png");		
+    border-bottom: 1px solid #F6F6F6;	
+   
+}
+.liActive {
+    background-color: #3ABA63;
+}
+li a {
+    display: block;
+    padding: 10px 30px;
+}
+ /*header*/		
+.header {		
+    display: -webkit-box;		
+    display: -webkit-flex;		
+    display: flex;		
+    border-bottom: 1px solid #E5E5E5;		
+    -webkit-box-pack: center;		
+    -webkit-box-align: center;		
+    background-color: #E5E5E5;		
+}		
+.header-title {		
+    -webkit-box-flex: 1;		
+    -webkit-flex: 1;		
+    flex: 1;
+}		
+
+
+
+.header a {		
+    display: block;		
+    background-size: 20px;		
+    padding: 20px;		
+    background-repeat: no-repeat;		
+    background-position: center;		
+}	
+
+.header .logo {	
+	float:left;
+    padding-left:80%;
+    background-size: 20px;		
+    background-image: url("../image/logo.png");		
+}	
+.header .back {		
+    background-image: url("../image/left.png");		
+}		
+
+.header .logo {	
+	float:left;
+    padding-left:80%;
+    background-size: 20px;		
+    background-image: url("../image/logo.png");		
+}
+
+.btn-box img{
+	padding-top:10px;
+}
+
+.userinfo-box{
+	text-align:center;
+	font-size:20px;
+}	
+
+#userphoto{
+	width:60%;
+	height:200px;
+}
+.modify{
+	right:16%;
+	position:absolute;
+	top:230px;
+}
+
+.info{
+	background: #82D0ED;
+}
+
+
+.input-wrap{
+    padding: 20px 10px; position: relative;
+}
+.txt{
+    border: 1px solid #e6e6e6; border-radius: 6px; padding: 10px;
+    width: 100%; outline: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.light{
+    border-color: #55abce;
+}
+.del{
+    display: inline-block; background: #e6e6e6 url(../image/del.png) no-repeat center;
+    width: 18px; height: 18px; position: absolute; right:20px; top: 30px;
+    border-radius: 18px; 
+    -webkit-background-size: 10px 10px;
+    background-size: 10px 10px;
+    visibility: hidden;
+}
+.show{
+    visibility:visible;
+}

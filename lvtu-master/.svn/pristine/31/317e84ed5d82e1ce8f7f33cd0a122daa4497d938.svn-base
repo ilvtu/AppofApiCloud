@@ -1,0 +1,140 @@
+
+
+function backToWin(){	
+    setTimeout(function () {    
+       api.closeWin();      
+    }, 100);
+}
+
+function openyj(travelid){
+	
+     var uid = $api.getStorage('uid');
+	api.openWin({
+	        name: 'win_yjview',
+	        url: 'win_yjview.html',
+	        opaque: true,
+	        vScrollBarEnabled:false,
+	        pageParam:{
+	        	uid:uid,
+	        	travelid:travelid,
+	        	type:'viewyj'
+	        }
+	    });
+}
+
+/*
+ * 获得游记天数和记录数
+ */
+/*
+function getdaynum(travelid,callback){
+	var daynum=0; 	
+	var recnum=0;
+	 var getdaynumUrl = '/youji?filter=';
+    var getdaynum_urlParam = {
+    	where:{
+    		id:travelid
+    		},
+    	include:['zjofyouji','record']
+    };
+    ajaxRequest(getdaynumUrl + JSON.stringify(getdaynum_urlParam), 'GET', '', function (ret, err) { 
+	 	//alert(JSON.stringify(ret));
+        if (ret && ret[0]!=null &&  ret[0].zjofyouji!=null &&  ret[0].zjofyouji[0]!=null) {  
+        		
+        	  daynum=ret[0].zjofyouji.length;
+        	  recnum = ret[0].record.length;
+        	  callback&&callback(daynum,recnum);
+        }
+        else{
+        	alert(JSON.stringify(err));
+        }
+        api.hideProgress();  
+    });    
+}
+*/
+
+function init(uid){
+	api.showProgress({
+        title: '加载中...',
+        modal: false
+    });
+    /*
+     * 第一期获得全部的point,二期开始分天显示点
+     */    
+	var yjUlr = '/user?filter=';
+	var yjUlr_Param = {
+      	 where:{
+    		id:uid
+    		},
+    	include: ['yj'],
+    	includefilter:{
+    		yj:{
+    			order:'updatedAt DESC'
+    		}
+    	}
+			       
+	    //	['record',{record:['img']}]
+    }
+    
+	 ajaxRequest(yjUlr+JSON.stringify(yjUlr_Param), 'GET', '', function (ret, err) {
+        if (ret) {
+        	
+			var yjstrr='';
+        	var t = ret[0].yj;
+        	for(var id in t){        	
+        		  yjstrr+='<div class="youji-box" onclick="openyj('+"'"+t[id].id+"','"+uid+"'"+');">';		
+			      yjstrr+='<div class="youji-top clearfix" tapmode="tap-active" onclick="" data-id="120333" data-type="">';		
+			      var yjtitle='游记还未起名';
+		            if(t[id].title!=null && t[id].title!=''){
+		            	yjtitle=t[id].title;
+		            }
+		          var newdate = new Date(t[id].updatedAt);
+		          var tmpMonth =newdate.getMonth()+1;
+	   			  var newday = newdate.getFullYear()+'-'+tmpMonth+'-'+newdate.getDate();
+	   			  
+			      yjstrr+='<span class="user-name pull-left">'+newday+'&nbsp;&nbsp;&nbsp;'+yjtitle+'</span>';		
+			      yjstrr+='</div>';	
+			      yjstrr+='<img src="../image/myyjlist/pic144.png"  height="200px">';	
+			      yjstrr+='<div class="youji-content-text" tapmode="tap-active" onclick="" data-id="90000099">';		
+			      
+			      var yjinfo='';
+		            if(t[id].note!=null && t[id].note!=''){
+		            	yjinfo=t[id].note;
+		            }
+			      yjstrr+='<p class="text">'+yjinfo+'</p>	';	
+			      yjstrr+='</div>';	
+			      yjstrr+='</div>';	
+	          		
+        		
+            }	
+            $api.byId('yj').innerHTML = yjstrr;
+           
+        } 
+        else {
+            api.alert({
+                msg: err.msg
+            });
+        }
+        api.hideProgress();
+    })
+}
+
+apiready = function () {
+
+
+	var header = $api.dom('header');
+	var headerPos = $api.offset(header);
+	$api.fixStatusBar(header);
+	
+ 	var uid= api.pageParam.uid;
+    $api.setStorage('uid',uid);  
+    
+    init(uid);
+
+    api.addEventListener({
+        name: 'scrolltobottom'
+    }, function (ret, err) {
+    	init(uid);
+    });
+	
+
+};

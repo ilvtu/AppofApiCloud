@@ -1,0 +1,104 @@
+*{
+	box-sizing: border-box;
+	margin:0px;
+	padding:0px;
+}
+body{
+
+   background-color: #F8F8F8;
+}
+a{
+	text-decoration: none;
+}
+#login-page{
+	width:100%;
+	height:100%;
+}
+h1{
+	width:100%;
+	height:10%;
+	text-align: center;
+	font-size:25px;
+	padding:10px;
+	border-bottom: 1px solid #000;
+}
+#content{
+	width:100%;
+	padding:10px 10%;
+}
+#login-form{
+	width:100%;
+}
+
+
+form>div{
+	width:100%;
+	height:120px;
+	padding:10px;
+	border-bottom: 2px solid #000;
+}
+.phone{
+	height:60px;
+}
+label,input[type="text"],input[type="password"]{
+	display:inline-block;
+	height:100%;
+	/*line-height: 100%;*/
+	text-align: left;
+	font-size: 20px;
+}
+.pwd{
+	height:60px;
+}
+input[type="text"],input[type="password"]{
+	border:none;
+	width:50%;
+	outline:none;
+}
+label{
+	width:30%;
+}
+.login-btn{
+	width:80%;
+	height:50px;
+	margin:30px 10%;
+	background:#5e8d1d;
+	color:#fff;
+	font-size:25px;
+	text-align: center;
+	line-height: 50px;
+	border-radius:10px;
+}
+.warn{
+	display: block;
+	width:100%;
+	height:20px;
+	padding:0px 0;
+	color:grey;
+	font-size:15px;
+	text-align: center;
+
+
+}
+.register{
+	float:left;
+	width:50%;
+	height:20px;
+	padding:0px 0;
+	color:#00BFFF;
+	font-size:15px;
+	text-align: center;
+
+
+}
+
+
+
+#logo{
+	text-align:center;	
+		
+}
+img{ 
+max-width:80%;height:auto; 
+} 
+

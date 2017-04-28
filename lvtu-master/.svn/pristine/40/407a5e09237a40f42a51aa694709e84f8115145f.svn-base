@@ -1,0 +1,148 @@
+<!doctype html>		
+<html>		
+<head>		
+    <meta charset="utf-8">		
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>		
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">		
+    <title>frame</title>		
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />		
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />		
+    <style>		
+        body.youji-frame{		
+            background-color: #EDEDED;		
+        }		
+        body.youji-frame #wrap{		
+            display: block;		
+        }		
+        #main.youji-frame{		
+            padding: 0.313em 0.625em;		
+            background-color: #EDEDED;		
+        }		
+        #main.youji-frame .youji-box{		
+            background-color: #FFFFFF;		
+            width: 100%;		
+            border-radius: 2px;		
+            /**/		
+            margin-bottom: 0.56em;		
+        }		
+        #main.youji-frame .youji-top{		
+            padding-left: 0.75em;		
+            padding-top: 0.75em;		
+        }		
+        .youji-top .youji-icon-box{		
+            width: 42px;		
+            height: 42px;		
+        }		
+        .youji-top .youji-icon-box img{		
+            width: 42px;		
+            border-radius: 21px;		
+            display: block;		
+        }		
+        .youji-top .user-name{		
+            height: 42px;		
+            line-height: 42px;		
+            text-indent: 0.75em;		
+            color: #3B3D42;		
+        }		
+        .youji-box .youji-content-text{		
+            padding: 0.75em;		
+        }		
+        .youji-content-text .text{		
+            color: #666554;		
+            display: block;		
+        }		
+        .youji-box .youji-content-img{		
+            padding-bottom: 0.75em;		
+        }		
+        .youji-box .youji-content-img img{		
+            width: 100%;		
+            display: block;		
+        }		
+        .youji-box .status-box{		
+            padding-left: 0.75em;		
+        }		
+        .status-box span{		
+            font-size: 0.625em;		
+            color: #969696;		
+            display: inline-block;		
+        }		
+        .youji-box .btns-group{		
+            height: 63px;		
+        }		
+        .btns-group .icon{		
+            width: 63px;		
+            height: 63px;		
+        }		
+        .btns-group .icon.pull-left{		
+            margin-right: 0.56em;		
+        }		
+        .btns-group .icon.pull-right{		
+        }		
+        .btns-group .icon-agree{		
+            background: url(../image/operation_support.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-agree:active,.btns-group .icon-agree.tap-active,.btns-group .icon-agree.active{		
+            background: url(../image/operation_support_press.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-disagree{		
+            background: url(../image/operation_unsupport.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-disagree:active,.btns-group .icon-disagree.tap-active,.btns-group .icon-disagree.active{		
+            background: url(../image/operation_unsupport_press.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-comment{		
+            background: url(../image/operation_comments.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-share {		
+            float: right;		
+            background: url(../image/operation_more.png) center center no-repeat;		
+            background-size: 100%;		
+        }		
+        .btns-group .icon-comment:active,.btns-group .icon-comment.tap-active,.btns-group .icon-share:active,.btns-group .icon-share.tap-active{		
+            background-color: #E5E5E5;		
+            background-size: 100%;		
+        }		
+        .youji-box .btns-group{		
+            height: 63px;		
+        }		
+        /*common*/		
+        .pull-left{		
+            float: left;		
+        }		
+        .pull-right{		
+            float: right;		
+        }		
+        .clearfix:after{		
+            content: '';		
+            display: block;		
+            clear: both;		
+        }		
+    </style>		
+</head>		
+<body class="youji-frame">		
+<div id="wrap">		
+    <div id="main" class="youji-frame">		
+        <div class="youji-box">		
+            <div class="youji-top clearfix" tapmode="tap-active" onclick="" data-id="120333" data-type="">		
+               <span class="user-name pull-left">apicloud</span>		
+            </div>		
+            <div class="youji-content-text" tapmode="tap-active" onclick="" data-id="90000099">		
+                <p class="text">重新定义移动应用开发</p>		
+            </div>		
+            <div class="youji-content-img" tapmode="tap-active" onclick="" data-id="90000099">		
+                <img src="../image/1.png" alt="">		
+            </div>	
+            <div class="btns-group clearfix">	
+            sdfdsf	              		
+            </div>		
+        </div>		
+        
+    </div>		
+</div>		
+</body>		
+</html>		

@@ -1,0 +1,173 @@
+apiready = function () {	
+	var header_h = api.pageParam.header_h;
+    $api.fixStatusBar($api.dom('.header'));
+    api.sendEvent({
+	    name: 'closemap',
+	    extra: {
+	        key1: 'fromrun'
+	    }
+	});
+	
+	initMap(header_h);
+}
+
+
+function initMap(maph){
+	var aMap = api.require('aMap');
+	aMap.open({
+	    rect: {
+	        x: 0,
+	        y:maph
+	    },
+	    showUserLocation: true,
+	    zoomLevel: 16,
+	    center: {
+	        lon: 116.4021310000,
+	        lat: 39.9994480000
+	    },
+	    fixedOn: api.frameName,
+	    fixed: true
+	}, function(ret, err) {
+	    if (ret.status) {         	   
+	    	
+	    	/*
+	    	 * 定位及设定定位按钮
+	    	 */      	   
+	    	setlocation();	    	
+	    	initSetLocationbtn();	  
+	    	
+	    	/*
+	    	 * 设定拍照、结束、暂停按钮
+	    	 */   
+	    	initTakePicbtn();	    	      
+	    	initEndbtn();	
+	    	initPausebtn();	
+	    } else {
+	        alert(JSON.stringify(err));
+	    }
+	});
+}
+
+
+function setlocation(){
+
+	
+	var aMap = api.require('aMap');
+        aMap.getLocation({
+        	autoStop:true
+        },function(ret, err) {
+		    if (ret.status) {
+		        if(ret.lon>0){
+					aMap.setCenter({
+					    coords: {
+					        lon: ret.lon,
+					        lat: ret.lat
+					    },
+					    animation: false
+					});
+					
+		        }
+		    } else {
+		        alert(JSON.stringify(err));
+		    }
+		});	  
+}
+
+
+function initSetLocationbtn(){
+	var button = api.require('UIButton');
+	button.open({
+	    rect: {
+	        x: 10,
+	        y: 500,
+	        w: 30,
+	        h: 30
+	    },
+	    corner: 5,
+	    bg: {
+	        normal: 'widget://image/frm_run/setmaplocation.png',
+	        highlight: 'widget://image/frm_run/setmaplocation.png',
+	        active: 'widget://image/frm_run/setmaplocation.png'
+	    },
+	    title: {
+	        size: 14,
+	        highlight: '',
+	        active: '',
+	        normal: '',
+	        highlightColor: '#000000',
+	        activeColor: '#000adf',
+	        normalColor: '#ff0000',
+	        alignment: 'center'
+	    },
+	    fixedOn: api.frameName,
+	    fixed: true,
+	    move: true
+	}, function(ret, err) {
+	    if (ret) {	 
+	    	$api.setStorage('setlocationbtn',ret.id);		//存储定位按钮的id
+	    	if(ret.eventType=="click")
+	    	{
+	    		
+	    		setlocation();
+	    	}
+	        //alert(JSON.stringify(ret));
+	    } else {
+	        //alert(JSON.stringify(err));
+	    }
+	});
+}
+
+
+function initTakePicbtn(){
+	var frmWidth = api.frameWidth;
+	var frmHeight = api.frameHeight;	
+	var tmpX= frmWidth-frmWidth/4;
+	var tmpY= frmHeight-frmHeight/5;
+	var button = api.require('UIButton');
+	button.open({
+	    rect: {
+	        x: tmpX,
+	        y: tmpY,
+	        w: 60,
+	        h: 60
+	    },
+	    corner: 5,
+	    bg: {
+	        normal: 'widget://image/frm_run/camera.png',
+	        highlight: 'widget://image/frm_run/camera.png',
+	        active: 'widget://image/frm_run/camera.png'
+	    },
+	    title: {
+	        size: 14,
+	        highlight: '',
+	        active: '',
+	        normal: '',
+	        highlightColor: '#000000',
+	        activeColor: '#000adf',
+	        normalColor: '#ff0000',
+	        alignment: 'center'
+	    },
+	    fixedOn: api.frameName,
+	    fixed: true,
+	    move: true
+	}, function(ret, err) {
+	    if (ret) {	 
+	    	$api.setStorage('setlocationbtn',ret.id);		//存储定位按钮的id
+	    	if(ret.eventType=="click")
+	    	{
+	    		
+	    		setlocation();
+	    	}
+	        //alert(JSON.stringify(ret));
+	    } else {
+	        //alert(JSON.stringify(err));
+	    }
+	});
+} 
+
+
+function initEndbtn(){
+}	
+
+function initPausebtn(){
+}	

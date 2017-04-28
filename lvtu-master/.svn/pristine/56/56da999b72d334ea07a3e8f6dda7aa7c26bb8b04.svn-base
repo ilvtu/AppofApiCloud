@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>    
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/userzuji.css" />
+    
+</head>
+<body>
+ <div id="wrap">
+    <div id="main">          
+		<div id="backToaddrecord" >           		       		
+			<img src="../image/close.png" height="30px" onclick="backToaddrecord();">  
+		</div>
+	 </div>
+	 <div id='zuji' class="zuji-list">		
+		<!--<a href="" class="item Fix hightitem" tapmode onclick="">		
+            <div class="cnt">		
+            	<img class="pic" src="../image/zujidefault.png">		
+	            <div class="wrap">		
+		            <div class="wrap2">		
+			            <div class="content">		
+			                <div class="shopname">2016年10月11日</div>		
+			                <div class="comment">	
+			                    <span></span>		
+			                </div>		
+			                <span class="classify">		
+			                	8个脚印		
+			                </span><span class="distance"><img src="../image/ic_address_big.png" alt=""></span>		
+			            </div>		
+		            </div>           		
+	            </div>		
+            </div>		
+        </a>	-->	
+   
+	</div>		
+</div>
+   
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/userzuji.js"></script>
+</html>

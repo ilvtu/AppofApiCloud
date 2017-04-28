@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>    
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/travel-pause.css" />
+    
+</head>
+<body>
+    <div id="wrap">
+        <div id="main">           
+           	<div id="backToaddrecord" >           		       		
+           		<img src="../image/restart.png" height="40px" onclick="backToaddrecord();">
+           	</div>
+       		<div id="ToPhotoStyle" >           		       		
+           		<img src="../image/phototubiao.png" height="40px" onclick="ToPhoto();">
+           	</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/travel-pause.js"></script>
+</html>

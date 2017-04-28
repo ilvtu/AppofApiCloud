@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>fixedPane</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/fixed.css"/>
+
+</head>
+<body>
+<header>		
+    <div class="header">
+        <a class="back" tapmode="" onclick="backToWin();"></a>		
+        <div class="header-title">		
+            <a class="logo" tapmode=""></a>		
+        </div>	
+    </div>		
+</header>
+
+<div id="profile" class="profile_box" >	
+	<div class="profile_top">	
+	    <i class="msg_icon" tapmode onclick=""></i>	
+	    <span class="login_btn" tapmode onclick="login();">点击登录</span>	
+	</div>	
+</div>
+<nav>
+    <ul>
+        <li tapmode="liActive" onclick="showyouji();">
+	        <img class="myyouji" src="../image/fixed/a.png" >
+	        <a class="nav1">我的游记</a>
+        </li>
+        <!--
+        <li tapmode="liActive" onclick=""> 
+	        <img class="favor" src="../image/fixed/logo.png" >
+        	<a class="nav1">我的收藏</a>
+        </li> 
+        <li tapmode="liActive" onclick=""> 
+	        <img class="friend" src="../image/fixed/logo.png" >
+        	<a class="nav1">我的好友</a>
+        </li> 
+        -->
+        <li tapmode="liActive" onclick=""> 
+	        <img class="refresh" src="../image/fixed/d.png" >
+        	<a class="nav1">检查更新</a>
+        </li> 
+        <li tapmode="liActive" onclick="showfeedback();"> 
+	        <img class="fankui" src="../image/fixed/e.png" >
+        	<a class="nav1">意见反馈</a>
+        </li>
+        <li tapmode="liActive" onclick="showabout();"> 
+	        <img class="about" src="../image/fixed/logo-1.png" >
+        	<a class="nav1">关于我们</a>
+        </li>
+        <li id="logout" tapmode="liActive" onclick="logout();">  
+	        <img class="logout" src="../image/fixed/g.png" >
+        	<a class="nav1">退出登录</a>
+        </li>
+    </ul>
+</nav>
+<div id="logo" >
+	<img src="../image/fixed/bottom-bokeh60-D.png" >
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/fixed.js"></script>
+
+</html>

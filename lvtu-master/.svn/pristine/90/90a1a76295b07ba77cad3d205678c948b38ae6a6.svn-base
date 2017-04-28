@@ -1,0 +1,10 @@
+
+apiready = function () {	
+	var header_h = api.pageParam.header_h;
+	var uid = api.pageParam.uid;
+	var travelid = api.pageParam.travelid;
+	$api.setStorage('uid',uid);
+	$api.setStorage('travelid',travelid);
+    $api.fixStatusBar($api.dom('.header'));
+    
+}

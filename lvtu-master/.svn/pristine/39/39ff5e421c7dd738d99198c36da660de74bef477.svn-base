@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Iamge list</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <script type="text/javascript"></script>
+
+    <style type="text/css">
+	    html,body {
+		    -webkit-touch-callout:none;
+		    -webkit-text-size-adjust:none;
+		    -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+		    -webkit-user-select:none;
+		}
+        .header {		
+            display: -webkit-box;		
+            display: -webkit-flex;		
+            display: flex;		
+            border-bottom: 1px solid #E5E5E5;		
+            -webkit-box-pack: center;		
+            -webkit-box-align: center;		
+            background-color: #E5E5E5;		
+        }		 
+        .header-title {		
+            -webkit-box-flex: 1;		
+            -webkit-flex: 1;		
+            flex: 1;		
+        }		
+        .header a {		
+            display: block;		
+            background-size: 20px;		
+            padding: 20px;		
+            background-repeat: no-repeat;		
+            background-position: center;		
+        }		
+        .header .back {		
+            background-image: url("../image/frm_pictureList/left.png");		
+        }		
+		
+        .header .logo {		
+            background-size: 45px;		
+            background-image: url("../image/frm_pictureList/logo.png");		
+        }/*
+		.ckb {
+		position:absolute;
+		bottom:1px;
+		right:1px;
+		display:block;
+		line-height:1;
+		}
+		.ckb:hover {
+		color:#ff3333;
+		}*/
+		#photo_wrap {width: 400px; margin: 10px auto 0;font-size: 0;*word-spacing:-1px;}
+		 @media screen and (-webkit-min-device-pixel-ratio:0){
+		#photo_wrap{letter-spacing:-4px;}}
+		#photo_wrap input{display: none;}
+		#photo_wrap li{position:relative; border: 5px solid #CCC;
+		 display:inline-block; *display:inline; *zoom:1; margin:0 2px;}
+		#photo_wrap li.checked{border:2px solid red;margin:-1px 1px;}
+		#photo_wrap li.checked i{width:30px; height:30px; position:absolute; right:0; bottom:0; 
+		 _right:-1px; _bottom:-1px; background:url(../image/frm_pictureList/checked.png) no-repeat;}
+    </style>
+</head>
+<body>
+  <header>
+    <div class="header">		
+        <a class="back" onclick="api.closeWin();"></a>		
+        <div class="header-title">		
+            <a class="logo" ></a>		
+        </div>		        
+        <div class="btn-box"  onclick="jumpNextWin();">
+            <img src="../image/frm_pictureList/examine.png" alt="">
+        </div>
+        <a  tapmode="" onclick=""></a>		
+    </div>		
+  </header>
+		<!--div id="main" style="margin :0px auto; ">
+			<!--input type="button"  name="file" id="doc" multiple="multiple"  style="width:150px;"
+			 onchange="setImagePreviews(this);" accept="image/*" /->
+			<div id="dd" style=" width:300px;"></div>width=302 border=0
+		</div-->
+    <ul id="photo_wrap" borderColor=#999999 cellSpacing=8 cellPadding=0 >
+        <!--li><a href=""><IMG class=invisible src="../image/addPhoto.png" onclick="Snapshot()" width=90px height=100px></a></li-->
+        <li id="photo_list"></li>
+    </ul>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		//api.showProgress({text: api['pageParam']['day']});
+		console.log("log: pictureList.html");
+		var selectDate = api['pageParam']['day'];
+		getPicture(selectDate);
+	}
+
+</script>
+<script>
+    var data;
+
+    function showImagein3grid(rData) {
+        var htmlStr = "";
+        var li = document.getElementById("photo_list");
+        li.innerHTML = "<li><a href=\"\"><IMG class=invisible src=\"../image/addPhoto.png\" onclick=\"Snapshot()\" width=90px height=100px></a></li>";
+
+        for(var i = 0, total = rData.total; i < total; ++i) {
+            if(null == rData.list[i]){
+                //alert(i + ":no object");
+            }
+            else if(rData.list[i].suffix == 'jpg'){
+ 	            htmlStr += "<li class=\"\" onclick=\"onPhotoSelect(this)\" id=\"";
+ 	            htmlStr += i;
+ 	            htmlStr += "\"><input type=\"checkbox\"><img src=\"";
+	            htmlStr += rData.list[i].thumbPath; 
+	            htmlStr += "\" width=90px height=100px/><i></i></li>";
+            }
+        }
+        li.innerHTML += htmlStr;
+        //alert(li.innerHTML);
+        return true; 
+    }
+
+    function onPhotoSelect(param) {
+        if("" == param.className){
+            param.className = "checked";
+            //alert(param.id);
+        }
+        else{
+            param.className = "";
+        }
+    }
+
+    function getPicture() {
+        var scanner = api.require('UIMediaScanner');
+        scanner.scan({
+	        type: 'picture',
+	        count: 150,
+	        sort: {
+		        key: 'time',
+		        order: 'desc'
+	        },
+	        thumbnail: {
+		        w: 150,
+		        h: 150
+	        }
+        },function(ret,err){
+        	if(ret){
+                //setImagePreviews(ret);
+                data = ret;
+                showImagein3grid(ret);
+        	}
+        	else{
+        	    api.alert({msg:err.msg});
+        	}
+        });
+    }
+    
+    function Snapshot() {
+        api.getPicture({
+            sourceType: 'camera',
+            encodingType: 'jpg',
+            mediaValue: 'pic',
+            destinationType: 'url'
+        },function(ret,err){
+        	if(ret){
+                //pictureBack(tagImgs, ret.data);
+                //setImagePreviews(ret.data);
+                getPicture();
+        	}
+        	else{
+        	    api.alert({msg:err.msg});
+        	}
+        });
+    }
+    
+    function jumpNextWin() {
+        var array = new Array(), cur = 0;
+        var photoWrap = document.getElementById("photo_wrap"),
+            li = photoWrap.getElementsByTagName("li");
+        for(var i = 0; i < li.length; i++){
+            if("checked" == li[i].className){
+                cur = li[i].id;
+                //alert("id:"+cur);
+                array.push(data.list[cur].path);
+            }
+            
+        }
+        //alert("path:"+array[0]);
+        api.openWin({
+            name: 'newnote',
+	        url: 'newnote.html',
+	        pageParam:{
+	            param: array
+	        }
+        });    
+    }
+/*
+    var image = '';
+    var data = api['pageParam']['day'];
+    var imagePath = '';
+    var tagImgs = $api.byId('imgs');
+    
+    function selectImage(file) {
+        if (!file.files || !file.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            document.getElementById('image').src = evt.target.result;
+            image = evt.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    
+    function pictureBack(element, url) {
+        var reg = /\.(jpg)$/;
+        if(reg.test(url)){
+            var pImg = new Image();
+            pImg.src = url;
+            pImg.onload = function(){
+                var w = this.width;
+                var h = this.height;
+                element.src = url;
+            }
+        }
+    }
+    
+    function imagePreivew() {
+        //var imgObj = document.getElementById("imglist");
+        var docObj = document.getElementById("doc");
+        var dd = document.getElementById("dd");
+        dd.innerHTML = "";
+        var fileList = docObj.files;
+        for(var i=0; i<fileList.length; ++i){
+            dd.innerHTML += "<div style='float:left' > <img id='img" + i + "'  /> </div>";
+            var imgObjPreview = document.getElementById("img"+i); 
+
+            if (docObj.files && docObj.files[i]) {
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '150px';
+                imgObjPreview.style.height = '180px';
+                imgObjPreview.src = docObj.files[0].getAsDataURL();
+                //imgObjPreview.src = window.URL.createObjectURL(docObj.files[i]);
+            }
+            else{
+                docObj.select();
+                var imgSrc = document.selection.createRange().text;
+                alert(imgSrc)
+                var localImagId = document.getElementById("img" + i);
+                localImagId.style.width = "150px";
+                localImagId.style.height = "180px";
+                
+                try {
+                    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                }
+                catch(e) {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                }
+                imgObjPreview.style.display = 'none';
+                document.selection.empty();
+            }
+        }
+        return true;
+    }
+
+    function setImagePreviews(rData) {
+        var div = document.getElementById("dd");
+        div.innerHTML = "";//重新置空
+        var imgObjPreview = "";
+        var tDate = "";
+					
+        for (var i = 0, total = rData.total; i < total; i++) {
+            if(rData.list[i].suffix == 'jpg'){
+            //div.innerHTML += "<div style='float:left' > <img id='img" + i + "'  /> </div>";
+            //div.innerHTML += "<img id='img" + i + "' src='../image/image" + i + ".jpg' />";
+	            tDate = rData.list[i].time;
+	            if(-1 != tDate.indexOf('2016-11') ){
+					api.toast({
+						msg: ('first jpg:' + tDate + 'num:' + total),
+						duration: 5000,
+						location: 'top'
+					});
+				//}
+				div.innerHTML += "<li class='scan'>";
+		            //div.innerHTML += "<input type='radio' id='radio_" + i + "' name='radio_a' />";
+		            //div.innerHTML += "<label for='radio_" + i + "' >";
+		            div.innerHTML += "<img id='img" + i + "' src='" + rData.list[i].thumbPath + "' />";
+		            div.innerHTML += "<input class='ckb' type='checkbox' />";
+		        div.innerHTML += "</li>";
+		            imgObjPreview = document.getElementById("img"+i);
+		            imgObjPreview.style.width = '150px';
+		            imgObjPreview.style.height = '150px';
+	            }
+            }
+        }
+        div.innerHTML += "</ul> </div>";
+
+        return true;
+    }
+
+    function fileRead(fdd){
+        var fs = api.require('fs');
+        var data = "";
+            fs.read({
+	            fd:fdd,
+	            offset:0
+            },function(ret,err){
+            	if(ret.status){
+            	    //api.alert({msg:'read file success.'});
+            	    data = ret.data;
+            	    //api.alert({msg:data});
+            	}else{
+            	    api.alert({msg:err.msg});
+            	}
+            });
+    }
+
+    function readAttr() {
+        var fs = api.require('fs');
+        var pfd = null;
+        if(rData.list[0].path){
+            fs.open({//Will be used.
+	            path: rData.list[0].path,
+	            flags: 'read'
+            },function(ret,err){
+                if(ret.status){
+            	    //api.alert({msg:'open file success.'});
+            	    pfd = ret.fd;
+            	    fileRead(pfd);
+            	    //api.alert({msg:pfd});
+            	} else{
+            	    api.alert({msg:err.msg});
+            	}
+            });
+            
+        if(null == pfd){
+        }
+    }
+    
+    function SavetoDB(){
+        var db = api.require('db');
+        db.openDatabase({
+	        name:'',
+	        path:''
+        },function(ret,err){
+        	if(ret.status){
+        	    var sql = '';
+        	    db.executeSQL({});
+        	}
+        });
+    }*/
+</script>
+</html>
