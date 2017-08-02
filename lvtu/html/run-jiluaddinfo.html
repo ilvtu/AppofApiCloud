@@ -1,0 +1,137 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+			background-color:#e6e6e6;
+			height:640px;
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		/*
+		.header .save{	
+			margin-top:12.7px;			
+			padding-right:30px;
+			width:22.3px;
+		}
+		*/
+		.pianduan{
+		}
+		.pianduanimg{
+			margin-top:10px;
+			margin-bottom:14.7px;
+			text-align:center;
+		}
+		
+		.pianduanimg input{
+			padding: 0px;
+			
+			max-width:90%;
+			height:192.7px;
+		}
+		
+		.pianduaninfo{
+			text-align:center;
+		}
+		
+		.pianduaninfo .note{
+			height:113px;
+			background-color:white;
+			
+			width:320px;
+			padding:0px;
+			color:#999999;
+			padding-left:8.3px;
+			padding-top:13.3px;
+		}
+		
+		.pianduanbtn{
+			text-align: right;
+		}
+		.pianduanbtn input{
+			
+			margin-top:20px;
+			margin-right:20px;
+			padding:0px;
+			
+		}
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			}
+			footer input{
+        	padding-right:0px;
+        	}
+			
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+		<div class="back" onclick="back();">
+	            <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/run-jiluaddinfo/fanhui@3x.png">
+	       			
+	       </div>
+	     <div class="hcenter"></div>
+	     <div>
+	             <!--<input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/run-editjilu/xuanzhong@3x.png">
+	       		-->
+	       </div>
+       </div>
+</header>
+<div class="pianduan">
+	<div class="pianduanimg" id="pianduanimg">
+		<input name="imageField" type="image" style="" id="imageField" src="">
+	</div>
+	<div class="pianduaninfo">
+		<textarea class="note" id="text_note"></textarea>
+	</div>
+	<div class="pianduanbtn">
+		<input name="imageField" onclick="addinfo();" type="image" style="width:50px;height: 50px;" id="imageField" src="../image/run-jiluaddinfo/ok.png">
+		       		
+	</div>
+</div>
+  <footer>
+        
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/run-jiluaddinfo.js"></script>
+ 
+  </html>

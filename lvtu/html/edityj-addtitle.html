@@ -1,0 +1,140 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          height:640px;
+          background-color:#F0F0F0;
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .hcenter{
+			margin-top: 15.3px;
+			color: #ffffff;
+			width:95px;
+			font-size: 18px;
+		}
+	
+		
+		
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			
+			}
+			
+		.cover{
+			text-align:center;
+			
+		}
+		.title{
+			text-align:center;
+			margin-top:14.7px;
+			padding-right:0px;
+			height:44px;
+			
+		}
+		.info{
+			text-align:center;
+			margin-top:14.7px;
+			padding-right:0px;
+			color:#999999;
+			height:110px;
+		}
+		.info textarea{
+			margin-top:14.7px;
+			padding-right:0px;
+			color:#999999;
+			font-size:15px;
+		}
+		
+		
+		
+		input{
+			padding-right:0px;
+		}
+		.btn{
+			text-align:center;
+			margin-top:50px;
+			padding-right:0px;
+			
+			margin-left:20px;
+			margin-right:20px;
+			font-family:'Microsoft YaHei';
+			font-size:20px;
+		}
+		
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+    	
+		<div class="back" onclick="back();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/edityj-addtitle/fanhui@3x.png">
+	       </div>
+	     	<span class="hcenter"></span>
+	    
+	     <div class="userphoto"></div>
+       </div>
+</header>
+
+<div class="cover" onclick="setcover();" id="cover">
+	             <input name="imageField" type="image" style="width:90%;height: 193.7px;" id="imageField" src="../image/edityj-addtitle/zhengwentupian@3x.png">
+ </div>
+<div class="title">	
+	<input name="title" type="text" style="width:90%;height:44px; background-color: white;color:#999999;font-size: 15px;padding-left:8.3px;" id="title" value="请输入标题" >
+ 
+</div>
+<div class="info">
+	<textarea class="jieshao" id="jieshao" style="width:90%;height:110px; background-color: white;padding-left:8.3px;padding-top:13.3px;">请输入内容</textarea> 
+</div>
+  <div class="btn">
+	<input name="ok" onclick="addtitle();" type="button" style="width:100%;height: 50px;background-color:#3ccf9d;color:white" id="ok" value="确定" />
+  </div>
+  <footer>
+      
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/edityj-addtile.js"></script>
+
+  </html>

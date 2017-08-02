@@ -1,0 +1,167 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          background:#DDDCDC;
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .edit{	
+			margin-top:12.7px;			
+			padding-right:30px;
+			width:22.3px;
+		}
+		
+		.map{
+			height: 208px;
+		}
+		
+		.info{
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    background-color:#FCFCFC;
+			height:87.3px;
+		}
+		
+		.info .leftinfo{
+			width:50%;
+			 border-width: 1px;
+		 	border-style:double;
+			 border-color:#F0F0F0;		
+			 }
+		
+		.info .rightinfo{
+			width:50%;
+			 border-width: 1px;
+		 	border-style:double;
+			 border-color:#F0F0F0;
+		}
+		.info .biaoti{
+			width:100%;
+			margin-top:20px;
+			text-align:center;
+			color:#b9b9b9;
+			font-size:12px;
+		}
+		
+		.info .content{
+			width:100%;
+			margin-top:8.3px;
+			text-align:center;
+			font-size:18px;
+			color:#3b3b3b;
+		
+		}
+		
+		
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+		    background-color:#FCFCFC;
+			height: 161.3px;
+			}
+			footer input{
+        	padding-right:0px;
+        	}
+        	footer .runinfo{
+        		height:111.3px;
+        		width:102px;
+        		padding-top:75px;
+        		margin-top: 24.3px;
+				margin-left: 129px;
+				color:#17C5CC;
+				font-size: 18px;
+
+				
+        	}
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+	     <div class="back"  onclick="back();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/run-stopstyle/fanhui@3x.png">
+	       </div>
+	     <div class="hcenter"></div>
+	     <div class="edit" onclick="editjilu();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/run-stopstyle/biji@3x.png">
+	       </div>
+       </div>
+</header>
+<div class="map">
+</div>
+
+<div class="info" id="dayweatherinfo" >
+	<div id="tianqi" class="leftinfo">
+		<span class="biaoti" id="date">2017.04.30</span>
+		<span class="content">22°C/多云</span>
+	</div>
+	<div id="juli" class="rightinfo">
+		<span class="biaoti">距离</span>
+		<span class="content">0.00</span>
+	</div>
+</div>
+
+<div class="info">
+	<div id="shijian" class="leftinfo">
+		<span class="biaoti">持续时间</span>
+		<span class="content">0.00</span>
+	</div>
+	
+	<div id="haiba" class="rightinfo">
+		<span class="biaoti">当前海拔</span>
+		<span class="content">150M</span>
+	</div>
+</div>
+  <footer>
+       <span class="runinfo" >207.04.30</span>
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/sqlite.js"></script>
+  <script type="text/javascript" src="../script/run-stopstyle.js"></script>
+  <script type="text/javascript">
+
+      
+      
+  </script>
+  </html>
