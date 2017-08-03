@@ -25,26 +25,214 @@
     </style>
 </head>
 <body>
+
+  <script type="text/javascript" src="script/api.js"></script>
+  <script type="text/javascript" src="script/sqlite.js"></script>
 <script>
+apiready = function () { 
+	openDB(function(ret){
+		if(ret){
+			api.openSlidLayout({
+		        type: 'left',
+		        leftEdge: 0,
+		        fixedPane: {
+		            name: 'fixed',
+		            url: 'html/fixed.html'
+		        },
+		        slidPane: {
+		            name: 'slide',
+		            url: 'html/slide.html'
+		        }
+		    }, function (ret) {
+		    	
+		    });
+		}
+		else{
+			alert("创建本地数据库失败，请重新安装");
+		}
+	});
+	
+    
+}
+    
+
+    
+/*
+ * 第一次打开app时，建立相应本地数据库
+ */
+/*
+function preparelocaldb(){
 
 	
-    apiready = function () { 
-    	
-        api.openSlidLayout({
-            type: 'left',
-            leftEdge: 0,
-            fixedPane: {
-                name: 'fixed',
-                url: 'html/fixed.html'
-            },
-            slidPane: {
-                name: 'slide',
-                url: 'html/slide.html'
-            }
-        }, function (ret) {
+	var db = api.require('db');
+	db.openDatabase({
+	    name: 'ilvtu'
+	}, function(ret, err) {
+		if(ret.status){
+			
+			//片段index表
+			var sqlstr ='select count(*) as c from ilvtu where type ="table" and name ="PianduanIndex"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	//staus 0正在旅行 1 完成 2 保存后台 3删除
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: 'CREATE TABLE PianduanIndex(frag_id INTEGER primary key autoincrement,uid number(8), Addtime datetime, status int, CoverImg varchar(255),Pianduaninfo varchar(400) )'
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+			
+			//片段内容表
+			var sqlstr2 ='select count(*) as c from ilvtu where type ="table" and name ="Pianduan"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr2
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	
+			    	var pianduansql = 'CREATE TABLE Pianduan(_id integer PRIMARY KEY AUTOINCREMENT,frag_id INTEGER, uid number(8), link_url varchar(255),text_note varchar(400),'; 
+			    	pianduansql +=' serial_no number(10), speed number(3),direction number(3),altitue number(3),media_type varchar(1), lng double, lat double,timestamp datetime)';
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: pianduansql
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+			
+			//游记index表
+			var sqlstr3 ='select count(*) as c from ilvtu where type ="table" and name ="YoujiIndex"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr3
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	//status 0草稿  2保存 3删除
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: 'CREATE TABLE YoujiIndex(yj_id INTEGER  PRIMARY key AUTOINCREMENT,introduction nvarchar(300), startdate datetime, enddate datetime,citys nvarchar(50), title varchar(20), coverimage varchar(50),uid number(8),status int)'
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+			
+			//游记日index表
+			var sqlstr4 ='select count(*) as c from ilvtu where type ="table" and name ="Youjiday"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr4
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	//status 0 新建 1 删除
+			    	var youjidaysql = 'CREATE TABLE Youjiday(day_id integer PRIMARY KEY AUTOINCREMENT,yj_id INTEGER, daycoverimg varchar(255),daytitle varchar(400),yjdate varchar(50),status int'; 
+			    	
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: youjidaysql
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+			
+			//游记内容表
+			var sqlstr5 ='select count(*) as c from ilvtu where type ="table" and name ="Youji"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr5
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	var youjisql = 'CREATE TABLE Youji(_id integer PRIMARY KEY AUTOINCREMENT,yj_id int, uid number(8), link_url varchar(255),text_note varchar(400),'; 
+			    	youjisql +=' serial_no number(10), speed number(3),direction number(3),altitue number(3),media_type varchar(1), lng double, lat double,timestamp dateTime,yjdate varchar(50))';
+			    	
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: youjisql
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+			
+			//我的信息表
+			var sqlstr6 ='select count(*) as c from ilvtu where type ="table" and name ="UserInfo"';	
+			db.selectSql({
+			    name: 'ilvtu',
+			    sql: sqlstr6
+			}, function(ret, err) {
+			    if (ret.status) {
+			    	
+			        //alert(JSON.stringify(ret));
+			    } else {
+			    	db.executeSql({
+					    name: 'ilvtu',
+					    sql: 'CREATE TABLE UserInfo(_id INTEGER PRIMARY KEY AUTOINCREMENT,phone_no nvarchar(20), uid number(8), yjnumber number(4), focusnum number(4), focusednum number(4), nick varchar(20), sex varchar(1), birthday datetime, userphoto varchar(2),coverimg varchar(2), slogan varchar(100)  )'
+					}, function(ret, err) {
+					    if (ret.status) {
+					        //alert(JSON.stringify(ret));
+					    } else {
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			        //alert(JSON.stringify(err));
+			    }
+			});
+		}
+		else{
+			alert("草稿本打开失败，请重新开启app，否则无法开启记录模式！");
+		}
+	});
 
-        });
-    }
+}
+
+*/
 </script>
 </body>
 </html>
