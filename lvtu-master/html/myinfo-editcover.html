@@ -1,0 +1,98 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+		    height:640px;
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	height:176px;
+		}
+		.header .back{
+			position:absolute;
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .ground{
+			
+		
+		}
+	
+		
+		
+		
+		
+		
+		
+		
+		footer{		
+		    
+			background-color:#F1F1F1;
+			
+		}
+		footer .altercover{
+			text-align:center;
+			padding-top:27.3px;
+			padding-right:0px;
+		}
+		
+		footer .defaultcover{
+			margin-top:21.3px;
+			text-align:center;
+			padding-right:0px;
+		}
+		footer .cancelchoose{
+			margin-top:153.3px;
+			text-align:center;
+			padding-right:0px;
+			padding-bottom:30px;
+		}
+		
+		footer input{
+			padding:0px;
+		}
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+    		<div class="back" onclick="back();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/myinfo-editcover/fanhui@3x.png">
+	       </div>
+	     	<div class="ground" id="ground">
+	             <input name="imageField" type="image" style="width:100%;height: 176px;" id="imageField" src="../image/myinfo-editcover/beijing.png">
+	       </div>
+       </div>
+</header>
+	
+<footer>
+	<div class="altercover" onclick="changecover();">
+		<input name="alter" type="button" style="width:90%;height: 50px;background-color:white;color:#3bce9c;font-size:24px; " id="alter" value="更换封面" />
+	  </div>
+  <div class="defaultcover" onclick="setdefaultcover();">
+	<input name="default" type="button" style="width:90%;height: 50px;background-color:white;color:#3bce9c;font-size:24px;" id="default" value="使用系统默认封面" />
+  </div>
+  <div class="cancelchoose" onclick="back();">
+	<input name="cancel" type="button" style="width:90%;height: 50px;background-color:white;color:#c8c7cc;font-size:24px;" id="cancel" value="取消" />
+  </div>
+</footer>
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/myinfo-editcover.js"></script>
+  </html>

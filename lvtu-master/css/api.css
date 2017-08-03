@@ -2,10 +2,10 @@ html{
 	font-family: sans-serif;
 }
 html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,strong,var,fieldset,form,label,dl,dt,dd,cite,input,hr,time,mark,code,figcaption,figure,textarea,h1,h2,h3,h4,h5,h6,p{
-	margin:0;
-	border:0;
-	padding:0;
-	font-style:normal;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	font-style: normal;
 }
 html,body {
 	-webkit-touch-callout:none;
@@ -20,20 +20,23 @@ nav,article,aside,details,main,header,footer,section,fieldset,figcaption,figure{
 img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea{
 	display:inline-block;
 }
-header,section,footer {
-	position:relative;
-}
+
 ol,ul{
 	list-style:none;
 }
 input,button,textarea {
-	border:0;
-	margin:0;
-	padding:0;
-	font-size:1em;
-	line-height:1em;
+	border: 0;
+	margin-top: 0;
+	margin-left: 0;
+	margin-bottom: 0;
+	padding-right: 42px;
+	padding-left: 0;
+	padding-bottom: 0;
+	font-size: 1em;
+	line-height: 1em;
 	/*-webkit-appearance:none;*/
-	background-color:rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	right: 24px;
 }
 span{
 	display:inline-block;
