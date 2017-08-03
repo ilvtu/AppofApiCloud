@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	body {
+		    background: transparent;
+		    padding: 0;
+		    margin: 0;
+		}
+		.info {
+		    background: rgba(0,0,0,.3);
+		    color: #fff;
+		    font-size: 15px;
+		    height: 30px;
+		    line-height: 30px;
+		    text-align: center;
+		}
+		.info input{
+			
+			padding-right:10px;
+			
+		}
+	
+    </style>
+</head>
+<body>
+	
+	<div class="info aui-ellipsis-1" id="info">
+		<input name="imageField" type="image" id="imageField" style="width:15px;height: 15px;" src="../image/runstyle/gps@3x.png">
+      	<span class="gpsinfo" id="gpsinfo">GPS轨迹记录中</span>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		
+	};
+	function pausegpsInfo(){
+		 $api.text($api.byId("gpsinfo"),'暂停记录GPS轨迹');
+		//$api.byId('gpsinfo').innerHTML="暂停记录GPS轨迹";
+	};
+	
+	function setgpsInfo(){		
+		$api.text($api.byId("gpsinfo"),'GPS轨迹记录中');
+		//$api.byId('gpsinfo').innerHTML="GPS轨迹记录中";
+	};
+</script>
+</html>

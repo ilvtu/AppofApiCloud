@@ -1,9 +1,18 @@
+var token='';
+var localuid='';
+var timeout='';
 apiready = function () { 
+	//uid= $api.getStorage('uid');
+	//token= $api.getStorage('token');
 	
-	var $header=$api.dom('.header');		
-    $api.fixIos7Bar($header);	
-    $api.fixStatusBar($header); 			
-	//$api.setStorage('uid','58a45e8e6b1017645e8f437d');   
+	var header=$api.dom('.header');		
+    $api.fixIos7Bar(header);	
+    $api.fixStatusBar(header); 		
+ 	//token = $api.getStorage('token');
+	//localuid = $api.getStorage('localuid');
+	//showUserInfo(token,localuid);
+	//getbackground();
+	/*
  	api.setRefreshHeaderInfo({
         visible: true,
         // loadingImgae: 'wgt://image/refresh-white.png',
@@ -15,26 +24,31 @@ apiready = function () {
     }, function (ret, err) {   	
     	
     	showUserInfo();
-        api.refreshHeaderLoadDone();
     });
-    
-    
-    api.setStatusBarStyle({
-        style: 'dark',
-        color: '#000'
-    });
-    $api.fixStatusBar($api.dom('nav'));   
-    
-    showUserInfo();
+   	*/
+   
     api.addEventListener({
-            name:'viewappear'
-        },function(ret,err){
-            //operation
-            //alert($api.getStorage('uid')); 
-                
-           showUserInfo();
-        }) ;
-    
+        name:'viewappear'
+    },function(ret,err){
+    	 token = $api.getStorage('token');
+    	localuid = $api.getStorage('localuid');
+    	timeout=$api.getStorage('timeout');
+		var curtime = new Date();
+		if((timeout*1000-curtime)<0){
+			api.openWin({
+		        name: 'login',
+		        url: 'login.html',
+		        opaque: true,
+		        vScrollBarEnabled: false
+		    });
+			 
+		}
+		
+    	showUserInfo(token,localuid);
+    	getbackground();
+	   
+    }) ;
+
 };
 
 function backToWin(){
@@ -42,288 +56,349 @@ function backToWin(){
 }
 
 /*
+ * 获取用户背景图
+ */
+function getbackground(){
+
+	var coverimg="../image/fixed/beijing.png";
+	var db = api.require('db');
+	var sqlstr ='select * from  t_self_info where  token='+ token;
+	db.selectSql({
+	    name: 'ilvtu',
+	    sql: sqlstr
+	}, function(ret, err) {
+		if(ret.status){
+			if(ret.data[0]!=null && ret.data[0]!='' && ret.data[0].coverimg!=null &&  ret.data[0].coverimg!=''){
+				
+				coverimg= ret.data[0].coverimg;
+			}
+		}
+		else{
+			//alert(JSON.stringify(err));
+		}
+		$api.byId('ground').innerHTML='<input name="imageField" type="image" style="width:100%;height: 150.7px;" id="imageField" src="'+coverimg+'">';
+	
+	});
+}
+
+/*
  * 设置fixed用户头像和信息
  */
-function showUserInfo(){
-	 var uid = $api.getStorage('uid');     
-	 
-    //alert(uid);
-	if(uid && uid!='undefined'){
-		$api.byId("profile").style.visibility="hidden";
+function showUserInfo(token,localuid){
+	if(token!=null && token!=''){
+	    //var db = api.require('db');
+	    var sqlstr ='select * from t_self_info where token="'+token+'"';
+	    dbSelectSql(sqlstr,function(ret){
+	    	 if (ret){
+		    		var yjstr='';
+		    		var focusstr='';
+		    		var focusedstr='';
+		    		if(ret[0]!=null && ret[0]!=''){
+		    		    var userinfo = ret[0];
+		    		   
+				    	setuserphoto(token, ret[0].userphoto);
+		 				$api.byId('usernick').innerHTML=userinfo.nick;
+					     yjstr+='<span class="number">'+userinfo.yjnumber+'</span>';
+						yjstr+='<span class="name">游记</span>';
+						
+						
+						
+					    focusstr+='<span class="number">'+userinfo.focusnum+'</span>';
+						focusstr+='<span class="name">关注</span>';
+						
+						
+					    focusedstr+='<span class="number">'+userinfo.focusednum+'</span>';
+						focusedstr+='<span class="name">粉丝</span>';
+					}
+					else{
+						
+						setuserphoto(token, null);
+						$api.byId('usernick').innerHTML='';
+						 yjstr+='<span class="number">0</span>';
+						yjstr+='<span class="name">游记</span>';
+						
+						
+						
+					    focusstr+='<span class="number">0</span>';
+						focusstr+='<span class="name">关注</span>';
+						
+						
+					    focusedstr+='<span class="number">0</span>';
+						focusedstr+='<span class="name">粉丝</span>';
+					}
+				   
+					
+				   
+				    $api.byId('youji').innerHTML=yjstr;
+				    
+					$api.byId('focus').innerHTML=focusstr;
+					$api.byId('focused').innerHTML=focusedstr;
+		    }
+		    else{
+			   
+			     	api.confirm({
+					    title: '提示',
+					    msg: '未能完整载入用户信息,是否退出再登录？',
+					    buttons: ['取消', '退出']
+						}, function(ret, err) {
+						var index = ret.buttonIndex;
+						if(index==2){
+							//先退出
+							
+							api.openWin({
+						        name: 'login',
+							    url: 'login.html',
+							    opaque: true,
+							    vScrollBarEnabled: false	  
+						    });
+						}
+					});
+			    }
+	    });
 		
-		$api.byId("logout").style.visibility="visible";
-		api.showProgress({
-	        title: '获取用户信息...',
-	        modal: false
-	    });
-		var getUserInfoUrl = '/user?filter=';
-	    var userinfo_urlParam = {
-	    	where:{
-	    		id:uid
-	    		},
-	    	include:['userinfoPointer']
-	    };
-	    ajaxRequest(getUserInfoUrl + JSON.stringify(userinfo_urlParam), 'GET', '', function (ret, err) { 
-	        if (ret) {  
-	        	var photoUrl = '';
-	        	var nickname='尚无昵称';
-	        	if(ret[0]!=null && ret[0].userinfo!=null){	        	
-	        		if(ret[0].userinfo.userphoto!=null){
-	        			photoUrl=ret[0].userinfo.userphoto.url;
-	        		}
-	        		if(ret[0].userinfo.nickname!=null && ret[0].userinfo.nickname!=''){
-	        			nickname=ret[0].userinfo.nickname;
-	        		}
-	        	}
-	                 
-			    initPersonalCenter({
-			        nickname: nickname,
-			        photo: photoUrl,
-			        point: 0
-			    });
-	             //$api.byId('userinfo').innerHTML=ret[0].userinfo.nickname;
-	        	//getUserLvyou('myyouji');              
-	            //getFavData('activity', localStorage.getItem('actFavArr'));
-	        } else {
-	            api.toast({msg: err.msg, location: 'middle'});
-	            
-	        }
-	
-            api.hideProgress();
-	    });
 	}
-}
-
-//init personal center
-function initPersonalCenter(json) {  
-    json = json || {};
-    if (!json.nickname) {
-    
-        return;
-    }
+	else{
 	
-	//$api.setStorage('appUid',ret[0].userinfo.id);
-    var pc = api.require('personalCenter');
-    //var headerH = api.pageParam.headerHeight;
-    var photo = json.photo || 'widget://image/userTitle.png';  
-    var point = json.point || 0;
-    
-  	var header = $api.dom('header');
-	var headerPos = $api.offset(header);
-    pc.open({
-        y: headerPos.h,
-        height: 201,
-        fixed: true,
-        imgPath: photo,
-        placeHoldImg: '',
-        showLeftBtn: false,
-        showRightBtn: false,
-        username: json.nickname,
-        count: point,
-        modButton: {
-            bgImg: 'widget://image/edit.png',
-            lightImg: 'widget://image/edit.png'
-        },
-        btnArray: [
-            {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
-                title: '笔记',
-                count: 1,
-                titleColor: '#ffffff',
-                titleLightColor: '#55abce',
-                countColor: '#ffffff',
-                countLightColor: '#55abce'
-            },
-            {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
-                title: '关注',
-                count: 1,
-                titleColor: '#ffffff',
-                titleLightColor: '#55abce',
-                countColor: '#ffffff',
-                countLightColor: '#55abce'
-            },
-            {
-                bgImg: 'widget://image/personal_btn_nor.png',
-                lightImg: 'widget://image/personal_btn_light.png',
-                selectedImg: 'widget://image/personal_btn_sele.png',
-                title: '粉丝',
-                count: 1,
-                titleColor: '#ffffff',
-                titleLightColor: '#55abce',
-                countColor: '#ffffff',
-                countLightColor: '#55abce'
-            }
-        ]
-    }, function (ret, err) {
-		if ( ret.click === 3) {
+		$api.byId('usernick').innerHTML='';
+    	var yjstr='';
+	    yjstr+='<span class="number"></span>';
+		yjstr+='<span class="name">游记</span>';
+		$api.byId('youji').innerHTML=yjstr;
 		
-	 		var uid = $api.getStorage('uid');  
-	        api.openWin({
-		        name: 'userinfo',
-		        url: 'userinfo.html',
-		        opaque: true,
-		        vScrollBarEnabled: false,
-		        pageParam:{uid:uid}
-		    });
-	    }
+		var focusstr='';
+	    focusstr+='<span class="number"></span>';
+		focusstr+='<span class="name">关注</span>';
+		$api.byId('focus').innerHTML=focusstr;
 		
-        //$api.byId('userLvyou').innerHTML = '';
-        if (ret.click === 0) {
-        	//getUserLvyou('myyouji');                	
-            //getFavData('activity', localStorage.getItem('actFavArr'));
-        }
-        if (ret.click === 1) {
-        	//getUserLvyou('favoryouji');      
-            //getFavData('merchant', localStorage.getItem('merFavArr'));
-        }
-        if (ret.click === 2) {
-        	//getUserLvyou('stamp');      
-            //getFavData('news', localStorage.getItem('newsFavArr'));
-        }
-        
-    });
+		var focusedstr='';
+	    focusedstr+='<span class="number"></span>';
+		focusedstr+='<span class="name">粉丝</span>';
+		$api.byId('focused').innerHTML=focusedstr;
+		setuserphoto(null,null);
+	}
 	
-	/*
-    var uid = $api.getStorage('uid');
-    
-    var getUserInfoUrl = '/user?filter=';
-    var userinfo_urlParam = {
-    	where:{
-    		id:uid
-    		},
-    	include:['userinfoPointer']
-    };
-    ajaxRequest(getUserInfoUrl + JSON.stringify(userinfo_urlParam), 'GET', '', function (ret, err) {   
-        if (ret) {        	
-        	
-        	
-            api.hideProgress();
-        	//getUserLvyou('myyouji');              
-            //getFavData('activity', localStorage.getItem('actFavArr'));
-        } else {
-            api.toast({msg: err.msg, location: 'middle'})
-            api.hideProgress();
-        }
-
-    })
-    */
 }
 
-function login(){
-	var uid = $api.getStorage('uid');     
-    //alert(uid);
-	if(!uid || uid=='undefined'){			
-	    api.openWin({
-            name: 'webpage',
-            url: '../html/win_userpage.html',
-            pageParam: {
-	            title: '登录',
-	            url: 'frm_login.html',
-	            frameName: 'frm_login'	
-	        },
-            bounces: false,
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
-            },           
-            reload: true,
-            showProgress: true
-        });
-		 
-	    return;
-	}	
-}
-
-function logout(){
-
-	var loginid = $api.getStorage("token");
-	api.showProgress({
-        title: '正在退出...',
-        modal: false
-    });
-    var user = api.require('user');
-	user.logout(function(ret, err){
-	    if( ret ){
-	   		 $api.setStorage('uid', null);
-            $api.setStorage('token', null);
-            
-            var pc = api.require('personalCenter');
-            pc.close();
-            
-			$api.byId("profile").style.visibility="visible";
-			$api.byId("logout").style.visibility="hidden";
-	        //alert( JSON.stringify( ret) );
-	    }else{
-	        //alert( JSON.stringify( err) );
-	    }	    
-        api.hideProgress();
-	});
-    
-
-}
-
-function showzuji(){
+function setuserphoto(token,userphoto){
 	
-	 var uid = $api.getStorage('uid'); 
-	if(!uid || uid=='undefined'){
-		 api.openWin({
-		        name: 'userLogin',
-		        url: 'userLogin.html',
-		        opaque: true,
-		        vScrollBarEnabled:false
-		    });
-		    return;
+	var button = api.require('UIButton');
+		button.close({
+			id:$api.getStorage('curuserphotoid')
+		});
+	
+	if(token==null ){			//显示登录按钮
+		var header = $api.dom('header');
+		var headerPos = $api.offset(header);
+		
+		//var button = api.require('UIButton');
+		button.open({
+		    rect: {
+		        x: 17,
+		        y: headerPos.h-85,
+		        w: 73.3,
+		        h: 73.3
+		    },
+		    corner: 50,
+		    bg: {
+		        normal: 'widget://image/fixed/touxiang@3x.png',
+		        highlight: 'widget://image/fixed/touxiang@3x.png',
+		        active: 'widget://image/fixed/touxiang@3x.png'
+		    },
+		    title: {
+		        size: 14,
+		        highlight: '点击登录',
+		        active: '点击登录',
+		        normal: '点击登录',
+		        highlightColor: '#000000',
+		        activeColor: '#000adf',
+		        normalColor: '#ff0000',
+		        alignment: 'center'
+		    },
+		    fixedOn: api.frameName,
+		    fixed: false,
+		    move: false
+		}, function(ret, err) {
+		    if (ret) {	
+		    	$api.setStorage('curuserphotoid',ret.id);	   
+		    	if(ret.eventType=="click")
+		    	{	    		
+		    		api.openWin({
+				        name: 'login',
+					    url: 'login.html',
+					    opaque: true,
+					    vScrollBarEnabled: false	  
+				    });
+		    	}
+		        //alert(JSON.stringify(ret));
+		    } else {
+		        //alert(JSON.stringify(err));
+		    }
+		});
+	}
+	else{
+	
+		var curuserphoto="widget://image/fixed/touxiang@3x.png";
+		if(userphoto!=null && userphoto!='' ){
+			curuserphoto= userphoto;
+		}
+			
+		var header = $api.dom('header');
+		var headerPos = $api.offset(header);
+		
+		//var button = api.require('UIButton');
+		
+		button.open({
+		    rect: {
+		        x: 17,
+		        y: headerPos.h-85,
+		        w: 73.3,
+		        h: 73.3
+		    },
+		    corner: 50,
+		    bg: {
+		        normal: curuserphoto,
+		        highlight: curuserphoto,
+		        active: curuserphoto
+		    },
+		    title: {
+		        size: 14,
+		        highlight: '',
+		        active: '',
+		        normal: '',
+		        highlightColor: '#000000',
+		        activeColor: '#000adf',
+		        normalColor: '#ff0000',
+		        alignment: 'center'
+		    },
+		    fixedOn: api.frameName,
+		    fixed: false,
+		    move: false
+		}, function(ret, err) {
+		    if (ret) {	
+		    	$api.setStorage('curuserphotoid',ret.id);	
+		    	if(ret.eventType=="click")
+		    	{	    		
+		    		api.openWin({
+				        name: 'myinfo',
+					    url: 'myinfo.html',
+					    opaque: true,
+					    vScrollBarEnabled: false	  
+				    });
+		    	}
+		        //alert(JSON.stringify(ret));
+		    } else {
+		        //alert(JSON.stringify(err));
+		    }
+		});
+	}
+	
+}
+
+
+
+/*
+ * 
+ */
+function showmyyouji(){
+	token = $api.getStorage('token');
+	if(token!=null && token!=''){
+		api.openWin({
+	        name: 'myyouji',
+		    url: 'myyouji.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	  
+	    });
 	}
 	else{
 		api.openWin({
-	        name: 'userzuji',
-	        url: 'userzuji.html',
-	        opaque: true,
-	        vScrollBarEnabled:false,
-	        pageParam:{uid:uid}
+	        name: 'login',
+		    url: 'login.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	  
 	    });
-    }
+	}
+	
 }
 
-function showyouji(){
-	
-	 var uid = $api.getStorage('uid'); 
-	if(!uid || uid=='undefined'){
-		 api.openWin({
-		        name: 'userLogin',
-		        url: 'userLogin.html',
-		        opaque: true,
-		        vScrollBarEnabled:false
-		    });
-		    return;
+/*
+ * 
+ */
+function  showmyfavour(){
+	token = $api.getStorage('token');
+	if(token!=null && token!=''){
+	}
+	else{
+		
+	}
+	alert("亲,该功能暂未开放");
+}
+
+/*
+ * 浏览用户自己的记录片段
+ */
+function showmyjilu(){
+	token = $api.getStorage('token');
+	if(token!=null && token!=''){
+		api.openWin({
+	        name: 'myjilu',
+		    url: 'myjilu.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	  
+	    });
 	}
 	else{
 		api.openWin({
-	        name: 'myyjlist',
-	        url: 'myyjlist.html',
-	        opaque: true,
-	        vScrollBarEnabled:false,
-	        pageParam:{uid:uid}
+	        name: 'login',
+		    url: 'login.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	  
 	    });
-    }
+	}
+	
 }
 
-function showabout(){
+/*
+ * 
+ */
+function showgengxin(){
 	
-	 var uid = $api.getStorage('uid'); 
-	
+	alert("亲,已是最新版本");
+}
+
+/*
+ * 
+ */
+function showfeedback(){
+
 	api.openWin({
-        name: 'aboutus_window',
-        url: 'aboutus_window.html',
-        opaque: true,
-        vScrollBarEnabled:false,
-        pageParam:{uid:uid}
+        name: 'feedback',
+	    url: 'feedback.html',
+	    opaque: true,
+	    vScrollBarEnabled: false	  
     });
+}
+
+
+function changecover(){
+	token = $api.getStorage('token');
+	if(token!=null && token!=''){
+		api.openWin({
+	        name: 'myinfo-editcover',
+		    url: 'myinfo-editcover.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	,
+		    pageParam:{
+		    	token:token
+		    }  
+	    });
+	}
+	else{
+		api.openWin({
+	        name: 'login',
+		    url: 'login.html',
+		    opaque: true,
+		    vScrollBarEnabled: false	  
+	    });
+	}
+	
 }
