@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6930868994492" version="0.0.1">
+  <name>lvtu</name>
+  <description/>
+  <author email="wljordan@sina.com" href="http://www.apicloud.com">wljordan</author>
+  <content src="index.html"/>
+  <preference name="appBackground" value="rgba(0,0,0,0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0)"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="autoUpdate" value="true"/>
+  <preference name="smartUpdate" value="false"/>
+  <preference name="debug" value="true"/>
+  <preference name="statusBarAppearance" value="true"/>
+  <preference name="backgroundMode" value="location"/>
+  <permission name="location"/>
+  <permission name="internet"/>
+  <permission name="record"/>
+  <access origin="*"/>
+  <feature name="aMap">
+    <param name="android_api_key" value="a14ac3d1de56e4a4072968ea888d5914"/>
+    <param name="ios_api_key" value="cc842c9de39bf708d2ddda40f4744ecd"/>
+  </feature>
+  <feature name="smsVerify">
+    <param name="android_app_key" value="106d9314e7a2b"/>
+    <param name="android_app_secret" value="ff69139f5a482cd419817e6efafb4d8f"/>
+    <param name="ios_app_key" value="106d9314e7a2b"/>
+    <param name="ios_app_secret" value="ff69139f5a482cd419817e6efafb4d8f"/>
+  </feature>
+  <feature name="qiniuUpfile">
+    <param name="bucket" value="ohtaq52av.bkt.clouddn.com"/>
+    <param name="SecretKey" value="pl3kz6DFwjTgrot1C6_Xca3dem0h4Jk1aSA4tFB0"/>
+    <param name="AccessKey" value="3_D9E03vPbcmP7y5IypXngQeN9_knq7wjfQwEr6j"/>
+  </feature>
+  <feature name="aMapLBS">
+    <param name="android_api_key" value="5685d89211a184f0e05b3314a6e66ce6"/>
+  </feature>
+  <feature name="aMapReportLocation">
+    <param name="android_api_key" value="5685d89211a184f0e05b3314a6e66ce6"/>
+  </feature>
+</widget>

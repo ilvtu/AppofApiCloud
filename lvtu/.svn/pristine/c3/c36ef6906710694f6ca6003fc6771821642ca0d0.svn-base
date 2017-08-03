@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>我的收藏</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <style>
+        header {
+            position: relative;
+            height: 48px;
+            line-height: 48px;
+            background: -webkit-linear-gradient(left, #56afff, #4cd1a2);
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #56afff, #4cd1a2);
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #56afff, #4cd1a2);
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #56afff, #4cd1a2);
+            color: #fff;
+        }
+
+        header i {
+            font-size: 22px !important;
+            color: #fff;
+            width: 4.2rem;
+            height: 100%;
+            left: 0.75rem;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            position: absolute;
+            left: 4.3rem;
+            bottom: 0;
+            right: 0;
+            font-size: 20px;
+            color: #fff;
+        }
+        nav ul li {
+            position: relative;
+            height: 48px;
+            line-height: 48px;
+            background: #fff;
+        }
+
+        .nav-img {
+            position: absolute;
+            width: 2rem;
+        }
+        .tabBar-bar{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 4px;
+            background-color: #56afff;
+            -webkit-transition: all .25s ease;
+                    transition: all .25s ease;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrap" class="flex-wrap flex-vertical">
+      <div id="header">
+        <header>
+            <i tapmode="hover" onclick="api.closeWin();" class="iconfont icon-fanhui"></i>
+            <div class="title">我的收藏</div>
+        </header>
+        <nav>
+            <ul class="flex-wrap">
+                <li class="flex-con tabBar-btn active" tapmode="tap-active" onclick="changeGroupIndex(0);">
+                    <img src="../image/mycollection/list1.gif" alt="" class="nav-img vertical-middle-center">
+                </li>
+                <li class="flex-con tabBar-btn" tapmode="tap-active" onclick="changeGroupIndex(1);">
+                    <img src="../image/mycollection/list2.gif" alt="" class="nav-img vertical-middle-center">
+                </li>
+                <div class="tabBar-bar"></div>
+            </ul>
+        </nav>
+      </div>
+
+        <div id="main" class="flex-con">
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    // tabbar切换效果
+    var aTabBarBtn = $api.domAll('.tabBar-btn');
+    var tabBar = $api.dom('.tabBar-bar');
+    var changeBar = function(index){
+        tabBar.style.webkitTransform = 'translateX('+(100*index)+'%)';
+        tabBar.style.transform = 'translateX('+100*index+'%)';
+        for (var i = 0,len = aTabBarBtn.length; i < len; i++) {
+            if (index == i) {
+                $api.addCls(aTabBarBtn[i],'active');
+            } else{
+                $api.removeCls(aTabBarBtn[i],'active');
+            }
+
+        };
+    };
+    // 窗口组切换
+        var changeGroupIndex = function(index){
+            api.setFrameGroupIndex({
+                name: 'collection-group',
+                index: index,
+                scroll: true
+            });
+        };
+
+    apiready = function() {
+        api.parseTapmode();
+        var header = $api.byId('header');
+        $api.fixIos7Bar($api.dom('#header header'));
+        $api.fixStatusBar($api.dom('#header header'));
+        var headerPos = $api.offset(header);
+        window.main = $api.byId('main');
+        var mainPos = $api.offset(main);
+        api.openFrameGroup({
+            name: 'collection-group',
+            background: '#fff',
+            scrollEnabled: true,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: mainPos.h
+            },
+            index: 0,
+            frames:[
+                {
+                    name: 'list1',
+                    url: './mycollection_list1.html',
+                    pageParam:{},
+                    bounces:true,
+                },{
+                  name: 'list2',
+                  url: './mycollection_list2.html',
+                  pageParam:{},
+                  bounces:true,
+                }
+            ]
+        }, function(ret, err){
+            var name = ret.name;
+            var index = ret.index;
+            changeBar(index);
+        });
+    };
+
+</script>
+
+</html>

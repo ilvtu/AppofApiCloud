@@ -1,9 +1,0 @@
-var uid;
-apiready = function () {
-
-	var header = $api.dom('header');
-	var headerPos = $api.offset(header);
-	$api.fixStatusBar(header);
-	
- 	uid= api.pageParam.uid;
-}

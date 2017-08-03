@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>我的游记list</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+      html{
+        font-size: 10px;
+      }
+      body{
+        background: #fff;
+      }
+      .list{
+        margin-top: 3rem;
+        margin-left: 3rem;
+      }
+      .title{
+        font-size: 30px;
+        height: 4.3rem;
+        line-height: 4.3rem;
+      }
+      .date{
+        font-size: 18px;
+        height: 3.6rem;
+        line-height: 3.6rem;
+      }
+      .photo{
+        position: relative;
+        margin-top: 3rem;
+      }
+      .photo img{
+        display: block;
+        width:90%;
+        border:8px solid #fff;
+        -webkit-box-shadow: 4px 4px 20px #999;
+        box-shadow: 4px 4px 20px #666;
+      }
+      .photo-name{
+        position:absolute;
+        left: 35%;
+        top:40%;
+        transform:translateX(-50%);
+        transform:translateY(-50%);
+        color: #fff;
+        font-size: 2rem;
+      }
+      .photo-date{
+        position:absolute;
+        left: 35%;
+        top:55%;
+        transform:translateX(-50%);
+        transform:translateY(-50%);
+        color: #fff;
+        font-size: 1.8rem;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="list">
+    <div class="title">Zermatt</div>
+    <div class="date">九月30 - 十月1，2015</div>
+    <div class="photo">
+      <img src="../image/mytravels/yj.jpg" alt="照片">
+      <div class="photo-name">Story#1</div>
+      <div class="photo-date">2016.10.12</div>
+    </div>
+  </div>
+  <div class="list">
+    <div class="title">张北，张家口</div>
+    <div class="date">九月10 - 九月15，2015</div>
+    <div class="photo">
+      <img src="../image/mytravels/yj.jpg" alt="照片">
+      <div class="photo-name">Story#2</div>
+      <div class="photo-date">2016.10.12</div>
+    </div>
+  </div>
+  <div class="list">
+    <div class="title">Zermatt</div>
+    <div class="date">九月30 - 十月1，2015</div>
+    <div class="photo">
+      <img src="../image/mytravels/yj.jpg" alt="照片">
+      <div class="photo-name">Story#1</div>
+      <div class="photo-date">2016.10.12</div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      api.parseTapmode();
+    };
+</script>
+
+</html>

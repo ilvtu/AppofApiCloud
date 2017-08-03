@@ -1,0 +1,163 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+        
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .hcenter{
+			margin-top: 15.3px;
+			color: #ffffff;
+			width:95px;
+			font-size: 18px;
+		}
+	
+		.yjlist{
+		
+		}
+		
+		.yjlist .yj{
+			width:100%;
+			height:202px;
+			margin-bottom:30px;
+		}
+		
+		.yjlist .yj .yjcover{		
+			position:absolute;
+			width:100%;
+		}
+		
+		.yjlist .yj .yjcover input{
+			padding-right:0px;
+		}
+		
+		.yjlist .yj .yjname{
+			position:absolute;
+			margin-top:62.7px;
+			width: 100%;
+			font-family:'Microsoft YaHei';
+			font-size:20px;
+			text-align:center;
+			color:white;
+		}
+		
+		.yjlist .yj .yjcity{
+		
+			position:absolute;
+			margin-top:96.7px;
+			width: 100%;
+			font-family:'Microsoft YaHei';
+			text-align:center;
+			color:white;
+		}
+		
+		.yjlist .yj .yjdate{
+		
+			position:absolute;
+			
+			font-family:'Microsoft YaHei';
+			margin-top:125.3px;
+			width: 100%;
+			text-align:center;
+			color:white;
+		}
+		
+		
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			
+			}
+		
+	
+		
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+    	
+		<div class="back">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/mybiji/fanhui@3x.png">
+	       </div>
+	     	<span class="hcenter">我的笔记</span>
+	    
+	     <div class="userphoto"></div>
+       </div>
+</header>
+
+<div class="yjlist">
+	<div class="yj">	
+		<div class="yjcover" >		
+		      <input name="imageField" type="image" style="width:100%;height: 202px;" id="imageField" src="../image/mybiji/yj.png">
+		</div>
+		<span class="yjname">迷人古建筑</span>
+		<span class="yjcity">北京</span>
+		<span class="yjdate">———• 2017-05-03 •———</span>
+	</div>
+	
+	<div class="yj">	
+		<div class="yjcover" >		
+		      <input name="imageField" type="image" style="width:100%;height: 202px;" id="imageField" src="../image/mybiji/yj.png">
+		</div>
+		<span class="yjname">迷人古建筑</span>
+		<span class="yjcity">北京</span>
+		<span class="yjdate">———• 2017-05-03 •———</span>
+	</div>
+	
+</div>
+
+  <footer>
+      
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/slide.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+			var header = $api.dom('.header');
+			$api.fixIos7Bar(header);
+		    $api.fixStatusBar(header);
+      };
+      
+      
+  </script>
+  </html>

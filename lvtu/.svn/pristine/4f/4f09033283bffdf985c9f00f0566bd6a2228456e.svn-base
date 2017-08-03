@@ -1,0 +1,114 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .logo{
+			margin-top: 15.3px;
+			margin-left: 21.7px;
+			color: #ffffff;
+			width:55px;
+			font-size: 18px;
+		}
+		.header .hcenter{
+			margin-top: 15.3px;
+			color: #ffffff;
+			font-size: 18px;
+		}
+		.header .userphoto{	
+			margin-top:12.7px;			
+			padding-right:30px;
+			width:22.3px;
+		}
+		
+		
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			background-color:#242f33;
+			
+			height: 154.7px;
+			margin-top:436.7px;
+			}
+			footer input{
+        	padding-right:0px;
+        	}
+			.stop{
+			
+			position:relative;
+			margin-left: 28px;
+			margin-top: 43.3px;
+						}
+			.paizhao{	
+			position:relative;
+			margin-top: 27.3px;
+				}
+			 .pause{
+			 position:relative;
+			margin-top:43.4px;
+			margin-right:28px;
+			}
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+	     <span class="logo"></span>
+	     <div class="hcenter">在路上</div>
+	     <div class="userphoto" >
+	            <!--<input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/runstyle/wode@3x.png">-->
+	       </div>
+       </div>
+</header>
+
+  <footer>
+        <div class="stop" id="stopbtn" ontouchstart="gtouchstart(this)" ontouchmove="gtouchmove()" ontouchend="gtouchend()">
+		    <input name="imageField" type="image" id="imageField" style="width:68px;height: 68px;" src="../image/runstyle/jieshu@3x.png">
+        </div>
+        <div class="paizhao" onclick="paizhao();">
+		    <input name="imageField" type="image" id="imageField" style="width:100px;height: 100px;" src="../image/runstyle/paizhao@3x.png">
+        </div>
+      <div class="pause" onclick="pauseguiji();" id="pausebtn">
+		    <input name="imageField" type="image" id="imageField" style="width:68px;height: 68px;" src="../image/runstyle/zanting@3x.png">
+        </div>
+  </footer>
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/runstyle.js"></script>
+  <script type="text/javascript">
+      
+      
+      
+  </script>
+  </html>
