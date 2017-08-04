@@ -1,238 +1,164 @@
 <!doctype html>
-  <html>
-  <head>
-  	  <meta charset="utf-8">
-      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-      <title>title</title>
-      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-      <style>
-        body {
-        
-        }
-        	.header input{
-        	padding-right:0px;
-        	}
-          .header{
-         	  	display: -webkit-box;		
-			    display: -webkit-flex;		
-			    display: flex;	
-			    -webkit-box-pack:justify;
-				justify-content:space-between;
-			    
-				height: 278.7px;
-				width:100%;
-		}
-		
-		.header .back{
-		
-			position:absolute;
-			margin-top: 12.7px;
-			margin-left: 10px;
-			z-index:999;
-		}
-		
-		.header .cover{
-			position:absolute;
-		 	width:100%;
-		}
-	
-		.header .edit{	
-			position:absolute;
-			margin-top:12.7px;			
-			right:10px;
-			z-index:999;
-		}
-	
-		.header .yjname{
-			position:absolute;
-			margin-top:128px;
-			width:100%;
-			text-align:center;
-			color:white;
-			
-			font-family:'Microsoft YaHei';
-			font-size:24px;
-		}
-		
-		
-		.header .authorphoto{
-			position:absolute;
-			margin-top:170px;
-			width:100%;
-			text-align:center;
-		}
-		
-		.header .authorname{
-			position:absolute;
-			margin-top:220px;
-			width:100%;
-			text-align:center;
-			color:white;
-			
-			font-family:'Microsoft YaHei';
-			font-size:18px;
-		}
-		
-		.yjjieshao{
-			width:100%;
-			height:62px;
-			background-color:#C8C7CC;
-		}
-		.yjjieshao .content{
-			position:relative;
-			margin-top:16px;
-			margin-left:16px;
-			font-family:'Microsoft YaHei';
-			font-size:15px;
-			color:white;
-		}
-		
-		.yjmap{
-			width:100%;
-			height:100px;
-			background-color:#C8C7CC;
-			
-			text-align:center;
-			 border-width: 1px;
-		 	border-style:double;
-			 border-color:#F0F0F0;		
-		}
-		
-		.yjcontent .daycontent{
-			height:65.3px;
-			
-		}
-		.yjcontent .daycontent input{
-			padding-right:0px;
-			
-			margin-left:8px;
-			margin-top:24.3px;
-		}
-		
-		.yjcontent .daycontent .dayinfo1{
-			position:absolute;
-			color:#33cc98;
-			left:38.3px;
-			margin-top:17px;
-			font-size:18px;
-		}
-		
-		.yjcontent .daycontent .dayinfo2{
-			position:absolute;
-			color:#33cc98;
-			left:38.3px;
-			margin-top:39px;
-			font-size:15px;
-		}
-		.yjcontent .yjimg{
-			padding:0px;
-		}
-		.yjcontent .imginfo{
-			margin-left:16.7px;
-			margin-top:13.3px;
-			margin-bottom:15.3px;
-			color:#000000;
-			font-size:15px;
-		}
-		footer{
-			
-			display: -webkit-box;		
-		    display: -webkit-flex;		
-		    display: flex;	
-		    
-			-webkit-box-pack:justify;
-			justify-content:space-between;
-			
-			
-			}
-		
-	
-		
-      </style>
+<html>
 
-  </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>游记</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/cqs-common.css">
+    <style>
+      .cover{
+        position: relative;
+        margin-bottom: 0.75rem;
+        text-align: center;
+      }
+      .cover img{
+        display: block;
+        width: 100%;
+      }
+      .back-icon{
+        position: absolute;
+        top:0.5rem;
+        left:0.5rem;
+      }
+      .collect-icon{
+        position: absolute;
+        top:0.5rem;
+        right:0.5rem;
+      }
+      .yj_title{
+        position: absolute;;
+        bottom:9rem;
+        font-size: 20px;
+        color: #fff;
+      }
+      .head{
+        position: absolute;;
+        bottom: 6rem;
+        width: 2rem;
+        height: 2rem;
+        text-align: center;
+      }
+      .head img{
+        display: block;
+        width: 100%;
+        border:1px solid #fff;
+        border-radius: 50%;
+      }
+      .nickname{
+        position: absolute;;
+        bottom: 4rem;
+        color: #fff;
+        font-size: 16px;
+      }
+    .yj_desc{
+      margin: 0 1.2rem;
+    }
+    .map{
+      position: relative;
+      margin: 0.75rem 0;
+    }
+    .map img{
+      display: block;
+      width: 100%;
+    }
+    .list{
+      position: relative;
+      margin: 0.8rem 0.75rem 0 0.75rem;
+    }
+    .dot{
+      display: inline-block;
+      width:1.5rem;
+      height: 1.5rem;
+      background-color: #7ba647;
+      border-radius: 50%;
+    }
+    .photo_title{
+      display: inline-block;
+    }
+    .day{
+      position: relative;
+      margin-left: 0.75rem;
+      color:  #7ba647;
+      font-size: 20px;
+    }
+    .date{
+      color:  #7ba647;
+      font-size: 18px;
+      margin-left: 0.75rem;
+    }
+    .photo{
+      display: block;
+      position: relative;
+      margin: 0.75rem 0;
+      padding: 0.75rem;
+    }
+    .photo img{
+      display: block;
+      width: 100%;
+    }
+    .photo_desc{
+      margin-top: 0.75rem;
+    }
+    </style>
+</head>
 
- <body>
+<body>
+  <div class="cover">
+    <img src="../image/yj/cover.gif" alt="cover">
+    <a tapmode="hover" onclick="" class="back-icon"></a>
+    <a tapmode="hover" onclick="" class="collect-icon"></a>
+    <div class="yj_title vertical-center">迷人古建筑</div>
+    <div class="head vertical-center">
+      <img src="../image/yj/touxiang@3x.png" alt="">
+    </div>
+    <div class="nickname vertical-center">迷人的男子</div>
+  </div>
+  <div class="yj_desc">迷人游记迷人的游记迷人的游记迷人游记迷人的游记迷人的游记迷人游记迷人的游记迷人的人游记迷人的游记迷人的游记</div>
+  <div class="map">
+    <img src="../image/yj/map.gif" alt="">
+  </div>
+  <div class="list">
+    <div class="dot"></div>
+    <div class="photo_title">
+      <div class="day font-bold">DAY 1</div>
+      <div class="date">2017.08.04</div>
+    </div>
+    <div class="photo">
+      <img src="../image/yj/photo.gif" alt="">
+      <div class="photo_desc">迷人的照片迷人的照片迷人的照片迷人的照片</div>
+    </div>
+  </div>
+  <div class="list">
+    <div class="dot"></div>
+    <div class="photo_title">
+      <div class="day font-bold">DAY 2</div>
+      <div class="date">2017.08.05</div>
+    </div>
+    <div class="photo">
+      <img src="../image/yj/photo.gif" alt="">
+      <div class="photo_desc">迷人的照片迷人的照片迷人的照片迷人的照片</div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/yj.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      api.parseTapmode();
+      api.setRefreshHeaderInfo({
+          visible: true,
+          loadingImg: 'widget://image/refresh.png',
+          bgColor: '#ccc',
+          textColor: '#fff',
+          textDown: '下拉刷新...',
+          textUp: '松开刷新...',
+          showTime: true
+      }, function(ret, err){
+          // initHome();
+      });
+    };
+</script>
 
-
-<header>
-	<div class="header">
-	
-		<div class="back" onclick="back();">
-            <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/yj/fanhui@3x.png">
-	
-	   </div>
-	    <div class="edit" id="edit" onclick="edityj();">
-	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/yj/biji@3x.png">
-	      
-       </div>
-       <div class="cover" id="cover">
-        	<!--<input name="imageField" type="image" style="width:100%;height: 278.7px;" id="imageField" src="../image/yj/fengmian.png">-->
-			<input name="imageField" type="image" style="width:100%;height: 278.7px;" id="imageField" src="">
-	   </div>
-	   
-	   <span class="yjname" id="yjname"></span>
-      <div class="authorphoto" id="authorphoto">
-     	<!--<input name="imageField" type="image" style="width:39.3px;height: 39.3px;" id="imageField" src="../image/yj/yjneirong.png">
-		-->
-		<input name="imageField" type="image" style="width:39.3px;height: 39.3px;" id="imageField" src="">
-	
-      </div>
-     <span class="authorname" id="authorname"></span>
-   </div>
-   
-</header>
-
- 
-   <div class="yjjieshao" id="yjjieshao">
-	<span class="content">app界面素材</span>
-   </div>
-	<div class="yjmap" id="yjmap">
-	map
-   </div>
-   
-	<div class="yjcontent" id="yjcontent">
-		<!--
-		<div class="daycontent">
-			<input name="imageField" type="image" style="width:17.3px;height:17.3px;" id="imageField" src="../image/yj/dian@3x.png">
-			<span class="dayinfo1">DAY1</span>
-			<span class="dayinfo2">2017.05.03</span>
-		</div> 
-		<input class="yjimg" name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		
-		<input class="yjimg"  name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		
-		<input class="yjimg"  name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		
-		
-		<div class="daycontent">
-			<input name="imageField" type="image" style="width:17.3px;height:17.3px;" id="imageField" src="../image/yj/dian@3x.png">
-			<span class="dayinfo1">DAY2</span>
-			<span class="dayinfo2">2017.05.04</span>
-		</div> 
-		<input class="yjimg"  name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		
-		<input class="yjimg"  name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		
-		<input class="yjimg"  name="imageField" type="image" style="width:100%;height:200px;" id="imageField" src="../image/yj/yjneirong.png">
-		<span class="imginfo">愤怒的小鸟，风景图标</span>
-		-->
-	</div>
-
-  <footer>
-      
-  </footer>
-
-  
- 
-
-  </body>
-  <script type="text/javascript" src="../script/api.js"></script>
-  <script type="text/javascript" src="../script/yj.js"></script>
-
-  </html>
+</html>

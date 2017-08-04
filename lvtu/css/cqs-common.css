@@ -45,6 +45,20 @@ header {
     background-size: 20px 20px;
     position: absolute; right: 0; bottom: 0;
 }
+.collect-icon{
+    display: inline-block; width: 44px; height: 44px;line-height: 44px;
+    background: url(../image/collect.png) no-repeat center center;
+    -webkit-background-size: 24px 24px;
+    background-size: 24px 24px;
+    position: absolute; right: 0; bottom: 0;
+}
+.collected-icon{
+    display: inline-block; width: 44px; height: 44px;line-height: 44px;
+    background: url(../image/collected.png) no-repeat center center;
+    -webkit-background-size: 24px 24px;
+    background-size: 24px 24px;
+    position: absolute; right: 0; bottom: 0;
+}
 header h1{
     font-size: 20px;
     height: 44px; line-height: 44px; margin: 0em; color: #fff;
@@ -154,106 +168,6 @@ select {
 input{
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-}
-@font-face {
-  font-family: "iconfont";
-  src: url('./font/iconfont.eot');
-  src: url('./font/iconfont.eot?#iefix') format('embedded-opentype'), url('./font/iconfont.woff') format('woff'), url('./font/iconfont.ttf') format('truetype'), url('./font/iconfont.svg#iconfont') format('svg')
-}
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 1rem;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale
-}
-.icon-shezhi:before {
-  content: "\e600"
-}
-.icon-tags:before {
-  content: "\e601"
-}
-.icon-message:before {
-  content: "\e602"
-}
-.icon-boshi:before {
-  content: "\e603"
-}
-.icon-menu:before {
-  content: "\e60f"
-}
-.icon-xingbienan:before {
-  content: "\e604"
-}
-.icon-xingbienv:before {
-  content: "\e605"
-}
-.icon-message1:before {
-  content: "\e606"
-}
-.icon-haoyou:before {
-  content: "\e607"
-}
-.icon-sousuo:before {
-  content: "\e608"
-}
-.icon-photo:before {
-  content: "\e609"
-}
-.icon-zuanshi:before {
-  content: "\e60a"
-}
-.icon-biaoxingfill:before {
-  content: "\e60b"
-}
-.icon-biaoxing:before {
-  content: "\e60c"
-}
-.icon-position:before {
-  content: "\e60d"
-}
-.icon-cake:before {
-  content: "\e60e"
-}
-.icon-list:before {
-  content: "\e610"
-}
-.icon-edit:before {
-  content: "\e611"
-}
-.icon-xiangshang1:before {
-  content: "\e612"
-}
-.icon-angelBottom:before {
-  content: "\e613"
-}
-.icon-bottom:before {
-  content: "\e614"
-}
-.icon-top:before {
-  content: "\e615"
-}
-.icon-right:before {
-  content: "\e616"
-}
-.icon-left:before {
-  content: "\e617"
-}
-.icon-guanbi2fill:before {
-  content: "\e618"
-}
-.icon-guanbi2:before {
-  content: "\e619"
-}
-.icon-jiahao1:before {
-  content: "\e61a"
-}
-.icon-menu-slide:before {
-  content: "\e61b"
-}
-.icon-chatboxworking:before {
-  content: "\e61c"
 }
 .dz-bg-gray {
   background: #ccc !important

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>我的笔记list</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/cqs-common.css">
+    <style>
+      html{
+        font-size: 10px;
+      }
+      body{
+        background: #fff;
+        padding-top: 1.5rem;
+      }
+      .list{
+        /*padding-top: 2rem;*/
+        margin-left: 2rem;
+      }
+      .dot{
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-left: -0.2rem;
+        border-radius: 50%;
+        background-color: #56afff;
+      }
+      .date{
+        display: inline-block;
+        font-size: 18px;
+        height: 3.6rem;
+        line-height: 3.6rem;
+        padding-left: 1rem;
+      }
+      .photo{
+        position: relative;
+        padding-top: 2rem;
+        border-left:2px solid #56afff;
+        padding-left: 2rem;
+        padding-bottom: 1.2rem;
+      }
+      .flex-con{
+        padding-right: 0.75rem ;
+      }
+      .photo img{
+        display: block;
+        width:100%;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="list">
+    <div class="dot"></div>
+    <div class="date font-bold">2017年9月3日</div>
+    <div class="photo flex-wrap">
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+    </div>
+  </div>
+  <div class="list">
+    <div class="dot"></div>
+    <div class="date font-bold">2017年8月3日</div>
+    <div class="photo flex-wrap">
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+    </div>
+  </div>
+  <div class="list">
+    <div class="dot"></div>
+    <div class="date font-bold">2017年7月3日</div>
+    <div class="photo flex-wrap">
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+      <div class="flex-con">
+        <img src="../image/mytravels/yj.jpg" alt="照片">
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      api.parseTapmode();
+      api.setRefreshHeaderInfo({
+          visible: true,
+          loadingImg: 'widget://image/refresh.png',
+          bgColor: '#ccc',
+          textColor: '#fff',
+          textDown: '下拉刷新...',
+          textUp: '松开刷新...',
+          showTime: true
+      }, function(ret, err){
+          // initHome();
+      });
+    };
+</script>
+
+</html>
