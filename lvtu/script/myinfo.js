@@ -7,7 +7,7 @@ var token='';
 var localuid='';
 var timeout='';
 apiready = function(){
-	var header = $api.dom('.header');
+	var header = $api.dom('header');
 	$api.fixIos7Bar(header);
     $api.fixStatusBar(header);
     token = $api.getStorage('token');

@@ -12,7 +12,7 @@
             background-color: #F0F0F0;
         }
 
-        .header input {
+        /*.header input {
             padding-right: 0px;
         }
 
@@ -32,14 +32,33 @@
             margin-left: 30px;
             font-size: 18px;
         }
-
         .header .hcenter {
             margin-top: 15.3px;
             color: #ffffff;
             width: 95px;
             font-size: 18px;
+        }*/
+        header {
+            position: relative;
+            height: 44px;
+            line-height: 44px;
+            background: -webkit-linear-gradient(left, #56afff, #4cd1a2);
+            background: linear-gradient(to right, #56afff, #4cd1a2);
+            color: #fff;
+            text-align: center;
         }
-
+        .back-icon{
+            display: inline-block; width: 44px; height: 44px;line-height: 44px;
+            background: url(../image/back.png) no-repeat center center;
+            -webkit-background-size: 20px 20px;
+            background-size: 20px 20px;
+            position: absolute; left: 0; bottom: 0;
+        }
+        .hover{ opacity: .8; }
+        header h1{
+            font-size: 20px;
+            height: 44px; line-height: 44px; margin: 0em; color: #fff;
+        }
         footer {
             display: -webkit-box;
             display: -webkit-flex;
@@ -190,7 +209,7 @@
 
 
     <header>
-        <div class="header">
+        <!-- <div class="header">
 
             <div class="back" onclick="back();">
                 <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/myinfo/fanhui@3x.png">
@@ -198,7 +217,9 @@
             <span class="hcenter">个人资料</span>
 
             <div></div>
-        </div>
+        </div> -->
+        <a tapmode="hover" onclick="back()" class="back-icon"></a>
+        <h1>个人资料</h1>
     </header>
     <div class="touxiang" id="touxiang">
         <span class="miaoshu">头像</span>
