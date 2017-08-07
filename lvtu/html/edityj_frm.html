@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>编辑游记frame</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        body{
+          background-color: #f0f0f0;
+        }
+        .header input {
+            padding-right: 0px;
+        }
+
+        .header {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            background-color: #242f33;
+            height: 48px;
+        }
+
+        .header .back {
+            margin-top: 12.7px;
+            margin-left: 30px;
+            font-size: 18px;
+        }
+
+        .header .save {
+            margin-top: 12.7px;
+            padding-right: 30px;
+            width: 22.3px;
+        }
+
+        .date {
+            width: 100%;
+            height: 56.7px;
+            background-color: #fff;
+        }
+
+        .date .date-start {
+            float: left;
+            margin-left: 45.3px;
+            margin-top: 18.3px;
+            color: #01d39f;
+            font-size: 20px;
+        }
+
+        .date input {
+            padding-right: 0px;
+        }
+
+        .date .date-year {
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 74px;
+            color: #999999;
+            font-size: 24px;
+        }
+
+        .date .date-tag {
+            margin-left: 90px;
+            margin-top: 34.3px;
+        }
+
+        .date .date-end {
+            float: right;
+            margin-right: 45.3px;
+            margin-top: 18.3px;
+            color: #01d39f;
+            font-size: 20px;
+        }
+
+        .yjcover {
+            height: 115px;
+            margin-top: 8px;
+            padding-bottom: 15px;
+            background-color: #fff;
+        }
+
+        .yjcover input {
+            padding-right: 0px;
+        }
+
+        .yjcover .covertag {
+            position: absolute;
+            left: 0px;
+        }
+
+        .yjcover .coverimg {
+            display: inline-block;
+            margin-left: 16px;
+            margin-top: 20.7px;
+        }
+
+        .yjcover .yjtitle {
+            position: absolute;
+            font-size: 15px;
+            margin-left: 10px;
+            margin-top: 27.3px;
+            color: #333333;
+        }
+
+        .yjcover .yjinfo {
+            position: absolute;
+            font-size: 15px;
+            margin-left: 10px;
+            margin-top: 47px;
+            color: #999999;
+        }
+
+        .imglist {
+            height: auto;
+            background: #F0F0F0;
+        }
+
+        .imglist .addtag {
+            height: 46.7px;
+            text-align: center;
+            padding-top: 9px;
+            border-width: 1px;
+            border-style: double;
+            border-color: #F0F0F0;
+        }
+
+        .imglist .addtag input {
+            padding-right: 0px;
+        }
+
+        .imglist .content {
+            position: relative;
+            height: 115.3px;
+            border-width: 1px;
+            border-style: double;
+            border-color: #F0F0F0;
+            background: white;
+        }
+
+        .imglist .content input {
+            padding-right: 0px;
+        }
+
+        .imglist .content .tupian {
+            margin-left: 16px;
+            margin-top: 20px;
+        }
+
+        .imglist .content .wenzi {
+            height: 60.7px;
+            max-width: 150px;
+            margin-left: 15.3px;
+            padding: 0px;
+            margin-top: 27.3px;
+            text-align: left;
+        }
+
+        .imglist .content .shanchu {
+            position: absolute;
+            max-width: 30px;
+            left:0;
+            bottom:0;
+        }
+
+        footer {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+        }
+
+        footer input {
+            padding-right: 0px;
+        }
+        /*chai css*/
+        .chai-form-body{
+          display: table-cell;
+          vertical-align: middle;
+          word-wrap: break-word;
+          word-break: break-all
+        }
+        .chai-form-input{
+          display: block;
+          margin-left: 5rem;
+          width: 100%;
+          font-size: 1rem;
+          height: 1.5rem;
+          padding-left: 0.3rem;
+          border: none
+        }
+        .yjdesc{
+          display: inline-block;
+        }
+        .chai-form-textarea{
+          display: block;
+          width: 100%;
+          font-size: 1rem;
+          height: 4rem;
+          padding-left: 0.3rem;
+          border: none
+        }
+        .first_card_date{
+          width:100%;
+          height:20px;
+          margin-top: 10px;
+          line-height: 20px;
+          text-align: center;
+          background-color: #fff;
+          color: #01d39f;
+          font-size: 20px;
+        }
+        .first_content{
+          height:150.3px !important
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="date" id="date">
+        <span class="date-start">04/24</span>
+
+        <span class="date-year">2017</span>
+        <input class="date-tag" name="imageField" type="image" style="width:24px;height: 12px;" id="imageField" src="../image/edityj/zuoyoushijian@3x.png">
+
+        <span class="date-end">04/28</span>
+    </div>
+    <div class="yjcover" id="yjcover">
+        <input class="covertag" name="imageField" type="image" style="width:52.7px;height: 30.7px;" id="imageField" src="../image/edityj/cover.png">
+        <div class="chai-form-body">
+          <input type="text" class="chai-form-input" name="yjtitle" value="" placeholder="请输入游记名称">
+        </div>
+        <input class="coverimg" name="imageField" type="image" style="width:74.3px;height: 74.3px;" id="imageField" src="../image/edityj/fengmianmorentu@3x.png">
+        <div class="yjdesc">
+          <textarea type="text" class="chai-form-textarea" name="yjdesc" value="" placeholder="请输入游记描述"></textarea>
+        </div>
+    </div>
+
+    <div class="imglist" id="imglist">
+        <div class="addtag">
+            <input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+
+        </div>
+        <div class="content">
+            <input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+
+            <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+            <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/delete.png">
+
+        </div>
+
+        <div class="addtag">
+            <input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+
+        </div>
+        <div class="content first_content">
+            <div class="first_card_date">04/24</div>
+            <input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+
+            <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+            <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/delete.png">
+
+        </div>
+
+        <div class="addtag">
+            <input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+
+        </div>
+        <div class="content">
+            <input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+
+            <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+            <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/delete.png">
+
+        </div>
+        <div class="addtag">
+            <input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/edityj.js"></script>
+
+</html>

@@ -22,7 +22,8 @@
             display: flex;
             -webkit-box-pack: justify;
             justify-content: space-between;
-            background-color: #242f33;
+            background: -webkit-linear-gradient(left, #56afff, #4cd1a2);
+            background: linear-gradient(to right, #56afff, #4cd1a2);
             height: 48px;
         }
 
@@ -201,7 +202,7 @@
     </header>
     <div class="touxiang" id="touxiang">
         <span class="miaoshu">头像</span>
-        <input name="imageField" onclick="settouxiang();" type="image" style="width:47.3px;height: 47.3px;" id="imageField" src="../image/myinfo/touxiang@3x.png">
+        <input name="imageField" onclick="setAvatar();" type="image" style="width:47.3px;height: 47.3px;" id="imageField" src="../image/myinfo/touxiang@3x.png">
 
     </div>
 
@@ -215,7 +216,7 @@
         <span class="miaoshu">性别</span>
         <input name="imageField" type="image" style="width:10px;height: 16.7px;" id="imageField" src="../image/myinfo/jiantou@3x.png">
 
-        <span class="info" id="sex" onclick="setsex();">男</span>
+        <span class="info" id="sex" onclick="setSex();">男</span>
     </div>
 
     <div class="birth">
@@ -247,5 +248,100 @@
 <script type="text/javascript" src="../script/sqlite.js"></script>
 <script type="text/javascript" src="../script/myinfo.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    // 设置头像
+    function setAvatar() {
+        api.actionSheet({
+            title: '选择头像',
+            cancelTitle: '取消',
+            buttons: ['拍照', '相册'],
+            style: {
+                fontNormalColor: '#4cd1a2'
+            }
+        }, function(ret, err) {
+            if (ret) {
+                var sourceTypes = [
+                    'camera',
+                    'album'
+                ];
+                if (ret.buttonIndex == (sourceTypes.length + 1)) {
+                    return;
+                }
+                var userphoto = '';
+                api.getPicture({
+                    sourceType: sourceTypes[ret.buttonIndex - 1],
+                    encodingType: 'jpg',
+                    mediaValue: 'pic',
+                    destinationType: 'url',
+                    allowEdit: true,
+                    quality: 50,
+                    targetWidth: 100,
+                    targetHeight: 100,
+                    saveToPhotoAlbum: false
+                }, function(ret, err) {
+                    if (ret) {
+                        userphoto = ret.data;
+                        if (userphoto != '') {
+                            savetouxiangtoDb(userphoto, token, localuid);
+                        }
+                    } else {
+                        alert(JSON.stringify(err));
+                    }
+                });
+            }
+        });
+    }
+
+    //设置性别
+    function setSex() {
+        api.actionSheet({
+            title: '选择性别',
+            cancelTitle: '取消',
+            buttons: ['男', '女'],
+            style: {
+                fontNormalColor: '#4cd1a2'
+            }
+        }, function(ret, err) {
+            var sex = '';
+            var gender = 0;
+            if (ret.buttonIndex == 1) {
+                sex = '男';
+                gender = 1;
+            } else {
+                sex = '女';
+                gender = 2;
+            }
+            if (gender != 0) {
+                var bodyparam = {
+                    token: token,
+                    data: {
+                        gender: gender
+                    }
+                };
+                api.ajax({
+                    url: 'http://47.92.118.125/user_info/update.php',
+                    method: 'post',
+                    data: {
+                        body: bodyparam
+                    }
+                }, function(ret, err) {
+                    if (ret) {
+                        var sqlstr = 'update t_self_info set sex = "' + sex + '"  where token="' + token + '"';
+                        dbExecuteSql(sqlstr, function(ret) {
+                            if (ret) {
+                                $api.byId('sex').innerHTML = sex;
+                            } else {
+                                //alert(JSON.stringify(err));
+                            }
+                        });
+                    } else {
+                        alert("更新用户性别失败,请再试一次");
+                    }
+                });
+            }
+        });
+
+    }
+</script>
 
 </html>

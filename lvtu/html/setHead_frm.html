@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>setHead_frm</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/cqs-common.css" />
+    <style media="screen">
+        body {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-group {
+            position: absolute;
+            width: 100%;
+            bottom: 0.5rem;
+        }
+
+        .dz-form-group {
+            margin: 0 1rem 1rem 1rem;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #4cd1a2;
+            height: 3.5rem;
+            padding-right: 0;
+        }
+
+        .btn-white:active,
+        .btn-white:visited {
+            background: #eee;
+            color: #4cd1a2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn-group">
+        <div class="dz-form-group text-center">
+            <button class="dz-btn dz-btn-lg btn-white vertical-center" onclick="takePhoto()">拍照</button>
+        </div>
+        <div class="dz-form-group text-center">
+            <button class="dz-btn dz-btn-lg btn-white vertical-center" onclick="selectPhoto()">从相册选择</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        var token = '';
+        var localuid = '';
+        apiready = function() {
+            token = $api.getStorage('token');
+            localuid = $api.getStorage('localuid');
+
+            api.addEventListener({
+                name: 'keyback'
+            }, function(ret, err) {
+                api.closeFrame();
+            });
+
+            // api.addEventListener({
+            //     name: 'tap'
+            // }, function(ret, err) {
+            //     api.closeFrame();
+            // });
+        }
+
+        // 拍照
+        function takePhoto() {
+            var userphoto = '';
+            api.getPicture({
+                sourceType: 'camera',
+                encodingType: 'jpg',
+                mediaValue: 'pic',
+                destinationType: 'url',
+                allowEdit: true,
+                quality: 50,
+                targetWidth: 100,
+                targetHeight: 100,
+                saveToPhotoAlbum: false
+            }, function(ret, err) {
+                if (ret) {
+                    userphoto = ret.data;
+                    if (userphoto != '') {
+                        savetouxiangtoDb(userphoto, token, localuid);
+                    }
+                } else {
+                    // alert(JSON.stringify(err));
+                }
+            });
+        }
+
+        // 从相册选择
+        function selectPhoto() {
+            var userphoto = '';
+            api.getPicture({
+                sourceType: 'album',
+                encodingType: 'jpg',
+                mediaValue: 'pic',
+                destinationType: 'url',
+                allowEdit: true,
+                quality: 50,
+                targetWidth: 100,
+                targetHeight: 100,
+                saveToPhotoAlbum: false
+            }, function(ret, err) {
+                if (ret) {
+                    userphoto = ret.data;
+                    if (userphoto != '') {
+                        savetouxiangtoDb(userphoto, token, localuid);
+                    }
+                } else {
+                    // alert(JSON.stringify(err));
+                }
+            });
+        }
+
+        // 保存头像到数据库
+        function savetouxiangtoDb(userphoto, token, localuid) {
+            /*
+             * 首先存到后台数据库，否则提示出错
+             */
+            api.showProgress({
+                title: '头像上传中...',
+                modal: false
+            });
+            var uploadphtoUlr = '/file';
+            var bodyParam = {
+                file: userphoto
+            }
+            ajaxPhotoRequest(uploadphtoUlr, 'post', userphoto, function(ret, err) {
+
+                if (ret) {
+
+                    var imgurl = ret.url; //获取图片的httpurl地址
+                    var bodyparam = {
+                        token: token,
+                        data: {
+                            userphoto: imgurl
+                        }
+                    };
+                    api.ajax({
+                        url: 'http://47.92.118.125/user_info/update.php',
+                        method: 'post',
+                        data: {
+                            body: bodyparam
+                        }
+                    }, function(ret, err) {
+                        if (ret) {
+                            var sqlstr = 'update t_self_info set userphoto = "' + userphoto + '" where  token="' + token + '"';
+                            dbExecuteSql(sqlstr, function(ret) {
+                                if (ret) {
+                                    var touxiangstr = '<span class="miaoshu">头像</span>';
+                                    touxiangstr += '<input name="imageField" onclick="settouxiang();" type="image" style="width:47.3px;height: 47.3px;" id="imageField" src="' + userphoto + '">';
+
+                                    $api.byId('touxiang').innerHTML = touxiangstr;
+
+                                } else {
+                                    //alert(JSON.stringify(err));
+                                }
+
+                            });
+                        } else {
+                            alert("更改失败，请重新上传");
+                        }
+                    });
+                } else {
+                    alert("头像上传失败，请重新上传");
+                }
+                api.hideProgress();
+            })
+        }
+    </script>
+
+</body>
+
+</html>
