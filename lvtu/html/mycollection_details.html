@@ -26,10 +26,8 @@
     apiready = function() {
         api.parseTapmode();
         var header = $api.dom('header');
-        $api.fixIos7Bar(header);
         $api.fixStatusBar(header);
         var headerPos=$api.offset(header);
-        var body_h=$api.offset($api.dom('body')).h;
         api.openFrame({
           name: 'mycollection_details_frm.html',
           url: 'mycollection_details_frm.html',

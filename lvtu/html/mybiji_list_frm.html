@@ -52,58 +52,136 @@
 </head>
 
 <body>
-  <div class="list">
-    <div class="dot"></div>
-    <div class="date font-bold">2017年9月3日</div>
-    <div class="photo flex-wrap">
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
-      </div>
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
-      </div>
-    </div>
-  </div>
-  <div class="list">
-    <div class="dot"></div>
-    <div class="date font-bold">2017年8月3日</div>
-    <div class="photo flex-wrap">
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
-      </div>
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
+  <div id="v-myBijiList" v-cloak>
+
+    <div class="list">
+      <div class="dot"></div>
+      <div class="date font-bold">2017年9月3日</div>
+      <div class="photo flex-wrap">
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="list">
-    <div class="dot"></div>
-    <div class="date font-bold">2017年7月3日</div>
-    <div class="photo flex-wrap">
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
-      </div>
-      <div class="flex-con">
-        <img src="../image/mytravels/yj.jpg" alt="照片">
+    <div class="list">
+      <div class="dot"></div>
+      <div class="date font-bold">2017年8月3日</div>
+      <div class="photo flex-wrap">
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
       </div>
     </div>
+    <div class="list">
+      <div class="dot"></div>
+      <div class="date font-bold">2017年7月3日</div>
+      <div class="photo flex-wrap">
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+      </div>
+    </div>
+    <div class="list" v-for="item in bijiList" @click="showbiji(item.frag_id,item.status,item.fragid_db)">
+      <div class="dot"></div>
+      <div class="date font-bold">{{item.Addtime}}</div>
+      <div class="photo flex-wrap">
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+        <div class="flex-con">
+          <img src="../image/mytravels/yj.jpg" alt="照片">
+        </div>
+      </div>
+    </div>
+
   </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
 <script type="text/javascript">
+    var app = new Vue({
+        el: '#v-myBijiList',
+        data: {
+            bijiList: null
+        },
+        methods: {
+            showbiji:function(frag_id,type,fragid_db){
+                if(type==1 || type==2){
+                  api.openWin({
+                      name: 'jilucontent',
+                	    url: 'jilucontent.html',
+                	    opaque: true,
+                	    vScrollBarEnabled: false,
+                	    pageParam:{
+                	    	pid:frag_id,
+                	    	type:type,
+                	    	fragid_db:fragid_db
+                	    }
+                    });
+                }
+            }
+        }
+    });
+
     apiready = function() {
-      api.parseTapmode();
-      api.setRefreshHeaderInfo({
-          visible: true,
-          loadingImg: 'widget://image/refresh.png',
-          bgColor: '#ccc',
-          textColor: '#fff',
-          textDown: '下拉刷新...',
-          textUp: '松开刷新...',
-          showTime: true
-      }, function(ret, err){
-          // initHome();
-      });
+        init();
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.closeWin();
+        });
+
+        api.parseTapmode();
+
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err) {
+            init();
+            api.refreshHeaderLoadDone();
+        });
+
+        function init() {
+            var token = $api.getStorage('token');
+            var localuid = $api.getStorage('localuid');
+            var timeout = $api.getStorage('timeout');
+            var curtime = new Date();
+            if ((timeout * 1000 - curtime) < 0) {
+                api.openWin({
+                    name: 'login',
+                    url: 'login.html',
+                    opaque: true,
+                    vScrollBarEnabled: false
+                });
+            }
+            var db = api.require('db');
+            var sqlstr ='select * from t_pianduan_index where (status=1 or status=2) and uid="'+localuid+'" order by AddTime desc';
+            db.selectSql({
+                name: 'ilvtu',
+                sql: sqlstr
+            }, function(ret, err) {
+                if (ret.status) {
+                    app.bijiList=ret.data;
+                } else {
+                    alert(JSON.stringify(err));
+                }
+            });
+        }
     };
 </script>
 

@@ -8,113 +8,251 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" href="../css/common.css">
     <style>
-      html{
-        font-size: 10px;
-      }
-      body{
-        background: #fff;
-      }
-      .list{
-        padding-top: 2rem;
-        margin-left: 2rem;
-      }
-      .title{
-        display: inline-block;
-        font-size: 30px;
-        height: 4.3rem;
-        line-height: 4.3rem;
-      }
-      .dot{
-        display: inline-block;
-        margin-left: -0.3rem;
-        font-size: 30px;
-        color:#56afff;
-      }
-      .date{
-        font-size: 18px;
-        height: 3.6rem;
-        line-height: 3.6rem;
-        border-left:2px solid #56afff;
-        padding-left: 2rem;
-      }
-      .photo{
-        position: relative;
-        padding-top: 2rem;
-        border-left:2px solid #56afff;
-        padding-left: 2rem;
-      }
-      .photo img{
-        display: block;
-        width:90%;
-        border:8px solid #fff;
-        -webkit-box-shadow: 4px 4px 20px #999;
-        box-shadow: 4px 4px 20px #666;
-      }
-      .photo-name{
-        position:absolute;
-        left: 35%;
-        top:40%;
-        transform:translateX(-50%);
-        transform:translateY(-50%);
-        color: #fff;
-        font-size: 2rem;
-      }
-      .photo-date{
-        position:absolute;
-        left: 35%;
-        top:55%;
-        transform:translateX(-50%);
-        transform:translateY(-50%);
-        color: #fff;
-        font-size: 1.8rem;
-      }
+        html {
+            font-size: 10px;
+        }
+        .text-center{
+          text-align: center;
+        }
+        body {
+            background: #fff;
+        }
+
+        .list {
+            padding-top: 2rem;
+            margin-left: 2rem;
+            border-left: 2px solid #4cd1a2;
+        }
+
+        .title {
+            display: inline-block;
+            font-size: 30px;
+            height: 4.3rem;
+            line-height: 4.3rem;
+            padding-left: 2rem;
+        }
+
+        .date {
+            font-size: 18px;
+            height: 3.6rem;
+            line-height: 3.6rem;
+            /*border-left:2px solid #56afff;*/
+            padding-left: 2rem;
+        }
+
+        .photo {
+            position: relative;
+            padding-top: 2rem;
+            /*border-left:2px solid #56afff;*/
+            padding-left: 1.2rem;
+        }
+
+        .dot {
+            display: inline-block;
+            position: absolute;
+            ;
+            bottom: 50%;
+            left: -2.4%;
+            width: 8px;
+            height: 8px;
+            margin-left: -0.2rem;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            background-color: #4cd1a2;
+        }
+
+        .vertical-middle {
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .photo img {
+            display: inline-block;
+            width: 90%;
+            border: 8px solid #fff;
+            -webkit-box-shadow: 4px 4px 20px #999;
+            box-shadow: 4px 4px 20px #666;
+        }
+
+        .photo-name {
+            position: absolute;
+            left: 35%;
+            top: 40%;
+            transform: translateX(-50%);
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .photo-date {
+            position: absolute;
+            left: 35%;
+            top: 55%;
+            transform: translateX(-50%);
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        .collected-icon {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+            background: url(../image/collected.png) no-repeat center center;
+            -webkit-background-size: 24px 24px;
+            background-size: 24px 24px;
+            position: absolute;
+            right: 4rem;
+            top: 3rem;
+        }
+
+        .collected-num {
+            display: inline-block;
+            position: absolute;
+            top: 4.5rem;
+            right: 4rem;
+            font-size: 14px;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-  <div class="list">
-    <div class="title"><span class="dot">. </span> Zermatt</div>
-    <div class="date">九月30 - 十月1，2015</div>
-    <div class="photo">
-      <img src="../image/mytravels/yj.jpg" alt="照片">
-      <div class="photo-name">Story#1</div>
-      <div class="photo-date">2016.10.12</div>
+  <div id="v-myTravels"  v-cloak>
+    <div class="list">
+        <div class="title">Zermatt</div>
+        <div class="date">九月30 - 十月1，2015</div>
+        <div class="photo">
+            <div class="dot"></div>
+            <img src="../image/mytravels/yj.jpg" alt="照片">
+            <div class="photo-name">Story#1</div>
+            <div class="photo-date">2016.10.12</div>
+            <div class="collected-icon"></div>
+            <div class="collected-num">0</div>
+        </div>
     </div>
-  </div>
-  <div class="list">
-    <div class="title"><span class="dot">. </span> 张北，张家口</div>
-    <div class="date">九月10 - 九月15，2015</div>
-    <div class="photo">
-      <img src="../image/mytravels/yj.jpg" alt="照片">
-      <div class="photo-name">Story#2</div>
-      <div class="photo-date">2016.10.12</div>
+    <div class="list">
+        <div class="title">张北，张家口</div>
+        <div class="date">九月10 - 九月15，2015</div>
+        <div class="photo">
+            <div class="dot"></div>
+            <img src="../image/mytravels/yj.jpg" alt="照片">
+            <div class="photo-name">Story#2</div>
+            <div class="photo-date">2016.10.12</div>
+            <div class="collected-icon"></div>
+            <div class="collected-num">0</div>
+        </div>
     </div>
-  </div>
-  <div class="list">
-    <div class="title"><span class="dot">. </span> Zermatt</div>
-    <div class="date">九月30 - 十月1，2015</div>
-    <div class="photo">
-      <img src="../image/mytravels/yj.jpg" alt="照片">
-      <div class="photo-name">Story#1</div>
-      <div class="photo-date">2016.10.12</div>
+    <div class="list">
+        <div class="title">Zermatt</div>
+        <div class="date">九月30 - 十月1，2015</div>
+        <div class="photo">
+            <div class="dot"></div>
+            <img src="../image/mytravels/yj.jpg" alt="照片">
+            <div class="photo-name">Story#1</div>
+            <div class="photo-date">2016.10.12</div>
+            <div class="collected-icon"></div>
+            <div class="collected-num">0</div>
+        </div>
+    </div>
+    <div class="list" v-for="item in travelList" @click="showyouji(item.yj_id, item.status, item.yjid_db)" tapmode>
+        <div class="title">{{item.title}}</div>
+        <div class="date">{{item.startdate}} - {{item.enddate}}</div>
+        <div class="photo">
+            <div class="dot"></div>
+            <img src="../image/myyouji/yj.jpg" alt="照片" v-show="!item.coverimage">
+            <img src="item.coverimage" alt="照片">
+            <div class="photo-name">Story#1</div>
+            <div class="photo-date">2016.10.12</div>
+            <div class="collected-icon"></div>
+            <div class="collected-num">0</div>
+        </div>
+    </div>
+    <div class="list text-center" v-show="!travelList">
+        当前暂无游记~
     </div>
   </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
 <script type="text/javascript">
+    var app = new Vue({
+        el: '#v-myTravels',
+        data: {
+            travelList: null
+        },
+        methods: {
+            showyouji:function(yid, type, yjid_db){
+                if(type==0 || type==2){
+                  api.openWin({
+                      name: 'yj',
+                      url: 'yj.html',
+                      opaque: true,
+                      vScrollBarEnabled: false,
+                      pageParam: {
+                          yid: yid,
+                          type: type, //0草稿, 2 保存的
+                          yjid: yjid_db
+                      }
+                  });
+                }
+            }
+        }
+    });
+
     apiready = function() {
-      api.parseTapmode();
-      api.setRefreshHeaderInfo({
-          visible: true,
-          loadingImg: 'widget://image/refresh.png',
-          bgColor: '#ccc',
-          textColor: '#fff',
-          textDown: '下拉刷新...',
-          textUp: '松开刷新...',
-          showTime: true
-      }, function(ret, err){
-          // initHome();
-      });
+        init();
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.closeWin();
+        });
+
+        api.parseTapmode();
+
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err) {
+            init();
+            api.refreshHeaderLoadDone();
+        });
+
+        function init() {
+            var token = $api.getStorage('token');
+            var localuid = $api.getStorage('localuid');
+            var timeout = $api.getStorage('timeout');
+            var curtime = new Date();
+            if ((timeout * 1000 - curtime) < 0) {
+                api.openWin({
+                    name: 'login',
+                    url: 'login.html',
+                    opaque: true,
+                    vScrollBarEnabled: false
+                });
+            }
+            var db = api.require('db');
+            var sqlstr = 'select * from t_youji_index  where (status=0 or status=2) and uid="' + localuid + '"';
+            db.selectSql({
+                name: 'ilvtu',
+                sql: sqlstr
+            }, function(ret, err) {
+                if (ret.status) {
+                    app.travelList=ret.data;
+                } else {
+                    alert(JSON.stringify(err));
+                }
+            });
+        }
     };
 </script>
 

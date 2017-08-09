@@ -15,7 +15,6 @@
         <header>
             <a tapmode="hover" onclick="api.closeWin();" class="back-icon"></a>
             <h1>我的笔记</h1>
-            <a tapmode="hover" onclick="" class="user-icon"></a>
         </header>
 
         <div id="main" class="flex-con">
@@ -28,10 +27,8 @@
     apiready = function() {
         api.parseTapmode();
         var header = $api.dom('header');
-        $api.fixIos7Bar(header);
         $api.fixStatusBar(header);
         var headerPos=$api.offset(header);
-        var body_h=$api.offset($api.dom('body')).h;
         api.openFrame({
           name: 'mybiji_list_frm',
           url: 'mybiji_list_frm.html',

@@ -7,158 +7,145 @@
     <title>游记</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" href="../css/cqs-common.css">
-    <style>
-      .cover{
-        position: relative;
-        margin-bottom: 0.75rem;
-        text-align: center;
-      }
-      .cover img{
-        display: block;
-        width: 100%;
-      }
-      .back-icon{
-        position: absolute;
-        top:0.5rem;
-        left:0.5rem;
-      }
-      .collect-icon{
-        position: absolute;
-        top:0.5rem;
-        right:0.5rem;
-      }
-      .yj_title{
-        position: absolute;;
-        bottom:9rem;
-        font-size: 20px;
-        color: #fff;
-      }
-      .head{
-        position: absolute;;
-        bottom: 6rem;
-        width: 2rem;
-        height: 2rem;
-        text-align: center;
-      }
-      .head img{
-        display: block;
-        width: 100%;
-        border:1px solid #fff;
-        border-radius: 50%;
-      }
-      .nickname{
-        position: absolute;;
-        bottom: 4rem;
-        color: #fff;
-        font-size: 16px;
-      }
-    .yj_desc{
-      margin: 0 1.2rem;
+    <style media="screen">
+    header{
+      background-color: rgba(0, 0, 0, 0)!important;
     }
-    .map{
-      position: relative;
-      margin: 0.75rem 0;
+    .collect-icon, .collected-icon{
+      right:2.5rem;
     }
-    .map img{
-      display: block;
+    .more-icon{
+        display: inline-block; width: 44px; height: 44px;line-height: 44px;
+        background: url(../image/more.png) no-repeat center center;
+        -webkit-background-size: 20px 20px;
+        background-size: 20px 20px;
+        position: absolute; right: 0; bottom: 0;
+    }
+    footer{
+      position: absolute;
+      left:0;
+      bottom: 0;
       width: 100%;
+      height: 40px;
+      background-color: #000;
+      color:#fff;
     }
-    .list{
-      position: relative;
-      margin: 0.8rem 0.75rem 0 0.75rem;
-    }
-    .dot{
+    footer a{
       display: inline-block;
-      width:1.5rem;
-      height: 1.5rem;
-      background-color: #7ba647;
-      border-radius: 50%;
-    }
-    .photo_title{
-      display: inline-block;
-    }
-    .day{
-      position: relative;
-      margin-left: 0.75rem;
-      color:  #7ba647;
-      font-size: 20px;
-    }
-    .date{
-      color:  #7ba647;
+      width: 19%;
+      height: 40px;
+      line-height: 40px;
       font-size: 18px;
-      margin-left: 0.75rem;
-    }
-    .photo{
-      display: block;
-      position: relative;
-      margin: 0.75rem 0;
-      padding: 0.75rem;
-    }
-    .photo img{
-      display: block;
-      width: 100%;
-    }
-    .photo_desc{
-      margin-top: 0.75rem;
+      color: #fff;
+      text-align: center;
     }
     </style>
 </head>
 
 <body>
-  <div class="cover">
-    <img src="../image/yj/cover.gif" alt="cover">
-    <a tapmode="hover" onclick="" class="back-icon"></a>
-    <a tapmode="hover" onclick="" class="collect-icon"></a>
-    <div class="yj_title vertical-center">迷人古建筑</div>
-    <div class="head vertical-center">
-      <img src="../image/yj/touxiang@3x.png" alt="">
+    <div id="wrap" class="flex-wrap flex-vertical">
+        <header>
+            <a tapmode="hover" onclick="api.closeWin();" class="back-icon"></a>
+            <a tapmode="hover" onclick="toggleCollect()" class="collect-icon" id="collectBtn"></a>
+            <a tapmode="hover" onclick="" class="more-icon"></a>
+        </header>
+
+        <div id="main" class="flex-con"></div>
+
+        <footer>
+          <a href="#" tapmode="hover">S</a>
+          <a href="#" tapmode="hover">D1</a>
+          <a href="#" tapmode="hover">D2</a>
+          <a href="#" tapmode="hover">D3</a>
+          <a href="#" tapmode="hover">E</a>
+        </footer>
     </div>
-    <div class="nickname vertical-center">迷人的男子</div>
-  </div>
-  <div class="yj_desc">迷人游记迷人的游记迷人的游记迷人游记迷人的游记迷人的游记迷人游记迷人的游记迷人的人游记迷人的游记迷人的游记</div>
-  <div class="map">
-    <img src="../image/yj/map.gif" alt="">
-  </div>
-  <div class="list">
-    <div class="dot"></div>
-    <div class="photo_title">
-      <div class="day font-bold">DAY 1</div>
-      <div class="date">2017.08.04</div>
-    </div>
-    <div class="photo">
-      <img src="../image/yj/photo.gif" alt="">
-      <div class="photo_desc">迷人的照片迷人的照片迷人的照片迷人的照片</div>
-    </div>
-  </div>
-  <div class="list">
-    <div class="dot"></div>
-    <div class="photo_title">
-      <div class="day font-bold">DAY 2</div>
-      <div class="date">2017.08.05</div>
-    </div>
-    <div class="photo">
-      <img src="../image/yj/photo.gif" alt="">
-      <div class="photo_desc">迷人的照片迷人的照片迷人的照片迷人的照片</div>
-    </div>
-  </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
-<script type="text/javascript" src="../script/yj.js"></script>
 <script type="text/javascript">
     apiready = function() {
-      api.parseTapmode();
-      api.setRefreshHeaderInfo({
-          visible: true,
-          loadingImg: 'widget://image/refresh.png',
-          bgColor: '#ccc',
-          textColor: '#fff',
-          textDown: '下拉刷新...',
-          textUp: '松开刷新...',
-          showTime: true
-      }, function(ret, err){
-          // initHome();
-      });
+        api.parseTapmode();
+        var header = $api.dom('header');
+        $api.fixStatusBar(header);
+        var headerPos=$api.offset(header);
+        var footer=$api.dom('footer');
+        var footerPos=$api.offset(footer);
+        api.openFrame({
+          name: 'yj_frm',
+          url: 'yj_frm.html',
+          bounces: true,
+          rect: {
+              x: 0,
+              y: headerPos.h,
+              w: 'auto',
+              h: api.winHeight - headerPos.h - footerPos.h
+          }
+        })
     };
+
+    function toggleCollect(){
+      var uid = $api.getStorage('uid');
+      //login
+      if (!uid) {
+          api.openWin({
+              name: 'userLogin',
+              url: './userLogin.html',
+              opaque: true,
+              vScrollBarEnabled: false
+          });
+          return;
+      }
+      var collectBtn=$api.byId('collectBtn');
+      var collectStatus=api.pageParam.collectStatus;
+      if(collectStatus==0){//未收藏则添加收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    yj_id: api.pageParam.yj_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collect-icon');
+              $api.addCls(collectBtn, 'collected-icon');
+              api.toast({
+                  msg: '收藏成功'
+              })
+            } else {
+              api.toast({
+                  msg: '收藏失败'
+              })
+            }
+        });
+
+      }else{//已收藏则取消收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    record_id: api.pageParam.yj_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collected-icon');
+              $api.addCls(collectBtn, 'collect-icon');
+              api.toast({
+                  msg: '取消收藏'
+              })
+            } else {
+              api.toast({
+                  msg: '操作失败'
+              })
+            }
+        });
+      }
+    }
 </script>
 
 </html>
