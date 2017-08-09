@@ -430,7 +430,6 @@ function showRecords(daycontent) {
 		timeInterval: 2.0
     },function(ret,err){
     		if(ret.eventType=="click"){
-
     		}
     });*/
 }

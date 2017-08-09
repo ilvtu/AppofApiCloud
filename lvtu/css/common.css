@@ -9,7 +9,7 @@ body{
 }
 #header .back-icon{
     display: inline-block; width: 40px; height: 40px;
-    background: url(../image/fanhui@3x.png) no-repeat center center;
+    background: url(../image/arr-l.png) no-repeat center center; 
     -webkit-background-size: 14px 18px;
     background-size: 14px 18px;
     position: absolute; left: 0; bottom: 0;
@@ -20,15 +20,15 @@ body{
 }
 #header .main h1, #header .travel h1, #header .life h1, #header .notice h1{
     background:  no-repeat center center;
-    -webkit-background-size: 100px 25px;
-    background-size: 100px 25px;
+    -webkit-background-size: 100px 25px; 
+    background-size: 100px 25px; 
     font-size: 20px;
 }
 #header .travel .submenu li, #header .notice .submenu li{
     height: 40px; line-height: 40px;
 }
 #header .travel .submenu li a, #header .notice .submenu li a{
-    display: block; text-align: center;
+    display: block; text-align: center; 
     background: url(../image/border.png) no-repeat right center;
     -webkit-background-size: 2px 36px;
     background-size: 2px 36px;
@@ -41,8 +41,8 @@ body{
 }
 #header .travel .submenu a i, #header .notice .submenu a i{
     display: inline-block; width: 16px; height: 16px;
-    -webkit-background-size: contain !important;
-    background-size: contain !important;
+    -webkit-background-size: contain !important; 
+    background-size: contain !important; 
     margin-right: .5em; vertical-align: text-bottom;
 
 }
@@ -99,7 +99,7 @@ body{
 }
 
 #nav{
-    background-color: #404040; border-top:2px solid #7a7a7a;
+    background-color: #404040; border-top:2px solid #7a7a7a; 
     width: 100%;
     text-align: center;
 }
@@ -112,7 +112,7 @@ body{
 }
 #nav li.active a, #nav a.active{
     color: #55abce;
-}
+} 
 #nav .main{
     background: url(../image/home.png) no-repeat center 4px;
 }
