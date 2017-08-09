@@ -1,3 +1,11 @@
+   function back() {	
+ 	setTimeout(function () {    
+       api.closeWin();      
+    }, 100);
+    
+}
+  
+  
   var token='';		//所有uid对应是返回的token
   var localuid='';
   apiready = function(){

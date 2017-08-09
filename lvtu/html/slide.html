@@ -50,23 +50,24 @@
 			background-color: #242f33;
 			height: 155.3px;
 			margin-top:436.7px;
-			}
-			footer input{
-        	padding-right:0px;
-        	}
-			.bianjineirong{
-			
+		}
+		footer input{
+    		padding-right:0px;
+    	}
+		.bianjineirong{
+		
 			position:relative;
 			margin-left: 34px;
 			margin-top: 40px;
-						}
-			.start{	
-				}
-			 .zou{
+		}
+		.start{	
+			margin-top:10px;
+		}
+		 .zou{
 			 position:relative;
 			margin-top:40px;
 			margin-right:34px;
-			}
+		}
       </style>
 
   </head>
@@ -84,13 +85,16 @@
        </div>
 </header>
 
-  <footer>
+  <footer id="footer">
+  		
         <div class="bianjineirong" onclick="bianji();">
 		    <input name="imageField" type="image" id="imageField" style="width:88.2px;height: 88.2px;" src="../image/slide/bianjineirong@3x.png">
         </div>
-        <div class="start" id="startbtn" ontouchstart="gtouchstart(this)"  ontouchend="gtouchend()">
-		    <input name="imageField" type="image" id="imageField" style="width:74.7px;height: 54.7px;" src="../image/slide/start@3x.png">
+        <div class="start" id="startbtn" ontouchstart="gtouchstart(this);"  ontouchend="gtouchend();" onclick="showfullscreen();" >
+		    <input name="imageField" type="image" id="imageField" style="width:50px;height: 30px;" src="../image/slide/down.png">
         </div>
+        <!--width:74.7px;height: 54.7px
+        !-->
       <div class="zou" onclick="zou();">
 		    <input name="imageField" type="image" id="imageField" style="width:88.2px;height: 88.2px;" src="../image/slide/zou@3x.png">
         </div>

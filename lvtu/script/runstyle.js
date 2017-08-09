@@ -58,7 +58,7 @@ apiready = function(){
 			init();
 	    });
 	   
-	    //init(); 
+	    init(); 
 	   
   };
 
@@ -362,14 +362,14 @@ function paizhao(){
 		}, function(ret, err) {
 		    if (ret) {	    	
 		    	var picurl = ret.data;
-		    	getlocation(function(recpoint){
+		    	getlocation(function(recpoint,altitude){
 	    			if(recpoint!=null){
 	    				
-	    				saveimg(picurl,recpoint);
+	    				saveimg(picurl,recpoint,altitude);
 	    			}
 	    			else{
 	    				
-		    			saveimg(picurl,null);
+		    			saveimg(picurl,null,altitude);
 	    			}
 		    	});
 		    	
@@ -383,7 +383,7 @@ function paizhao(){
 /*
  * 存入手机本地sqlite
  */
-function saveimg(imgurl,recpoint){	
+function saveimg(imgurl,recpoint,altitude){	
 	var curlng='';
 	var curlat='';
 	if($api.strToJson(recpoint)!=null && $api.strToJson(recpoint).lng!=null && $api.strToJson(recpoint).lat!=null ){
@@ -405,8 +405,8 @@ function saveimg(imgurl,recpoint){
         		
 				//alert(JSON.stringify(imgurl));	    
 			    var serial_no=0;
-				var addnewImgstr ='insert into t_pianduan(_id,frag_id,link_url,text_note,lng,lat,serial_no,timestamp,uid)' ;
-				addnewImgstr+= ' values(null,'+curPianduanId+",'"+imgurl+"','',"+curlng+','+curlat+","+ newserial_no+",'"+newdate +"','"+localuid+"')";	
+				var addnewImgstr ='insert into t_pianduan(_id,frag_id,link_url,text_note,lng,lat,serial_no,altitude,timestamp,uid)' ;
+				addnewImgstr+= ' values(null,'+curPianduanId+",'"+imgurl+"','',"+curlng+','+curlat+","+ newserial_no+",'"+altitude+"','"+newdate +"','"+localuid+"')";	
 				db.executeSql({
 				    name: 'ilvtu',
 				    sql: addnewImgstr
@@ -472,16 +472,21 @@ function getlocation(callback){
 		    if (ret.status) {
 		 		if(ret.lon >0){		 			 				
 		 			var recpoint ='{"lat":"'+ ret.lat+'","lng":"'+ret.lon+'"}';	
-		 			callback&&callback(recpoint);	
-					//$api.setStorage('newphotorecpoint',recpoint);  
+		 			if(ret.altitude!=null){
+			 			callback&&callback(recpoint,ret.altitude);	
+						//$api.setStorage('newphotorecpoint',recpoint); 
+					} 
+					else{
+						callback&&callback(recpoint,null);	
+					}
 		 		}
 		 		else{
-		 			callback&&callback(null);
+		 			callback&&callback(null,null);
 		 			//$api.setStorage('newphotorecpoint',null);
 		 		}
 		    } 
 		    else {
-		    	callback&&callback(null);
+		    	callback&&callback(null,null);
 		    	//$api.setStorage('newphotorecpoint',null);
 		        //alert(JSON.stringify(err));
 		    }
