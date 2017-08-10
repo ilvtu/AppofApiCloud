@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>收藏详情frame</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/cqs-common.css">
+    <style>
+        body {
+            background-color: #fff;
+        }
+
+        .content {
+            position: relative;
+            margin: 10px;
+        }
+
+        .head {
+            position: absolute;
+        }
+
+        .head img {
+            border-radius: 50%;
+            width: 3rem;
+        }
+
+        .name {
+            position: absolute;
+            left: 3.5rem;
+        }
+
+        .date {
+            position: absolute;
+            left: 3.5rem;
+            top: 1.75rem;
+        }
+
+        .follow {
+            position: absolute;
+            right: 0;
+            top: 1rem;
+        }
+
+        .follow a {
+            width: 3rem;
+            height: 1.5rem;
+            color: #e91d64;
+            border: 1.5px solid #e91d64;
+            border-radius: 5px;
+            padding: 0.3rem 0.5rem;
+        }
+
+        .photo {
+            position: relative;
+            top: 5rem;
+            -webkit-box-shadow: 2px 2px 5px #999;
+            box-shadow: 2px 2px 5px #999;
+        }
+
+        .photo img {
+            width: 100%;
+            border: 2px solid #fff;
+        }
+
+        .collect-icon,
+        .collected-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .tag {
+            display: block;
+            position: relative;
+            left: 0.5rem;
+            top: 2.5rem;
+        }
+
+        .tag img {
+            width: 4rem;
+        }
+
+        .title {
+            position: relative;
+            left: 0.75rem;
+            top: 3rem;
+            font-size: 18px;
+        }
+
+        .show-icon {
+            display: block;
+            position: relative;
+            float: right;
+            top: 4rem;
+            width: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            background: url(../image/mycollection/show.gif) no-repeat center center;
+            -webkit-background-size: 4rem 4rem;
+            background-size: 4rem 4rem;
+        }
+
+        .show img {
+            width: 4rem;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body class="flex-wrap flex-vertical">
+    <div class="flex-con content">
+        <div class="top">
+            <div class="head">
+                <img src="../image/mycollection/head1.gif" alt="">
+            </div>
+            <div class="name font-bold">吕苏恩</div>
+            <div class="date color-666">10-01 11：28</div>
+            <div class="follow">
+                <a onclick="">+ 关注</a>
+            </div>
+        </div>
+        <div class="photo">
+            <img src="../image/mycollection/photo1.gif" alt="">
+            <div id="collectBtn" class="collect-icon" tapmode="hover" onclick="toggleCollect()"></div>
+        </div>
+        <div class="tag">
+            <img src="../image/mycollection/tag.png" alt="">
+        </div>
+        <div class="title font-bold">让自己拥有一个充满小确幸的婚礼吧！</div>
+        <a class="show-icon" onclick="" tapmode="hover"></a>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+    };
+
+    function toggleCollect(){
+      var uid = $api.getStorage('uid');
+      //login
+      if (!uid) {
+          api.openWin({
+              name: 'userLogin',
+              url: './userLogin.html',
+              opaque: true,
+              vScrollBarEnabled: false
+          });
+          return;
+      }
+      var collectBtn=$api.byId('collectBtn');
+      var collectStatus=api.pageParam.collectStatus;
+      if(collectStatus==0){//未收藏，添加收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    record_id: api.pageParam.record_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collect-icon');
+              $api.addCls(collectBtn, 'collected-icon');
+              api.toast({
+                  msg: '收藏成功'
+              })
+            } else {
+              api.toast({
+                  msg: '收藏失败'
+              })
+            }
+        });
+
+      }else{//已收藏，取消收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    record_id: api.pageParam.record_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collected-icon');
+              $api.addCls(collectBtn, 'collect-icon');
+              api.toast({
+                  msg: '取消收藏'
+              })
+            } else {
+              api.toast({
+                  msg: '操作失败'
+              })
+            }
+        });
+      }
+    }
+</script>
+</html>

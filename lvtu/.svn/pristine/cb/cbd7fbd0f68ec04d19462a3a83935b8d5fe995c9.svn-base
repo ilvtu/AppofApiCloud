@@ -1,0 +1,276 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .save{	
+			margin-top:12.7px;			
+			padding-right:30px;
+			width:22.3px;
+		}
+		
+		
+		.date{
+			width:99%;
+			height:56.7px;
+			 border-width: 1px;
+		 	border-style:double;
+			 border-color:#F0F0F0;		
+			 
+			
+			 
+			 }
+		
+		.date .date-start{
+			float:left;
+			margin-left:45.3px;
+			margin-top:18.3px;
+			color:#01d39f;
+			font-size:20px;
+		}
+		
+		
+		.date  input{
+			padding-right:0px;
+			
+		}
+		.date .date-year {
+			position:absolute;
+			margin-top:10px;
+			margin-left:74px;
+			color:#999999;
+			font-size:24px;
+		}
+		
+		.date .date-tag{
+			margin-left:90px;		
+			margin-top:34.3px;
+		}
+		
+		
+		
+		
+		.date .date-end{
+			float:right;
+			margin-right:45.3px;
+			margin-top:18.3px;
+			color:#01d39f;
+			font-size:20px;
+		}
+		
+		
+		.yjcover {
+			height:115px;
+		}
+		
+		.yjcover input{
+			padding-right:0px;
+		
+		}
+		
+		.yjcover .covertag{
+			position:absolute;
+			left:0px;
+		}
+		
+		.yjcover .coverimg{
+			margin-left:16px;
+			margin-top:20.7px;
+		}
+		.yjcover .yjtitle{
+			position:absolute;
+			font-size:15px;
+			margin-left:10px;
+			margin-top:27.3px;
+			
+			color:#333333;
+		}
+		
+		.yjcover .yjinfo{
+			position:absolute;
+			font-size:15px;
+			margin-left:10px;
+			margin-top:47px;
+		
+			color:#999999;
+		}
+		
+		.imglist {
+			height:auto;
+			background:#F0F0F0;
+			
+				
+		}
+		.imglist .addtag{
+			height:46.7px;
+			text-align:center;
+			padding-top:9px;
+			border-width: 1px;
+		 	border-style:double;
+			 border-color:#F0F0F0;		
+			 background:white;
+		}
+		.imglist .addtag input{
+			padding-right:0px;
+		}
+		.imglist .content{
+			height:115.3px;
+			border-width: 1px;
+		 	border-style:double;
+			 border-color:#F0F0F0;		
+			 margin-bottom:9px;	
+			 background:white;
+		}
+		
+		.imglist .content input{
+			padding-right:0px;
+		}
+		.imglist .content .tupian{
+			margin-left:16px;
+			margin-top:20px;
+		}
+		
+		.imglist .content .wenzi{
+	
+			height:60.7px;
+			max-width:150px;
+			margin-left:15.3px;
+			padding:0px;
+			margin-top:27.3px;
+			text-align:left;
+		}
+		
+		.imglist .content .shanchu{
+			float:right;
+			max-width:30px;
+			margin-right:16px;
+			margin-top:27.3px;
+		}
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			}
+			footer input{
+        	padding-right:0px;
+        	}
+			
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+		<div class="back" onclick="back();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/edityj/fanhui@3x.png">
+	       </div>
+	     <div class="hcenter"></div>
+	     <div class="save" onclick="saveYouji();">
+	             <input name="imageField" type="image" style="width:24.7px;height: 20px;" id="imageField" src="../image/edityj/fabu@3x.png">
+	       </div>
+       </div>
+</header>
+<div class="date" id="date">
+	<span class="date-start">04/24</span>
+	
+	<span class="date-year">2017</span>	
+	<input class="date-tag" name="imageField" type="image" style="width:24px;height: 12px;" id="imageField" src="../image/edityj/zuoyoushijian@3x.png">
+
+	<span class="date-end">04/28</span>
+</div>
+<div class="yjcover" id="yjcover">
+	<input class="covertag" name="imageField" type="image" style="width:52.7px;height: 52.7px;" id="imageField" src="../image/edityj/fengmian@3x.png">
+	<input class="coverimg" name="imageField" type="image" style="width:74.3px;height: 74.3px;" id="imageField" src="../image/edityj/fengmianmorentu@3x.png">
+	       
+	<span class="yjtitle">标题</span>
+	<span class="yjinfo">输入内容</span>
+</div>
+
+<div class="imglist" id="imglist">
+	<div class="addtag">
+		<input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+	     
+	</div>
+	<div class="content">
+		<input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+	   
+	    <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+	    <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/shanchu@3x.png">
+	   
+	</div>
+	
+	<div class="addtag">
+		<input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+	     
+	</div>
+	<div class="content">
+		<input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+	   
+	    <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+	    <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/shanchu@3x.png">
+	   
+	</div>
+	
+	<div class="addtag">
+		<input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+	     
+	</div>
+	<div class="content">
+		<input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="../image/edityj/zhengwentupian@3x.png">
+	   
+	    <textarea class="wenzi">5月9日，我在西双版纳</textarea>
+	    <input name="imageField" class="shanchu" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/shanchu@3x.png">
+	   
+	</div>
+	<div class="addtag">
+		<input name="imageField" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">
+	     
+	</div>
+</div>
+
+  <footer>
+        
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/edityj.js"></script>
+
+  </html>

@@ -13,6 +13,7 @@ apiready = function () {
 	//showUserInfo(token,localuid);
 	//getbackground();
 	/*
+
  	api.setRefreshHeaderInfo({
         visible: true,
         // loadingImgae: 'wgt://image/refresh-white.png',
@@ -377,7 +378,6 @@ function showfeedback(){
 	    vScrollBarEnabled: false	  
     });
 }
-
 
 function changecover(){
 	token = $api.getStorage('token');

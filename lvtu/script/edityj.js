@@ -2,7 +2,6 @@
  	setTimeout(function () {    
        api.closeWin();      
     }, 100);
-    
 }
 var token='';
 var localuid='';
@@ -15,20 +14,18 @@ var insertserial_no=0;
 apiready = function(){
 	yid= api.pageParam.yid;
 	$api.setStorage('yid',yid);
-	
-	
-	
-	var header = $api.dom('.header');
-	$api.fixIos7Bar(header);
-    $api.fixStatusBar(header);
-    
+
+	// var header = $api.dom('.header');
+	// $api.fixIos7Bar(header);
+  //   $api.fixStatusBar(header);
+
     api.addEventListener({
         name: 'keyback'
     }, function(ret, err){
-    	
-    	api.closeWin();    	
+
+    	api.closeWin();
     });
-    
+
     api.addEventListener({
 		    name:'exifDone'
 	    },function(ret){
@@ -43,12 +40,10 @@ apiready = function(){
 	    	    }
 	    	    else{
 	    	    	var newphotos =g_data;
-	    	    	
 	    	    	//首先修改已有片段的排序号
 		    		var addnum = newphotos.length;
 					var db = api.require('db');
 					var tmpstr ='update t_youji set serial_no=serial_no+'+addnum+' where serial_no in(SELECT serial_no FROM Youji  WHERE serial_no >= '+insertserial_no+')';
-		    		
 		    		db.executeSql({
 					    name: 'ilvtu',
 					    sql:  tmpstr
@@ -61,12 +56,7 @@ apiready = function(){
 							alert(JSON.stringify(err));
 						 }
 					 });
-	    	    	
-	    	    	
-	    	    	
-	    	    	
-	    	    	
-	    	    	
+	      	    	
 	    	    }
 	    	}
 	    });
@@ -89,7 +79,6 @@ function init(){
 	        opaque: true,
 	        vScrollBarEnabled: false
 	    });
-		 
 	}
 
 
@@ -101,8 +90,7 @@ function init(){
 		db.selectSql({
 		    name: 'ilvtu',
 		    sql: sqlstr
-		}, function(ret, err) {
-		
+		}, function(ret, err) {	
 			if(ret.status){
 				var datestr='';
 				if(ret.data!=null && ret.data[0]!=null ){	
@@ -126,20 +114,18 @@ function init(){
 				    
 				    
 				    var coverstr='<input class="covertag" name="imageField" type="image" style="width:52.7px;height: 52.7px;" id="imageField" src="../image/edityj/fengmian@3x.png">';
-					
 				    var coverimgurl="../image/edityj/fengmianmorentu@3x.png";
 				    if(ret.data[0].coverimage!=null && ret.data[0].coverimage!=''){
 				    	coverimgurl=ret.data[0].coverimage;
 				    }
 				    
 				    coverstr+='<input class="coverimg" onclick="altercover('+"'"+yid+"'"+')" name="imageField" type="image" style="width:74.3px;height: 74.3px;" id="imageField" src="'+coverimgurl+'">';
-					       
+				
 					coverstr+='<span class="yjtitle" onclick="altercover('+"'"+yid+"'"+')" >'+ret.data[0].title+'</span>';
 					coverstr+='<span class="yjinfo" onclick="altercover('+"'"+yid+"'"+')">'+ret.data[0].yjinfo+'</span>';
 					$api.byId('yjcover').innerHTML=coverstr;
 				    //载入照片
 				    loadphotos(yid);
-				    
 				}
 				else{
 					$api.byId('yjcover').innerHTML=datestr;
@@ -167,7 +153,6 @@ function altercover(yid){
 
 //读取游记内容
 function loadphotos(yid){
-	
 	var db = api.require('db');
 	var sqlstr ='select * from t_youji where yj_id='+ yid;
 		db.selectSql({
@@ -184,7 +169,6 @@ function loadphotos(yid){
 						imgliststr +='<div class="addtag">';
 						imgliststr +='<input name="imageField" onclick="addnewrecord('+"'"+photos[id].serial_no+"'"+');" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">';
 					    imgliststr +='</div>';
-					    
 						imgliststr +='<div class="content">';
 						imgliststr +='<input name="imageField" class="tupian" type="image" style="width:75.3px;height: 75.3px;" id="imageField" src="'+ photos[id].link_url+'">';
 						imgliststr +='<textarea class="wenzi" onclick="addrecordinfo('+"'"+photos[id]._id+"','"+ photos[id].text_note +"','"+photos[id].link_url+"'"+');">'+photos[id].text_note+'</textarea>';
@@ -196,7 +180,6 @@ function loadphotos(yid){
 					
 					imgliststr +='<div class="addtag">';
 					imgliststr +='<input name="imageField" onclick="addnewrecord(-1);" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">';
-					     
 					imgliststr +='</div>';
 					$api.byId('imglist').innerHTML=imgliststr;
 				}
@@ -204,7 +187,6 @@ function loadphotos(yid){
 					var imgliststr = '';
 					imgliststr +='<div class="addtag">';
 					imgliststr +='<input name="imageField" onclick="addnewrecord(0);" type="image" style="width:29.3px;height: 29.3px;" id="imageField" src="../image/edityj/tianjia@3x.png">';
-					     
 					imgliststr +='</div>';
 					$api.byId('imglist').innerHTML=imgliststr;
 				}
@@ -213,7 +195,6 @@ function loadphotos(yid){
 				readyoujierr();
 			}
 		});
-		
 }
 
 
@@ -247,7 +228,6 @@ function getDateFromTime(curtime){
  */
 function addnewrecord(serial_no){
 	//curPianduanId= $api.getStorage('curPianduanId');
-	
 	//根据插入位置不同
 	switch(serial_no){
 		case 0:
@@ -264,8 +244,7 @@ function addnewrecord(serial_no){
 	        	var newserial_no = ret.data[0].c*1.0+1;
 	        	insertserial_no= newserial_no;
 	        	//coding...
-	        	if(ret.status){
-	        		    
+	        	if(ret.status){	        		    
 				    getnewImgsInfo(newserial_no);
 	        	}
 	        	else{            	
@@ -347,7 +326,6 @@ function getnewImgsInfo(newserial_no){
     		
              for(var i = 0, total = ret.list.length;i<total;++i){    		
 		        if('jpg' == ret.list[i].suffix || 'png' == ret.list[i].suffix) {
-		        	
 		            var attrJson = {};
 		            attrJson.time = ret.list[i].time;
 		            attrJson.path = ret.list[i].path;
@@ -362,8 +340,6 @@ function getnewImgsInfo(newserial_no){
 		   
 		    getGPSInfo(g_data[0].path);
     		
-    		
-    	
     	}
     	else{
     	    //api.alert({msg:err.msg});
@@ -402,11 +378,9 @@ function addImglist(newphotos,yid){
 	var i=0;
 	var j=0;
 	for(var id in newphotos){
-		
 		var db = api.require('db');
 		var addnewImgstr ='insert into t_youji(_id,yj_id,link_url,text_note,lng,lat,serial_no,timestamp)' ;
 		addnewImgstr+= ' values(null,'+yid+",'"+newphotos[id].path+"','',"+newphotos[id].lng+','+newphotos[id].lat+","+ newphotos[id].serial_no+",'"+newphotos[id].time +"')";	
-	
 		db.executeSql({
 	        name:'ilvtu',
 	        sql:addnewImgstr
@@ -453,7 +427,6 @@ function delcurrecord(_id){
 		 	init();
 		 }
 	 });
-	
 }
 
 /*
@@ -485,7 +458,6 @@ function saveYouji(){
 	    sql:'select * from t_youji_index where yj_id='+curyid
     },function(ret,err){
     	//coding...
-    	
     	if(ret.status){
     		if(ret.data[0]!=null && ret.data[0]!=''){
     			//var userid=11
@@ -508,8 +480,6 @@ function saveYouji(){
 					//status:status,
 					citys:null
 				}
-				
-				
     			db.selectSql({
 				    name:'ilvtu',
 				    sql:'select * from t_youji where yj_id='+curyid
@@ -538,12 +508,9 @@ function saveYouji(){
     							
     						
     						}
-    					  
-    						
-    						
-    						
+    					 					
     						saveYjToDb(curyid,indexjson,records);
-    						
+
     					}
     					else{
     						saveYjToDb(curyid,indexjson,null);
@@ -561,7 +528,6 @@ function saveYouji(){
     		alert("本次读取失败");    	
     	}
     });
-	
 }
 
 /*
@@ -581,7 +547,6 @@ function saveYjToDb(yjid,indexjson,records){
 		    records:records
 	    	}
 	    };
-	
 	api.ajax({
 	    url: 'http://47.92.118.125/travel/save.php',
 	    method: 'post',

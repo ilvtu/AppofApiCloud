@@ -1,4 +1,3 @@
- 
 function back(){
 	api.closeWin();
 }
@@ -7,13 +6,13 @@ var token='';
 var localuid='';
 var timeout='';
 apiready = function(){
-	var header = $api.dom('.header');
+	var header = $api.dom('header');
 	$api.fixIos7Bar(header);
     $api.fixStatusBar(header);
     token = $api.getStorage('token');
     localuid = $api.getStorage('localuid');
     
-    
+  
     api.addEventListener({
         name: 'keyback'
     }, function(ret, err){
@@ -28,7 +27,7 @@ apiready = function(){
     	
     	api.closeWin();    	
     });
-    
+
     api.addEventListener({
 	    name:'tap'
 	},function(ret,err){
@@ -60,8 +59,7 @@ apiready = function(){
 
          
     	if(token!=null || token!=''){
-    		
-			init();
+			  init();
     	}
     	else{
     		api.openWin({
@@ -76,14 +74,13 @@ apiready = function(){
 
 
 function init(){
-	
 	var db = api.require('db');
 	var sqlstr ='select * from t_self_info where token="'+ token+'"';
 	db.selectSql({
 	    name: 'ilvtu',
 	    sql: sqlstr
 	}, function(ret, err) {
-		
+
 	    ///alert(JSON.stringify(ret));
 	    if (ret.status && ret.data[0]!=null) {
 	    	//头像
@@ -110,7 +107,7 @@ function init(){
 	    		
 	    		$api.byId('sex').innerHTML='您还未设置性别';
 	    	}
-	    	
+
 	    	//出生日期
 	    	if(ret.data[0].birthday!=null && ret.data[0].birthday!='' && ret.data[0].birthday>'1000-00-00'){
 	    		var t = new Date(ret.data[0].birthday);
@@ -152,10 +149,12 @@ function settouxiang(){
 	        y: api.winHeight*08
 	    },
 	    styles: {
-	       
+          mask: 'rgba(0,0,0,0.5)',
+          bg: '',
+          corner:5,
 	        cell: {
 	            bg: {
-	                normal: '',
+	                normal: '#fff',
 	                highlight: ''
 	            },
 	            h: 50,
@@ -228,14 +227,10 @@ function settouxiang(){
 					}, function(ret, err) {
 					    if (ret) {
 					        //alert(JSON.stringify(ret));
-					        
 					        userphoto = ret.data;
 					        if(userphoto!=''){
 						        savetouxiangtoDb(userphoto,token,localuid);
 							}
-					        
-					        
-					        
 					    } else {
 					        alert(JSON.stringify(err));
 					    }
@@ -299,7 +294,6 @@ function savetouxiangtoDb(userphoto,token,localuid){
 							else{
 								//alert(JSON.stringify(err));
 							}
-				        
 				        });
 					}
 					else{
@@ -308,24 +302,18 @@ function savetouxiangtoDb(userphoto,token,localuid){
 				});
          	
         } else {
-        	
+
 			alert("头像上传失败，请重新上传");
             //api.alert({ msg: err.msg });
         }
         api.hideProgress();
     })
-	
-	
-	
-	
-     
 }
 
 /*
  * 设置昵称
  */
 function setnick(){
-	
 	var inputField = api.require('inputField');
 	inputField.open({
 	    bgColor: '#FFFFFF',
@@ -357,7 +345,6 @@ function setnick(){
 			    data: {
 				    	body:bodyparam
 			    	}
-			    
 			}, function(ret, err) {
 				if(ret){
 					var sqlstr ='update t_self_info set nick = "'+newnick+'"  where token="'+ token+'"';
@@ -368,15 +355,12 @@ function setnick(){
 						else{
 							//alert(JSON.stringify(err));
 						}
-			        
 			        });
 				}
 				else{
 					alert("更新昵称失败！");
 				}
 			});
-				
-	        
 	    } else {
 	        alert(JSON.stringify(err));
 	    }
@@ -398,7 +382,7 @@ function setsex(){
 	        y: api.winHeight*08
 	    },
 	    styles: {
-	       
+					mask: 'rgba(0,0,0,0.5)',
 	        cell: {
 	            bg: {
 	                normal: '',
@@ -407,7 +391,7 @@ function setsex(){
 	            h: 50,
 	            title: {
 	                marginL: 145,
-	                color: '#636363',
+	                color: '#4cd1a2',
 	                size: 15,
 	            },
 	            icon: {
@@ -434,7 +418,6 @@ function setsex(){
 	    animation: false
 	}, function(ret) {
 	    if (ret && ret.eventType=='click') {
-	    
 	    	var sex='';
 	    	var gender=0;
 	        switch(ret.index){
@@ -449,7 +432,6 @@ function setsex(){
 	        	default:
 	        		break;
     		}
-    		
     		if(gender!=0){
     			 var bodyparam = {
 			        	token:token,
@@ -474,16 +456,12 @@ function setsex(){
 							else{
 								//alert(JSON.stringify(err));
 							}
-				        
 				        });
 					}
 					else{
 						alert("更新用户性别失败,请再试一次");
 					}
 				});
-	    		 
-					
-					
 			}
 	    }
 	});
@@ -494,12 +472,10 @@ function setsex(){
  */
 function setbirthday(){
 	var UICustomPicker = api.require('UICustomPicker');
-	
 	var tmpid = $api.getStorage('birthselected');
 	UICustomPicker.close({
         id: tmpid
     });
-	
 	UICustomPicker.open({
 	    rect: {
 	        x: 30,
@@ -510,9 +486,9 @@ function setbirthday(){
 	    styles: {
 	        bg: 'rgba(0,0,0,0)',
 	        normalColor: '#959595',
-	        selectedColor: '#3685dd',
+	        selectedColor: '#4cd1a2',
 	        selectedSize: 24,
-	        tagColor: '#3685dd',
+	        tagColor: '#4cd1a2',
 	        tagSize: 14
 	    },
 	    data: [{
@@ -533,7 +509,6 @@ function setbirthday(){
 	    	switch(ret.eventType){
 	    		case "show":
 	    			$api.setStorage('birthselected',ret.id);
-	    			
 	    			/*
 	    			 * 设置目前年龄
 	    			 */
@@ -578,7 +553,6 @@ function setbirthday(){
 					    				UICustomPicker.close({
 						                    id: tmpid
 					                    });
-					                    
 						    			break;
 						    		case 1:
 						    			var UICustomPicker = api.require('UICustomPicker');
@@ -586,7 +560,6 @@ function setbirthday(){
 						                    id: tmpid
 					                    });
 						    			var newbirthday = $api.getStorage('newbirthday');
-						    			
 						    			/*
 						    			 * 存入成功后改变本机数据库数据
 						    			 */
@@ -611,12 +584,12 @@ function setbirthday(){
 								    			 dbExecuteSql(updatebirthstr, function(ret) {
 										        	if(ret){
 														$api.byId('birthday').innerHTML = $api.getStorage('newbirthday');
-												
+
 													}
 													else{
 														//alert(JSON.stringify(err));
 													}
-										        
+<
 										        });
 											}
 											else{
@@ -635,20 +608,16 @@ function setbirthday(){
 						        alert(JSON.stringify(err));
 						    }
 						});
-	    			
 	    			break;
 	    		default:
 	    			break;
 	    	}
-	    	
 	        //alert(JSON.stringify(ret));
 	    } else {
 	        //alert(JSON.stringify(err));
 	    }
 	});
 
-	
-	
 }
 
 /*
@@ -677,7 +646,6 @@ function setphone(){
 	        /*
 	         * 存储到后台
 	         */
-	        
 	        var newphone = ret.msg;
     		 api.ajax({
 			    url: 'http://47.92.118.125/user_info/update.php',
@@ -701,14 +669,12 @@ function setphone(){
 						else{
 							//alert(JSON.stringify(err));
 						}
-			        
 			        });
 	        	}
 	        	else{
 	        		alert("更新手机号失败,再试一次");
 	        	}
 	        });
-	        
 	    } else {
 	        alert(JSON.stringify(err));
 	    }
@@ -738,7 +704,6 @@ function logout(){
             
             var pc = api.require('personalCenter');
             pc.close();
-            
 			$api.byId("profile").style.visibility="visible";
 			$api.byId("logout").style.visibility="hidden";
 	        //alert( JSON.stringify( ret) );
