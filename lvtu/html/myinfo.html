@@ -1,0 +1,369 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        body {
+            height: 640px;
+            background-color: #F0F0F0;
+        }
+
+        /*.header input {
+            padding-right: 0px;
+        }
+
+        .header {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            background: -webkit-linear-gradient(left, #56afff, #4cd1a2);
+            background: linear-gradient(to right, #56afff, #4cd1a2);
+            height: 48px;
+        }
+
+        .header .back {
+            margin-top: 12.7px;
+            margin-left: 30px;
+            font-size: 18px;
+        }
+        .header .hcenter {
+            margin-top: 15.3px;
+            color: #ffffff;
+            width: 95px;
+            font-size: 18px;
+        }*/
+        header {
+            position: relative;
+            height: 44px;
+            line-height: 44px;
+            background: -webkit-linear-gradient(left, #56afff, #4cd1a2);
+            background: linear-gradient(to right, #56afff, #4cd1a2);
+            color: #fff;
+            text-align: center;
+        }
+        .back-icon{
+            display: inline-block; width: 44px; height: 44px;line-height: 44px;
+            background: url(../image/back.png) no-repeat center center;
+            -webkit-background-size: 20px 20px;
+            background-size: 20px 20px;
+            position: absolute; left: 0; bottom: 0;
+        }
+        .hover{ opacity: .8; }
+        header h1{
+            font-size: 20px;
+            height: 44px; line-height: 44px; margin: 0em; color: #fff;
+        }
+        footer {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+        }
+
+        .touxiang {
+            height: 65.3px;
+            background-color: white;
+            margin-top: 13.3px;
+        }
+
+        .touxiang .miaoshu {
+            margin-left: 13.3px;
+            margin-top: 25.3px;
+            color: #999999;
+            font-size: 18px;
+        }
+
+        .touxiang input {
+            float: right;
+            padding-right: 0px;
+            margin-top: 10px;
+            margin-right: 20.7px;
+            border-radius: 50%;
+        }
+
+        .nicheng {
+            height: 65.3px;
+            background-color: white;
+            margin-top: 13.3px;
+        }
+
+        .nicheng .miaoshu {
+            margin-left: 13.3px;
+            margin-top: 25.3px;
+            color: #999999;
+            font-size: 18px;
+        }
+
+        .nicheng .info {
+            float: right;
+            margin-top: 25.3px;
+            margin-right: 50.7px;
+        }
+
+        .sex {
+            height: 65.3px;
+            background-color: white;
+            margin-top: 1px;
+        }
+
+        .sex .miaoshu {
+            margin-left: 13.3px;
+            margin-top: 25.3px;
+            color: #999999;
+            font-size: 18px;
+        }
+
+        .sex .info {
+            float: right;
+            margin-top: 25.3px;
+            color: #333333;
+            font-size: 18px;
+            margin-right: 30px;
+        }
+
+        .sex input {
+            float: right;
+            padding-right: 0px;
+            margin-top: 26px;
+            margin-right: 20.7px;
+        }
+
+        .birth {
+            height: 65.3px;
+            background-color: white;
+            margin-top: 10px;
+        }
+
+        .birth .miaoshu {
+            margin-left: 13.3px;
+            margin-top: 25.3px;
+            color: #999999;
+            font-size: 18px;
+        }
+
+        .birth .info {
+            float: right;
+            margin-top: 25.3px;
+            color: #333333;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+        .birth input {
+            float: right;
+            padding-right: 0px;
+            margin-top: 26px;
+            margin-right: 20.7px;
+        }
+
+        .phone {
+            height: 65.3px;
+            background-color: white;
+            margin-top: 1px;
+        }
+
+        .phone .miaoshu {
+            margin-left: 13.3px;
+            margin-top: 25.3px;
+            color: #999999;
+            font-size: 18px;
+        }
+
+        .phone .info {
+            float: right;
+            margin-top: 25.3px;
+            color: #333333;
+            font-size: 18px;
+            margin-right: 30px;
+        }
+
+        .phone input {
+            float: right;
+            padding-right: 0px;
+            margin-top: 26px;
+            margin-right: 20.7px;
+        }
+
+        input {
+            padding-right: 0px;
+        }
+
+        .btn {
+            margin-top: 108px;
+            /*148*/
+            margin-left: 20px;
+            padding-right: 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <header>
+        <!-- <div class="header">
+
+            <div class="back" onclick="back();">
+                <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/myinfo/fanhui@3x.png">
+            </div>
+            <span class="hcenter">个人资料</span>
+
+            <div></div>
+        </div> -->
+        <a tapmode="hover" onclick="back()" class="back-icon"></a>
+        <h1>个人资料</h1>
+    </header>
+    <div class="touxiang" id="touxiang">
+        <span class="miaoshu">头像</span>
+        <input name="imageField" onclick="setAvatar();" type="image" style="width:47.3px;height: 47.3px;" id="imageField" src="../image/myinfo/touxiang@3x.png">
+
+    </div>
+
+
+    <div class="nicheng">
+        <span class="miaoshu">昵称</span>
+        <span class="info" id="nick" onclick="setnick();">段杰伟</span>
+    </div>
+
+    <div class="sex">
+        <span class="miaoshu">性别</span>
+        <input name="imageField" type="image" style="width:10px;height: 16.7px;" id="imageField" src="../image/myinfo/jiantou@3x.png">
+
+        <span class="info" id="sex" onclick="setSex();">男</span>
+    </div>
+
+    <div class="birth">
+        <span class="miaoshu">出生日期</span>
+        <input name="imageField" type="image" style="width:10px;height: 16.7px;" id="imageField" src="../image/myinfo/jiantou@3x.png">
+
+        <span class="info" id="birthday" onclick="setbirthday();">1992-04-15</span>
+    </div>
+
+
+    <div class="phone">
+        <span class="miaoshu">手机号码</span>
+        <input name="imageField" type="image" style="width:10px;height: 16.7px;" id="imageField" src="../image/myinfo/jiantou@3x.png">
+
+        <span class="info" id="phone"></span>
+    </div>
+    <div class="btn">
+        <input name="ok" type="button" onclick="logout();" style="width:90%;height: 50px;background-color:white;color:#38cf9c;font-size:24px;" id="ok" value="退出登录" />
+    </div>
+    <footer>
+
+    </footer>
+
+
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/sqlite.js"></script>
+<script type="text/javascript" src="../script/myinfo.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    // 设置头像
+    function setAvatar() {
+        api.actionSheet({
+            title: '选择头像',
+            cancelTitle: '取消',
+            buttons: ['拍照', '相册'],
+            style: {
+                fontNormalColor: '#4cd1a2'
+            }
+        }, function(ret, err) {
+            if (ret) {
+                var sourceTypes = [
+                    'camera',
+                    'album'
+                ];
+                if (ret.buttonIndex == (sourceTypes.length + 1)) {
+                    return;
+                }
+                var userphoto = '';
+                api.getPicture({
+                    sourceType: sourceTypes[ret.buttonIndex - 1],
+                    encodingType: 'jpg',
+                    mediaValue: 'pic',
+                    destinationType: 'url',
+                    allowEdit: true,
+                    quality: 50,
+                    targetWidth: 100,
+                    targetHeight: 100,
+                    saveToPhotoAlbum: false
+                }, function(ret, err) {
+                    if (ret) {
+                        userphoto = ret.data;
+                        if (userphoto != '') {
+                            savetouxiangtoDb(userphoto, token, localuid);
+                        }
+                    } else {
+                        alert(JSON.stringify(err));
+                    }
+                });
+            }
+        });
+    }
+
+    //设置性别
+    function setSex() {
+        api.actionSheet({
+            title: '选择性别',
+            cancelTitle: '取消',
+            buttons: ['男', '女'],
+            style: {
+                fontNormalColor: '#4cd1a2'
+            }
+        }, function(ret, err) {
+            var sex = '';
+            var gender = 0;
+            if (ret.buttonIndex == 1) {
+                sex = '男';
+                gender = 1;
+            } else {
+                sex = '女';
+                gender = 2;
+            }
+            if (gender != 0) {
+                var bodyparam = {
+                    token: token,
+                    data: {
+                        gender: gender
+                    }
+                };
+                api.ajax({
+                    url: 'http://47.92.118.125/user_info/update.php',
+                    method: 'post',
+                    data: {
+                        body: bodyparam
+                    }
+                }, function(ret, err) {
+                    if (ret) {
+                        var sqlstr = 'update t_self_info set sex = "' + sex + '"  where token="' + token + '"';
+                        dbExecuteSql(sqlstr, function(ret) {
+                            if (ret) {
+                                $api.byId('sex').innerHTML = sex;
+                            } else {
+                                //alert(JSON.stringify(err));
+                            }
+                        });
+                    } else {
+                        alert("更新用户性别失败,请再试一次");
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+
+</html>

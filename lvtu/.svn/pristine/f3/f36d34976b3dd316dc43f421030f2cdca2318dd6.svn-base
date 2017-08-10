@@ -1,0 +1,194 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          max-height:640px;
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .back{
+			margin-top: 12.7px;
+			margin-left: 30px;
+			font-size: 18px;
+		}
+		
+		.header .hcenter{
+			margin-top: 15.3px;
+			color: #ffffff;
+			width:125px;
+			font-size: 18px;
+		}
+	
+		.phonearea{
+			margin-top:17.3px;
+			margin-left:19.3px;
+			margin-right:19.3px;
+			height:55.3px;
+			 border-width: 1px;
+		 	border-bottom-style:double;
+		 	border-bottom-color:#3ccf9d;
+		}
+		
+		.phonearea input{
+			padding:0px;
+			margin-left:67.3px;
+			width:150px;
+		}
+		.codearea {
+			margin-left:19.3px;
+			margin-right:19.3px;
+			height:55.3px;
+			 border-width: 1px;
+		 	border-bottom-style:double;
+			 
+		 	border-bottom-color:#3ccf9d;
+		}
+		
+		.codearea input{
+			padding:0px;
+		}
+		.codearea .code{
+		
+			margin-left:17.3px;
+			width:100px;
+		}
+		.codearea .codebtn{
+			float:right;
+			margin-top:12px;
+			margin-right:0px;
+			
+			border-color:#3ccf9d;
+			background-color:#34cd99;
+			border-radius: 15px;
+			
+			
+			 border-width: 1px;
+		 	border-style:double;	
+		}
+		.passwordarea{
+			margin-left:19.3px;
+			margin-right:19.3px;
+			height:55.3px;
+			 border-width: 1px;
+		 	border-bottom-style:double;
+			 
+		 	border-bottom-color:#3ccf9d;
+		}
+		.passwordarea input{
+			padding:0px;
+			margin-left:17.3px;
+			width:150px;
+		}
+		footer{
+			}
+		
+		
+		
+		input{
+			padding-right:0px;
+		}
+		.btn{
+			text-align:center;
+			margin-top:44px;
+			padding-right:0px;
+			
+			
+		}
+		.xieyi{
+		
+			text-align:center;
+			margin-top:33.3px;
+		}
+		.xieyi .xieyiinfo{
+			color:#888888;
+			font-family: 'Microsoft YaHei';
+		}
+		
+		.xieyi a{
+			color:#3ccf9d;
+			text-decoration:underline;
+		}
+		.newuser{
+			text-align:center;
+			margin-top:102.7px;
+		}
+		
+		.getpwd{
+			margin-top:52.7px;
+			text-align:center;
+		}
+		
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+    	
+		<div class="back">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/getbackpwd/fanhui@3x.png">
+	       </div>
+	     	<span class="hcenter">找回密码</span>
+	    
+	     <div class="userphoto"></div>
+       </div>
+</header>
+
+<div class="phonearea">
+	<span class="guobie">手机号：</span>
+	<input name="phoneField" type="text" style="height:55.3px;color:#888888" id="phoneField" value="">
+  
+</div>
+<div class="codearea">
+	<span class="mima">验证码：</span>
+	<input class="code" name="mimaField" type="text" style="height:55.3px;color:#888888" id="codeField" value="">
+   <input class="codebtn" name="imageField" onclick="sendcode();" type="button" style="width:80px;height: 33.3px;" id="codebtnField" value="">
+	   
+</div>
+<div class="passwordarea">
+	<span class="mima">新密码：</span>
+	<input name="mimaField" type="password" style="height:55.3px;color:#888888" id="mimaField" value="">
+  
+</div>
+<div class="btn">
+	<input name="ok" onclick="getbackpwd();" type="button" style="width:85%;height:50px;background-color:#3ccf9d;color:white" id="ok" value="确定" />
+ </div>
+ 
+<!--
+<div class="xieyi">
+	<span class="xieyiinfo">注册代表您已同意</span><a herf=''>《旅图网》</a>
+</div>
+-->
+  <footer>
+      
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/sqlite.js"></script>
+  <script type="text/javascript" src="../script/getbackpwd.js"></script>
+
+  </html>

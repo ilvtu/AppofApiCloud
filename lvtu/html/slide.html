@@ -1,0 +1,114 @@
+<!doctype html>
+  <html>
+  <head>
+  	  <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+        body {
+          
+        }
+        	.header input{
+        	padding-right:0px;
+        	}
+          .header{
+         	  	display: -webkit-box;		
+			    display: -webkit-flex;		
+			    display: flex;	
+			    -webkit-box-pack:justify;
+				justify-content:space-between;
+			    
+				background-color: #242f33;
+				height: 48px;
+		}
+		
+		.header .logo{
+			margin-top: 15.3px;
+			margin-left: 21.7px;
+			color: #ffffff;
+			width:55px;
+			font-size: 18px;
+		}
+		
+		.header .userphoto{	
+			margin-top:12.7px;			
+			padding-right:30px;
+			width:22.3px;
+		}
+		
+		
+		footer{
+			
+			display: -webkit-box;		
+		    display: -webkit-flex;		
+		    display: flex;	
+		    
+			-webkit-box-pack:justify;
+			justify-content:space-between;
+			
+			background-color: #242f33;
+			height: 155.3px;
+			margin-top:436.7px;
+		}
+		footer input{
+    		padding-right:0px;
+    	}
+		.bianjineirong{
+		
+			position:relative;
+			margin-left: 34px;
+			margin-top: 40px;
+		}
+		.start{	
+			margin-top:10px;
+		}
+		 .zou{
+			 position:relative;
+			margin-top:40px;
+			margin-right:34px;
+		}
+      </style>
+
+  </head>
+
+ <body>
+
+
+<header>
+    	<div class="header">
+	     <span class="logo">旅图网</span>
+	     <div class="hcenter"></div>
+	     <div class="userphoto" onclick="sliding();">
+	             <input name="imageField" type="image" style="width:22.3px;height: 22.3px;" id="imageField" src="../image/slide/wode@3x.png">
+	       </div>
+       </div>
+</header>
+
+  <footer id="footer">
+  		
+        <div class="bianjineirong" onclick="bianji();">
+		    <input name="imageField" type="image" id="imageField" style="width:88.2px;height: 88.2px;" src="../image/slide/bianjineirong@3x.png">
+        </div>
+        <div class="start" id="startbtn" ontouchstart="gtouchstart(this);"  ontouchend="gtouchend();" onclick="showfullscreen();" >
+		    <input name="imageField" type="image" id="imageField" style="width:50px;height: 30px;" src="../image/slide/down.png">
+        </div>
+        <!--width:74.7px;height: 54.7px
+        !-->
+      <div class="zou" onclick="zou();">
+		    <input name="imageField" type="image" id="imageField" style="width:88.2px;height: 88.2px;" src="../image/slide/zou@3x.png">
+        </div>
+  </footer>
+
+  
+ 
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/slide.js"></script>
+  <script type="text/javascript">
+      
+      
+      
+  </script>
+  </html>

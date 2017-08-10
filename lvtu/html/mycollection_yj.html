@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>mycollection_list1</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/cqs-common.css" />
+    <style media="screen">
+        .content {
+            margin-bottom: 0.75rem;
+        }
+
+        .list {
+            position: relative;
+            font-size: 0.8rem;
+            background-color: #ffffff;
+            border-top: 1px solid #dddddd;
+        }
+        .list-item{
+          position: relative;
+          min-height: 2.2rem;
+          margin:0.5rem 0.5rem 0 0.5rem;
+          -webkit-box-shadow: 2px 2px 5px #999;
+          box-shadow: 2px 2px 5px #999;
+        }
+        .item-photo img{
+          width:100%
+        }
+        .item-text{
+          margin-top: 1rem;
+          margin-left: 1.75rem;
+          text-align: left;
+          font-size: 16px;
+        }
+        .item-text p:nth-child(2){
+          margin-top: 0.75rem;
+          font-size: 14px;
+          color: #999;
+        }
+        .head{
+          position: absolute;
+          left:27%;
+
+        }
+        .head img{
+          border-radius: 50%;
+          width:3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <ul class="list">
+            <li class="list-item flex">
+                <div class="item-photo flex-item-3">
+                    <img src="../image/mycollection/photo1.gif" alt="">
+                </div>
+                <div class="item-text flex-item">
+                  <p>PORTUGAL 2017</p>
+                  <p>Gionvasddf</p>
+                </div>
+                <div class="head vertical-middle">
+                  <img src="../image/mycollection/head1.gif" alt="">
+                </div>
+            </li>
+            <li class="list-item flex">
+                <div class="item-photo flex-item-3">
+                    <img src="../image/mycollection/photo1.gif" alt="">
+                </div>
+                <div class="item-text flex-item">
+                  <p>PORTUGAL 2017</p>
+                  <p>Gionvasddf</p>
+                </div>
+                <div class="head vertical-middle">
+                  <img src="../image/mycollection/head1.gif" alt="">
+                </div>
+            </li>
+            <li class="list-item flex">
+                <div class="item-photo flex-item-3">
+                    <img src="../image/mycollection/photo1.gif" alt="">
+                </div>
+                <div class="item-text flex-item">
+                  <p>PORTUGAL 2017</p>
+                  <p>Gionvasddf</p>
+                </div>
+                <div class="head vertical-middle">
+                  <img src="../image/mycollection/head1.gif" alt="">
+                </div>
+            </li>
+            <li class="list-item flex">
+                <div class="item-photo flex-item-3">
+                    <img src="../image/mycollection/photo1.gif" alt="">
+                </div>
+                <div class="item-text flex-item">
+                  <p>PORTUGAL 2017</p>
+                  <p>Gionvasddf</p>
+                </div>
+                <div class="head vertical-middle">
+                  <img src="../image/mycollection/head1.gif" alt="">
+                </div>
+            </li>
+            <li class="list-item flex">
+                <div class="item-photo flex-item-3">
+                    <img src="../image/mycollection/photo1.gif" alt="">
+                </div>
+                <div class="item-text flex-item">
+                  <p>PORTUGAL 2017</p>
+                  <p>Gionvasddf</p>
+                </div>
+                <div class="head vertical-middle">
+                  <img src="../image/mycollection/head1.gif" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/zepto.min.js"></script>
+    <!-- <script type="text/javascript" src="../script/vue.js"></script>
+    <script type="text/javascript" src="../script/constant.js"></script> -->
+    <script type="text/javascript">
+        apiready = function() {
+            // initHome();
+            api.setRefreshHeaderInfo({
+                visible: true,
+                loadingImg: 'widget://image/refresh.png',
+                bgColor: '#ccc',
+                textColor: '#fff',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...',
+                showTime: true
+            }, function(ret, err) {
+                // initHome();
+            });
+        }
+
+        // initHome();
+        //
+        // function initHome() {
+        //     $.ajax({
+        //         url: urlHome,
+        //         type: "POST",
+        //         dataType: "json",
+        //         beforeSend: function() {
+        //             $("#loadingToast").show();
+        //         },
+        //         complete: function() {
+        //             $("#loadingToast").hide();
+        //             api.refreshHeaderLoadDone();
+        //         },
+        //         success: function(data) {
+        //             if (data.errorCode == 200) {
+        //                 app.homeInfo = data.data;
+        //             } else {
+        //                 api.toast({
+        //                     msg: data.errorMsg,
+        //                     duration: toastTime,
+        //                     location: 'bottom'
+        //                 });
+        //             }
+        //         },
+        //         error: function() {
+        //             api.toast({
+        //                 msg: '网络错误，请稍后再试',
+        //                 duration: toastTime,
+        //                 location: 'bottom'
+        //             });
+        //         }
+        //     })
+        // }
+    </script>
+</body>
+
+</html>

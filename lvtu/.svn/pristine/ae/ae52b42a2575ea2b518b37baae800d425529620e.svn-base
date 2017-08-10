@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>mycollection_list1</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style media="screen">
+      .item{
+        margin:0.2rem;
+        padding:0.2rem;
+        background: #fff;
+        -webkit-box-shadow: 2px 2px 5px #999;
+        box-shadow: 2px 2px 5px #999;
+      }
+      .item .photo{
+        width: 100%;
+      }
+      .item .title{
+        font-size: 16px;
+        margin:0.6rem;
+      }
+      .head, .name{
+        display: inline-block;
+      }
+      .head{
+        width:2rem;
+        margin: 0 0.6rem 0.6rem 0.6rem;
+      }
+      .name{
+        font-size: 14px;
+        vertical-align: top;
+        margin-top: 0.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-wrap">
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+    </div>
+    <div class="flex-wrap">
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+    </div>
+    <div class="flex-wrap">
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+      <div class="flex-con item">
+        <img class="photo" src="../image/mycollection/photo1.gif" alt="">
+        <p class="title">让自己拥有一个充满小确幸的婚礼吧！</p>
+        <img class="head" src="../image/mycollection/head1.gif" alt="">
+        <p class="name">Nicolas</p>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/zepto.min.js"></script>
+    <!-- <script type="text/javascript" src="../script/vue.js"></script>
+    <script type="text/javascript" src="../script/constant.js"></script> -->
+    <script type="text/javascript">
+    apiready = function () {
+        // initHome();
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err){
+            // initHome();
+        });
+    }
+
+    // initHome();
+    //
+    // function initHome(){
+    //     $.ajax({
+    //         url: urlHome,
+    //         type: "POST",
+    //         dataType: "json",
+    //         beforeSend: function () {
+    //             $("#loadingToast").show();
+    //         },
+    //         complete: function () {
+    //             $("#loadingToast").hide();
+    //             api.refreshHeaderLoadDone();
+    //         },
+    //         success: function (data) {
+    //             if(data.errorCode==200){
+    //                 app.homeInfo = data.data;
+    //             }else{
+    //                 api.toast({
+    //                     msg: data.errorMsg,
+    //                     duration: toastTime,
+    //                     location: 'bottom'
+    //                 });
+    //             }
+    //         },
+    //         error:function(){
+    //             api.toast({
+    //                 msg: '网络错误，请稍后再试',
+    //                 duration: toastTime,
+    //                 location: 'bottom'
+    //             });
+    //         }
+    //     })
+    // }
+    </script>
+  </body>
+</html>

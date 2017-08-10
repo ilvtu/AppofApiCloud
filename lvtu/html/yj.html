@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>游记</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/cqs-common.css">
+    <style media="screen">
+    header{
+      background-color: rgba(0, 0, 0, 0)!important;
+    }
+    .collect-icon, .collected-icon{
+      right:2.5rem;
+    }
+    .more-icon{
+        display: inline-block; width: 44px; height: 44px;line-height: 44px;
+        background: url(../image/more.png) no-repeat center center;
+        -webkit-background-size: 20px 20px;
+        background-size: 20px 20px;
+        position: absolute; right: 0; bottom: 0;
+    }
+    footer{
+      position: absolute;
+      left:0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background-color: #000;
+      color:#fff;
+    }
+    footer a{
+      display: inline-block;
+      width: 19%;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap" class="flex-wrap flex-vertical">
+        <header>
+            <a tapmode="hover" onclick="api.closeWin();" class="back-icon"></a>
+            <a tapmode="hover" onclick="toggleCollect()" class="collect-icon" id="collectBtn"></a>
+            <a tapmode="hover" onclick="" class="more-icon"></a>
+        </header>
+
+        <div id="main" class="flex-con"></div>
+
+        <footer>
+          <a href="#" tapmode="hover">S</a>
+          <a href="#" tapmode="hover">D1</a>
+          <a href="#" tapmode="hover">D2</a>
+          <a href="#" tapmode="hover">D3</a>
+          <a href="#" tapmode="hover">E</a>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+        var header = $api.dom('header');
+        $api.fixStatusBar(header);
+        var headerPos=$api.offset(header);
+        var footer=$api.dom('footer');
+        var footerPos=$api.offset(footer);
+        api.openFrame({
+          name: 'yj_frm',
+          url: 'yj_frm.html',
+          bounces: true,
+          rect: {
+              x: 0,
+              y: headerPos.h,
+              w: 'auto',
+              h: api.winHeight - headerPos.h - footerPos.h
+          }
+        })
+    };
+
+    function toggleCollect(){
+      var uid = $api.getStorage('uid');
+      //login
+      if (!uid) {
+          api.openWin({
+              name: 'userLogin',
+              url: './userLogin.html',
+              opaque: true,
+              vScrollBarEnabled: false
+          });
+          return;
+      }
+      var collectBtn=$api.byId('collectBtn');
+      var collectStatus=api.pageParam.collectStatus;
+      if(collectStatus==0){//未收藏则添加收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    yj_id: api.pageParam.yj_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collect-icon');
+              $api.addCls(collectBtn, 'collected-icon');
+              api.toast({
+                  msg: '收藏成功'
+              })
+            } else {
+              api.toast({
+                  msg: '收藏失败'
+              })
+            }
+        });
+
+      }else{//已收藏则取消收藏
+        api.ajax({
+            url: '',
+            method: 'post',
+            data: {
+                values: {
+                    uid: 'uid',
+                    record_id: api.pageParam.yj_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+              $api.removeCls(collectBtn, 'collected-icon');
+              $api.addCls(collectBtn, 'collect-icon');
+              api.toast({
+                  msg: '取消收藏'
+              })
+            } else {
+              api.toast({
+                  msg: '操作失败'
+              })
+            }
+        });
+      }
+    }
+</script>
+
+</html>
