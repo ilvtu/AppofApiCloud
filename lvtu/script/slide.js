@@ -15,8 +15,19 @@ function sliding() {
 }
 
 var Htmls  = "";
+/*
+ * localuid本机数据库userid
+ */
 var localuid='';
+
+/*
+ * 访问后台的token
+ */
 var token='';
+
+/*
+ * token的时效，超过时效需要重新登录
+ */
 var timeout='';
 apiready = function(){
 	localuid = $api.getStorage('localuid');     
@@ -44,17 +55,24 @@ apiready = function(){
 	    }
 	});
 	
+	 api.addEventListener({
+    	name: 'backtobtn'
+	}, function(ret, err) {
+	    if(ret.value.key1=='fromshowbtn'){
+	    	
+            showinitmap();
+	    	
+	    }
+	});
+	
 	api.addEventListener({
 	    name:'swipedown'
 	}, function(ret, err){  
-		
 	     if(Htmls != "")
-            {
-	   			alert('发现');
-	   			Htmls="";
+            {	   			
+	   			Htmls="";	   				
+	   			showfullscreen();
             } 
-	   
-	   
 	});
 	
 	
@@ -65,7 +83,7 @@ apiready = function(){
     });   
    
     
-     api.addEventListener({
+    api.addEventListener({
         name:'viewappear'
     },function(ret,err){
         //operation	 
@@ -73,7 +91,7 @@ apiready = function(){
 	   
 		localuid = $api.getStorage('localuid');     
 		token = $api.getStorage('token');     
-		 timeout=$api.getStorage('timeout');
+		timeout=$api.getStorage('timeout');
 		var curtime = new Date();
 		if((timeout*1000-curtime)<0){
 			api.openWin({
@@ -94,6 +112,162 @@ apiready = function(){
   
 };
 
+/*
+ *下划或点击图标后，显示地图全屏 
+ */
+function showfullscreen(){
+	var aMap = api.require('aMap');
+	
+	
+	var header = $api.dom('header');
+	var headerPos = $api.offset(header);
+	
+	
+	var footer = $api.dom('footer');
+	var footerPos = $api.offset(footer);
+	
+	var maph=footerPos.t-headerPos.h+155;
+	aMap.setRect({
+	    rect: {
+	        x: 0,
+	        y:headerPos.h,
+	        h: maph
+	    }
+	});
+	
+	api.openFrame({
+        name:'slide_showbtn',
+        url:'slide_showbtn.html',
+        rect:{
+            x:0,
+            y:footerPos.t-headerPos.h+155,
+            w:'auto',
+            h:50
+        },
+        bounces:false,
+        vScrollBarEnabled:false,
+        hScrollBarEnabled:false
+    });
+    
+    showOtherpoint();
+	
+}
+
+
+/*
+ * 上划或点击图标后，恢复地图和页面初始状态
+ */
+function showinitmap(){
+
+	api.closeFrame({
+		name:'slide_showbtn'
+    });
+            
+	var aMap = api.require('aMap');	
+	
+	var header = $api.dom('header');
+	var headerPos = $api.offset(header);
+	
+	
+	var footer = $api.dom('footer');
+	var footerPos = $api.offset(footer);
+	
+	var maph=footerPos.t-headerPos.h;
+	aMap.setRect({
+	    rect: {
+	        x: 0,
+	        y:headerPos.h,
+	        h: maph
+	    }
+	});
+	showOtherpoint();
+}
+
+/*
+ * 获取所有其他人的
+ */
+function showOtherpoint(){
+
+	var icons = new Array();//显示足迹点
+	var i=0;
+	var lng=0.000;
+    var lat=0.000;	
+    
+    var k=0;
+	var bodyparam={
+		token:token
+		};
+	api.ajax({
+	    url: 'http://47.92.118.125/travel/get_index.php',
+	    method: 'post',
+	    data: {
+	    	body:bodyparam
+	    }
+	}, function(ret, err) {				
+		if(ret){
+			if(ret.data!=null && ret.data.index!=null && ret.data.index[0]!=null && ret.data.index[0]!=''){
+				var yjlist = ret.data.index;
+				for(var id in yjlist){
+					k++;
+					var tid= yjlist[id].id;
+					var bodyparam2={
+			    			token:token,
+			    			travel_id:tid
+			    		}
+			    		api.ajax({
+						    url: 'http://47.92.118.125/travel/get.php',
+						    method: 'post',
+						    data: {
+						    	body:bodyparam2
+						    }
+						}, function(ret, err) {		
+						    if (ret) {
+						    	var recordslist=ret.data.records;
+						    	var j=0;
+						    	if(recordslist.length>0){
+						    		for(var id in recordslist){
+						    			j++;
+							    		i++;
+							    		lng=recordslist[id].lng*1.0;
+						            	lat=recordslist[id].lat*1.0;
+						            	var icon = {
+						            		id:i,
+						            		lon:lng,
+						            		lat:lat
+									    }; 
+									   
+						            	icons.push(icon); 
+						    		}
+						    		
+						    	}
+						    	if(k==yjlist.length && j==recordslist.length){
+									var aMap = api.require('aMap');			
+										aMap.addAnnotations({
+										    annotations:icons, 
+										    icons: ['widget://image/run-stopstyle/position.png'],
+											draggable: true,
+											timeInterval: 2.0
+									    },function(ret,err){
+									    		if(ret.eventType=="click"){
+									    			alert('Hello!'+ret.id);
+									    		}
+									    });
+								}
+						    
+						    }
+						    else{
+						    }
+						});
+				}
+				
+			
+			}
+		}
+		else{
+		}
+	});
+
+}
 
 /*
  * 如果有未结束旅行，询问用户是否继续
@@ -153,6 +327,9 @@ function findcurpianduan(token,localuid){
 }
 
 
+/*
+ * 
+ */
 function init(){
 		
 	var header = $api.dom('header');
@@ -163,6 +340,7 @@ function init(){
 	var footerPos = $api.offset(footer);
 	//alert(JSON.stringify(footerPos));
 	var aMap = api.require('aMap');
+	
 	aMap.open({
 	    rect: {
 	        x: 0,
@@ -170,7 +348,7 @@ function init(){
 	        h:footerPos.t-headerPos.h
 	    },
 	    showUserLocation: true,
-	    zoomLevel: 16,
+	    zoomLevel: 10,
 	    center: {
 	        lon: 116.4021310000,
 	        lat: 39.9994480000
@@ -182,6 +360,8 @@ function init(){
 	    	//setlocation();
 	    	initsetLocationbtn();
 	        //alert(JSON.stringify(ret));
+	        
+	        showOtherpoint();
 	        
 	    } else {
 	        alert(JSON.stringify(err));
@@ -390,6 +570,7 @@ var timeOutEvent = 0;
 //开始按
 function gtouchstart(obj) {
   Htmls ="showmore";  
+  //alert(Htmls);
 };
 
 //手释放，取消长按事件

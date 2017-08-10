@@ -3,6 +3,13 @@
 var curPianduanId='';
 var token='';
 var localuid='';
+
+
+var recordnum = 0;
+var distance =0.0;
+var continuetime= 0;
+var topaltitude=0;
+var curcity = '';
  function back() {
  	curPianduanId= $api.getStorage('curPianduanId');
 	api.confirm({
@@ -117,19 +124,26 @@ var localuid='';
 function showpianduan(pianduanId){
 	
 	var db = api.require('db');
-	var sqlstr ='select * from t_pianduan where frag_id='+ pianduanId ;
+	var sqlstr ='select * from t_pianduan  where frag_id='+ pianduanId+'  order by timestamp asc' ;
 	db.selectSql({
 	    name: 'ilvtu',
 	    sql: sqlstr
 	}, function(ret, err) {	
 	    if (ret.status) {
 	    	var records = ret.data;
+	    	
+	    	recordnum = records.length;	//拍摄照片数	    	
+	    	
 	    	var icons = new Array();//显示足迹点
 	    	var imglist = new Array();
         	var i = 0;		        
         	var lng=0.000;
         	var lat=0.000;	
             for(var id in records){	
+            	if(ret.data[id].altitude!=null && ret.data[id].altitude>topaltitude){
+            		topaltitude=ret.data[id].altitude;
+            	}
+            
             	i++;	            	            	
             			   
             	lng=records[id].lng*1.0;
@@ -155,7 +169,7 @@ function showpianduan(pianduanId){
 		    			
 		    		}
 		    });
-		    
+		    showpianduanline(pianduanId);
 	    	/*
 	    	 * 
 	    	 */
@@ -185,47 +199,152 @@ function showpianduan(pianduanId){
 
 /*
  * 展示片段中的轨迹
+ * 根据lineid显示不同段线路
  */
-function showpianduanline(){
+function showpianduanline(pianduanId){
 	var db = api.require('db');
-        db.selectSql({
-            name:'ilvtu',
-            sql:'select *  from t_pianduanline where frag_id='+curPianduanId
-        },function(ret,err){
-     
-        	if(ret.status){
-        		var linejson = new Array();
-        		for(var id in ret.data){
-        			var point = {
-					    longtitude: ret.data[id].lng,     //字符串类型；经度
-					    latitude: ret.data[id].lat,        //字符串类型；纬度
-					    rgba: 'rgba(123,234,12,1)' //字符串类型；颜色值
-					};
-					linejson.push(point);
-        		}
-        		
-        		api.writeFile({
-				    path: 'fs://runningRecord.json',
-				    data: linejson
+    db.selectSql({
+        name:'ilvtu',
+        sql:'select *  from t_pianduanline where frag_id='+pianduanId+' order by timestamp asc'
+    },function(ret,err){ 		
+    	if(ret.status){
+    		//var linejson = new Array();
+    		var linenum=ret.data[ret.data.length-1].line_id;
+    		for(var i=0;i<linenum;i++){
+    			var j=i+1;
+    			var linejson= 'linejson'+j;
+    			
+    			window[linejson] = new Array();
+    		}
+    		
+    		//所有轨迹持续时间
+    		var tmptime1  = new Date(ret.data[ret.data.length-1].timestamp);
+    		var tmptime2 = new Date(ret.data[0].timestamp);    		
+			var nTime = tmptime1.getTime() - tmptime2.getTime();    		   
+			var nseconds = Math.floor(nTime%86400/60);
+			
+			//获取最后城市
+			
+			//
+			var startpoint = {
+		        lon: ret.data[0].lng,
+		        lat: ret.data[0].lat
+		    };
+			
+			
+    		for(var id in ret.data){    		
+    			if(ret.data[id].altitude!=null && ret.data[id].altitude>topaltitude){
+            		topaltitude=ret.data[id].altitude;
+            	}
+    			
+    			var tmplineid= ret.data[id].line_id;
+    			var curlinejson = 'linejson'+tmplineid;
+    			var point = {
+				    longtitude: ret.data[id].lng,     //字符串类型；经度
+				    latitude: ret.data[id].lat,        //字符串类型；纬度
+				    rgba: 'rgba(123,234,12,1)' //字符串类型；颜色值
+				};
+				
+				window[curlinejson].push(point);
+				
+				var endpoint = {
+			        lon: ret.data[id].lng,
+			        lat: ret.data[id].lat
+			    };
+				
+				var aMap = api.require('aMap');
+				aMap.getDistance({
+				    start:startpoint,
+				    end: endpoint
 				}, function(ret, err) {
 				    if (ret.status) {
-				        //成功
-				        var aMap = api.require('aMap');
-						aMap.addLocus({
-						    id: 1,
-						    borderWidth: 5,
-						    autoresizing: true,
-						    locusData:'fs://runningRecord.json'
-						});
+				    	distance+= ret.distance;
+						startpoint= endpoint;
 				    } else {
-				
+				        alert(JSON.stringify(err));
 				    }
 				});
-        	}
-        	else{
-        	}
-        });
-        	//coding...
+				
+    		}
+    		
+    		
+    		
+    		var j=0;
+    		for(var i=0;i<linenum;i++){
+    			var tmpi = i+1;
+    			var linejson= 'linejson'+tmpi;
+    			api.writeFile({
+				    path: 'fs://runningRecord'+i+'.json',
+				    data: eval(linejson)
+				}, function(ret, err) {			
+					
+					j++;
+					if (ret.status) {
+						if(j==linenum){
+						for(var t=0;t<linenum;t++){
+							 var aMap = api.require('aMap');
+								aMap.addLocus({
+								    id: t+1,
+								    borderWidth: 10,
+								    autoresizing: true,
+								    locusData:'fs://runningRecord'+i+'.json'
+								});
+							}
+						}
+					}
+					
+    			});
+    		}
+    		/*
+    		api.writeFile({
+			    path: 'fs://runningRecord.json',
+			    data: linejson
+			}, function(ret, err) {
+			    if (ret.status) {
+			        //成功
+			        var aMap = api.require('aMap');
+					aMap.addLocus({
+					    id: 1,
+					    borderWidth: 10,
+					    autoresizing: true,
+					    locusData:'fs://runningRecord.json'
+					});
+			    } else {
+			
+			    }
+			});
+			*/
+			
+			var aMap = api.require('aMap');
+			aMap.getNameFromCoords({
+			    lon: ret.data[ret.data.length-1].lng,
+			    lat: ret.data[ret.data.length-1].lat
+			}, function(ret, err) {			
+			    if (ret.status) {
+			        
+			        var tmpday = new Date(ret.data[ret.data.length-1].timestamp);
+					var tmpday2 = tmpday.Format("yyyy-MM-dd");	
+			        
+			        $api.byId("curcity").innerHTML=tmpday2+'&nbsp;'+ret.city;
+			        
+			       
+			    } else {
+			        alert(JSON.stringify(err));
+			    }
+			     
+		        $api.byId("recordsnum").innerHTML=recordnum;
+				$api.byId("continuetime").innerHTML=nseconds;
+				$api.byId("topaltitude").innerHTML=topaltitude;
+				$api.byId("distance").innerHTML=distance;
+			});
+			
+			
+			
+    	}
+    	else{
+    	}
+    });
+    	//coding...
 }
 
 
@@ -234,7 +353,7 @@ function init(){
 	var t = new Date();
 	var t2 = t.Format("yyyy-MM-dd hh:mm:ss");
 	
-	$api.byId('date').innerHTML= t2;
+	//$api.byId('date').innerHTML= t2;
 		
 	var header = $api.dom('header');
 	var headerPos = $api.offset(header);
@@ -262,12 +381,11 @@ function init(){
 	    if (ret.status) {         	   
 	    	
 	    	initsetLocationbtn();	
-	    	//ssetlocation();
-	    	curPianduanId = $api.getStorage('curPianduanId');
-	    	
+	    	//setlocation();
+	    	curPianduanId = $api.getStorage('curPianduanId');	    	
 		    
 		 	showpianduan(curPianduanId);
-		 	showpianduanline();
+		 	//showpianduanline();
 	        //alert(JSON.stringify(ret));
 	        
 	    } else {
